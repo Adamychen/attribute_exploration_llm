@@ -1,0 +1,51 @@
+{
+  "model": "llama4:16x17b",
+  "context_name": "graphs",
+  "prompt_mode": "stem_basis",
+  "question_mode": "implicational",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 110.659,
+  "n_iterations": 1,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0033997920132046566,
+  "mean_entropy": 0.0715116881004397,
+  "stem_basis": [],
+  "final_context": {
+    "objects": [
+      "'"
+    ],
+    "properties": [
+      "None"
+    ],
+    "context": [
+      [
+        true
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.0033997920132046566,
+      "mean_entropy": 0.0715116881004397,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']"
+    }
+  ]
+}

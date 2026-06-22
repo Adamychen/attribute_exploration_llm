@@ -1,0 +1,299 @@
+{
+  "model": "llama3.2:3b",
+  "context_name": "graphs",
+  "prompt_mode": "full_context",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 113.616,
+  "n_iterations": 2,
+  "n_retries_total": 11,
+  "n_retry_exhausted": 1,
+  "n_repeated_objects": 1,
+  "joint_entropy": 0.2276452969944614,
+  "mean_entropy": 0.03598054283326688,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 6.121006750122685,
+      "mean_entropy": 0.7410698471057036,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['connected', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 4.754672576519709,
+      "mean_entropy": 0.7276944954606857,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample",
+        "repeated_object"
+      ],
+      "retries_used": 1,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 4.754672576519709,
+      "mean_entropy": 0.7276944954606857
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 1.470769442977623,
+      "mean_entropy": 0.2598796671785947,
+      "retry_attempt": 1
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample"
+      ],
+      "retries_used": 2,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 1.470769442977623,
+      "mean_entropy": 0.2598796671785947
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.6150552153815644,
+      "mean_entropy": 0.4882584465051665,
+      "retry_attempt": 2
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 3,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.6150552153815644,
+      "mean_entropy": 0.4882584465051665
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 2.3544661200798074,
+      "mean_entropy": 0.08186726615207102,
+      "retry_attempt": 3
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 4,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 2.3544661200798074,
+      "mean_entropy": 0.08186726615207102
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.7540726250657327,
+      "mean_entropy": 0.07299610518520847,
+      "retry_attempt": 4
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 5,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.7540726250657327,
+      "mean_entropy": 0.07299610518520847
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 1.6726522234282795,
+      "mean_entropy": 0.05089092179591342,
+      "retry_attempt": 5
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 6,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 1.6726522234282795,
+      "mean_entropy": 0.05089092179591342
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.35877194538576573,
+      "mean_entropy": 0.052099612602305057,
+      "retry_attempt": 6
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 7,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.35877194538576573,
+      "mean_entropy": 0.052099612602305057
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.06743923023924142,
+      "mean_entropy": 0.05358532920974691,
+      "retry_attempt": 7
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 8,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.06743923023924142,
+      "mean_entropy": 0.05358532920974691
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.04075090219991436,
+      "mean_entropy": 0.025750393069302706,
+      "retry_attempt": 8
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 9,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.04075090219991436,
+      "mean_entropy": 0.025750393069302706
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.19250335114760136,
+      "mean_entropy": 0.029288114704571568,
+      "retry_attempt": 9
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 10,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.19250335114760136,
+      "mean_entropy": 0.029288114704571568
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.2276452969944614,
+      "mean_entropy": 0.03598054283326688,
+      "retry_attempt": 10
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 11,
+      "max_retries": 10,
+      "is_valid_json": false,
+      "joint_entropy": 0.2276452969944614,
+      "mean_entropy": 0.03598054283326688
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "model": "gemma3:1b",
+  "context_name": "rcc",
+  "prompt_mode": "stem_basis",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 606.731,
+  "n_iterations": 2,
+  "n_retries_total": 4,
+  "n_retry_exhausted": 1,
+  "n_repeated_objects": 2,
+  "joint_entropy": 0.007709085101703372,
+  "mean_entropy": 0.14592821338850334,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.1829517495924111,
+      "mean_entropy": 0.15123651332302102,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "No object provided.",
+      "attribute_vector": [
+        {
+          "description": "Does the example satisfy C?",
+          "title": "C",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy DC?",
+          "title": "DC",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy O?",
+          "title": "O",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy P?",
+          "title": "P",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy PP?",
+          "title": "PP",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy EQ?",
+          "title": "EQ",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy DR?",
+          "title": "DR",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy PO?",
+          "title": "PO",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy TPP?",
+          "title": "TPP",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy EC?",
+          "title": "EC",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy NTPP?",
+          "title": "NTPP",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy Pi?",
+          "title": "Pi",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy PPi?",
+          "title": "PPi",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy NTPPi?",
+          "title": "NTPPi",
+          "type": "boolean"
+        },
+        {
+          "description": "Does the example satisfy TPPi?",
+          "title": "TPPi",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 1.1884194592236248,
+      "mean_entropy": 0.15122022992153816,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample",
+        "repeated_object"
+      ],
+      "retries_used": 1,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 1.1884194592236248,
+      "mean_entropy": 0.15122022992153816
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.041451890787841984,
+      "mean_entropy": 0.13487026301729144,
+      "retry_attempt": 1
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample",
+        "repeated_object"
+      ],
+      "retries_used": 2,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 0.041451890787841984,
+      "mean_entropy": 0.13487026301729144
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.014733086320603776,
+      "mean_entropy": 0.12091069304983156,
+      "retry_attempt": 2
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 3,
+      "max_retries": 3,
+      "is_valid_json": false,
+      "joint_entropy": 0.014733086320603776,
+      "mean_entropy": 0.12091069304983156
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.007709085101703372,
+      "mean_entropy": 0.14592821338850334,
+      "retry_attempt": 3
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 4,
+      "max_retries": 3,
+      "is_valid_json": false,
+      "joint_entropy": 0.007709085101703372,
+      "mean_entropy": 0.14592821338850334
+    }
+  ]
+}
