@@ -1,0 +1,23 @@
+"""
+llmfca.prompting — Domain-specific prompts and Pydantic output parsers.
+
+Each domain (integers, graphs, rcc, top) exports:
+    *_ATTRIBUTES : List[str]     # predicate names
+    *_PROMPT     : str          # baseline system prompt
+    *_PROMPT_FULL_CONTEXT : str # with the canonical context appended
+    *_PROMPT_STEM_BASIS   : str # with the stem basis appended
+    *_PARSER     : PydanticOutputParser  # for the dynamic ModelResponse
+"""
+from llmfca.prompting.prompts import (
+    INTEGER_ATTRIBUTES, INTEGER_PROMPT, INTEGER_PROMPT_FULL_CONTEXT, INTEGER_PROMPT_STEM_BASIS, INTEGER_PARSER,
+    ATTRIBUTES_GRAPHS, GRAPHS_PROMPT, GRAPHS_PROMPT_FULL_CONTEXT, GRAPHS_PROMPT_STEM_BASIS, GRAPHS_PARSER,
+    RCC_ATTRIBUTES, RCC_PROMPT, RCC_PROMPT_FULL_CONTEXT, RCC_PROMPT_STEM_BASIS, RCC_PARSER,
+    ATTRIBUTES_TOP, TOP_PROMPT, TOP_PROMPT_FULL_CONTEXT, TOP_PROMPT_STEM_BASIS, TOP_PARSER,
+)
+
+__all__ = [
+    "INTEGER_ATTRIBUTES", "INTEGER_PROMPT", "INTEGER_PROMPT_FULL_CONTEXT", "INTEGER_PROMPT_STEM_BASIS", "INTEGER_PARSER",
+    "ATTRIBUTES_GRAPHS", "GRAPHS_PROMPT", "GRAPHS_PROMPT_FULL_CONTEXT", "GRAPHS_PROMPT_STEM_BASIS", "GRAPHS_PARSER",
+    "RCC_ATTRIBUTES", "RCC_PROMPT", "RCC_PROMPT_FULL_CONTEXT", "RCC_PROMPT_STEM_BASIS", "RCC_PARSER",
+    "ATTRIBUTES_TOP", "TOP_PROMPT", "TOP_PROMPT_FULL_CONTEXT", "TOP_PROMPT_STEM_BASIS", "TOP_PARSER",
+]
