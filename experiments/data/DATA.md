@@ -134,10 +134,10 @@ For each run whose context is non-empty according to `results.csv`: `concepts`
 executions (`outcome_results_csv` for the first, `outcome_trace` for the second)
 and `sources_agree` when they coincide.
 
-- Terminal state: they agree in 434 of 576 configurations (75 %). 221
-  configurations finished in the first execution and 180 in the second; 133
+- Terminal state: they agree in 435 of 576 configurations (76 %). 221
+  configurations finished in the first execution and 181 in the second; 134
   finished in both.
-- Where both finished, `S` is identical in 65 of the 133; the mean absolute
+- Where both finished, `S` is identical in 65 of the 134; the mean absolute
   difference is 0.15 for `S` and 0.16 for `S_H`.
 - 71 traces show the model accepting the very first implication
   (`accepted_at_initialization = true`): the explorer then stops at once with

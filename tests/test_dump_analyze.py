@@ -14,8 +14,9 @@ sys.path.insert(0, ROOT)
 
 import pandas as pd
 
-from experiments.dump_prompts import build_appendix, _escape_tex
-from experiments.analyze_traces import load_traces, build_per_context_table, build_per_size_bin_table
+from experiments.dump_prompts import build_tex_appendix as build_appendix, _escape_tex
+from experiments.analyze_traces import (load_traces, build_per_context_table, build_per_size_bin_table,
+                                        build_complexity_outcome_tables)
 
 
 def test_escape_tex_curly_and_percent():
@@ -91,9 +92,25 @@ def test_per_context_table_smoke():
     })
     tex = build_per_context_table(df)
     assert r"\begin{table}" in tex
-    assert "Integer Numbers" in tex
-    assert "Graph Theory" in tex
+    assert "Integers & 2" in tex
+    assert "Graphs & 2" in tex
     print(f"OK test_per_context_table_smoke ({len(tex)} chars)")
+
+
+def test_complexity_outcome_split():
+    """Completed = finished; Aborted = everything else (early stop or timeout)."""
+    df = pd.DataFrame({
+        "context_name": ["integers"] * 3,
+        "finished": [True, False, False],
+        "wallclock_seconds": [10.0, 20.0, 40.0],
+        "n_iterations": [4, 2, 3],
+        "n_retries_total": [0, 3, 5],
+        "joint_entropy": [0.5, 1.0, 2.0],
+    })
+    tex = build_complexity_outcome_tables(df)
+    assert r"\multirow{2}{*}{Integers} & Completed & 10.00 & 10.00 & 4.0 & 0.00 & 0.500" in tex
+    assert " & Aborted & 30.00 & 30.00 & 2.5 & 4.00 & 1.500" in tex
+    assert "tab:complexity_outcome_size" not in tex
 
 
 def test_per_size_bin_table_without_size():

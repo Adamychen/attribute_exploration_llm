@@ -187,8 +187,9 @@ is run separately. Steps (2) to (8) write, in this order:
 - `tables/table_{integers,rcc,graphs,top}.tex` + `table_aggregated.tex` + `table_complexity.tex`
 - `tables/table_correlation.tex`
 - `appendix_prompts.tex`
-- `tables/table_traces_summary.tex`
-- `figuras_rendimiento/<domain>_performance.png` + `extraction_heatmap.png` + `complexity_iter.png`
+- `tables/table_traces_summary.tex` + `table_syntax_vs_semantics.tex` + `table_complexity_outcome.tex`
+- `figuras_rendimiento/<domain>_performance.png` + `extraction_heatmap.png`
+- `figuras_rendimiento/complexity_iter.png` (written by `analyze_traces`)
 
 All paths above are defaults; every script accepts absolute paths to write
 into a different directory.
