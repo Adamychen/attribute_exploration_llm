@@ -60,11 +60,16 @@ Reference for every comparison: `C0` on the same (model, domain, strategy, query
 - Four variants are compared with `C0`; p-values are adjusted (Holm) and reported with
   effect sizes. The analysis is exploratory.
 
-Power: in a simulation calibrated with the run-to-run agreement observed in the main
-sweep (about 75 % of explorations end in the same state in the two executions), 72 pairs
-detect a change of 0.20 in the probability of finishing about 72 % of the time and a
-change of 0.10 about 25 % of the time. The design can reveal large sensitivity; it cannot
-rule out small or moderate effects.
+Power (`python -m experiments.sensitivity_power`, 10 000 simulations; this replaces an
+earlier estimate made with 72 pairs): the probability that a run finishes under `C0` is
+taken, per cell, as the mean of the two executions of the main sweep, and the variant
+shifts it by a fixed amount, clipped to [0, 1]. With the actual numbers of pairs (56 for
+`V1_order` and `V2_format`, 84 for `V3_wording` and `V4_attrs`), the sign test at
+alpha = 0.05 detects a shift of -0.20 (mean shift after clipping -0.15) 60 % and 80 % of
+the time, a shift of +0.20 (mean shift +0.10) 31 % and 54 % of the time, and a shift of
+0.10 in either direction at most 28 % of the time; at the smallest Holm threshold
+(0.05 / 4) these figures drop to 37 %, 59 %, 13 %, 29 % and at most 11 %. The design can
+reveal large sensitivity; it cannot rule out small or moderate effects.
 
 ## Cost
 

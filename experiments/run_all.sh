@@ -89,6 +89,10 @@ step "ae_trace" "experiments.render_ae_trace" \
 step "sensitivity" "experiments.analyze_sensitivity" \
     --output-dir "${ASSETS_DIR}/tables"
 
+# Step 2d: slices of the sweep for Results and Discussion, and the replication table
+step "discussion" "experiments.discussion_tables" \
+    --output-dir "${ASSETS_DIR}/tables"
+
 # Step 3: prompt ablation (Wilcoxon)
 step "prompts" "experiments.analysis_prompts" \
     --results "$RESULTS_CSV" --output-dir "${ASSETS_DIR}/tables"
