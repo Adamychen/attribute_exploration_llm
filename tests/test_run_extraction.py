@@ -59,7 +59,7 @@ def test_csv_lock_serialises_writes(tmp_path=None):
     if tmp_path is None:
         tmp_path = tempfile.mkdtemp()
     output = os.path.join(tmp_path, "results.csv")
-    csv_lock = asyncio.Lock()
+    csv_lock = None  # created inside the event loop (asyncio.Lock binds to a loop on Python 3.9)
     N = 20
 
     async def worker(i: int):
@@ -87,6 +87,8 @@ def test_csv_lock_serialises_writes(tmp_path=None):
             df_row.to_csv(output, mode="a", header=write_header, index=False)
 
     async def main():
+        nonlocal csv_lock
+        csv_lock = asyncio.Lock()
         await asyncio.gather(*(worker(i) for i in range(N)))
 
     asyncio.run(main())
@@ -140,6 +142,7 @@ def test_probe_dedup_under_contention_unavailable():
     """When the probe returns False, the model is marked unavailable and subsequent
     workers skip the experiment entirely."""
     call_count = {"n": 0}
+    ran = {"n": 0}
 
     def fake_probe(*args, **kwargs):
         call_count["n"] += 1
@@ -150,7 +153,6 @@ def test_probe_dedup_under_contention_unavailable():
         probed: set = set()
         unavailable_lock = asyncio.Lock()
         sem = asyncio.Semaphore(n_workers)
-        ran = {"n": 0}
 
         async def worker():
             async with sem:
@@ -222,12 +224,10 @@ def test_exception_in_run_explorer_writes_failed_row(tmp_path=None):
     traces_dir = os.path.join(tmp_path, "traces")
     os.makedirs(traces_dir, exist_ok=True)
 
-    csv_lock = asyncio.Lock()
-    sem = asyncio.Semaphore(1)
     processed = set()
     unavailable: set = set()
     probed: set = set()
-    unavailable_lock = asyncio.Lock()
+    state = {}
 
     boom = RuntimeError("LLM endpoint exploded")
 
@@ -235,6 +235,9 @@ def test_exception_in_run_explorer_writes_failed_row(tmp_path=None):
         raise boom
 
     async def main():
+        # Locks and semaphores are created inside the event loop (Python 3.9).
+        csv_lock, sem, unavailable_lock = asyncio.Lock(), asyncio.Semaphore(1), asyncio.Lock()
+        state["sem"] = sem
         with patch.object(re, "run_explorer", side_effect=fake_run_explorer), \
              patch.object(re, "make_model", return_value=MagicMock()):
             await re._run_one(
@@ -268,7 +271,7 @@ def test_exception_in_run_explorer_writes_failed_row(tmp_path=None):
     assert row["finished"] == False
     assert row["error_type"] == "RuntimeError"
     assert "LLM endpoint exploded" in row["error_msg"]
-    assert not sem.locked(), "Semaphore must be released after the failure"
+    assert not state["sem"].locked(), "Semaphore must be released after the failure"
     print(f"OK test_exception_in_run_explorer_writes_failed_row "
           f"(error_type={row['error_type']}, msg snippet: {row['error_msg'][:40]!r})")
 

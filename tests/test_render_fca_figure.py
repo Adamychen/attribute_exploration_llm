@@ -18,6 +18,7 @@ from experiments.render_fca_figure import (
 FIXTURES = Path(__file__).parent / "fixtures"
 TOY_CXT = FIXTURES / "toy.cxt"
 PROJECT_ROOT = FIXTURES.parent.parent.parent
+REPO_ROOT = FIXTURES.parent.parent
 PAPER_CONTEXTOS = PROJECT_ROOT / "paper" / "contextos"
 
 
@@ -137,7 +138,7 @@ def test_cli_renders_toy(tmp_path):
             "--out", str(tmp_path),
         ],
         capture_output=True, text=True,
-        cwd=PROJECT_ROOT / "code",
+        cwd=REPO_ROOT,
     )
     assert result.returncode == 0, result.stderr
     assert (tmp_path / "toy_lattice.svg").exists()
