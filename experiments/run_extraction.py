@@ -230,6 +230,8 @@ async def main_experiment(
     concurrency: int = 4,
     models_filter: Tuple[str, ...] = (),
     dry_run: bool = False,
+    question_modes: Tuple[str, ...] = QUESTION_MODES,
+    configs: Tuple[Tuple[str, str, str, str], ...] = (),
 ) -> None:
     """Run the full sweep. Resumes from output_path if present.
 
@@ -262,7 +264,17 @@ async def main_experiment(
     missing = sorted({(c, p) for c in contexts for p in prompt_modes if (c, p) not in PROMPTS})
     if missing:
         raise ValueError(f"No prompt defined for (context, strategy): {missing}")
-    plan = list(itertools.product(models, QUESTION_MODES, contexts, prompt_modes))
+    unknown_modes = sorted(set(question_modes) - set(QUESTION_MODES))
+    if unknown_modes:
+        raise ValueError(f"Unknown question modes: {unknown_modes}")
+    plan = list(itertools.product(models, question_modes, contexts, prompt_modes))
+    if configs:
+        # explicit list of (model, question_mode, context, prompt) runs
+        wanted = set(configs)
+        not_in_grid = sorted(wanted - set(plan))
+        if not_in_grid:
+            raise ValueError(f"Configurations outside the selected grid: {not_in_grid}")
+        plan = [p for p in plan if p in wanted]
 
     processed = load_processed(output_path)
     if dry_run:
@@ -322,6 +334,15 @@ async def main_experiment(
         print("\n✓ All tasks completed.")
 
 
+def _read_configs(path: str) -> Tuple[Tuple[str, str, str, str], ...]:
+    """Read (model, question_mode, context, prompt) tuples from a CSV file."""
+    df = pd.read_csv(path)
+    return tuple(
+        (r.model, r.question_mode, r.context_name, r.prompt_mode)
+        for r in df.itertuples(index=False)
+    )
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Run the Attribute Exploration sweep over the configured models."
@@ -336,6 +357,11 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--models", nargs="+", default=None,
                         help="Restrict the sweep to these models from models.csv. "
                              "Defaults to all of them.")
+    parser.add_argument("--question-modes", nargs="+", default=None, choices=QUESTION_MODES,
+                        help="Which question modes to run. Defaults to both.")
+    parser.add_argument("--configs", default=None,
+                        help="CSV with columns model, context_name, prompt_mode, question_mode: "
+                             "run only these configurations (they must lie in the selected grid).")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_SECONDS,
                         help="Per-experiment wallclock timeout in seconds.")
     parser.add_argument("--output", default=None,
@@ -369,4 +395,6 @@ if __name__ == "__main__":
         concurrency=args.concurrency,
         models_filter=tuple(args.models) if args.models else (),
         dry_run=args.dry_run,
+        question_modes=tuple(args.question_modes) if args.question_modes else QUESTION_MODES,
+        configs=_read_configs(args.configs) if args.configs else (),
     ))
