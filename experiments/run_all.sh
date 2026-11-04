@@ -85,6 +85,10 @@ step "assets" "experiments.generate_paper_assets" \
 step "ae_trace" "experiments.render_ae_trace" \
     --output "${ASSETS_DIR}/tables/table_ae_trace.tex"
 
+# Step 2c: prompt sensitivity (variants of the prompt vs. C0; design in SENSITIVITY.md)
+step "sensitivity" "experiments.analyze_sensitivity" \
+    --output-dir "${ASSETS_DIR}/tables"
+
 # Step 3: prompt ablation (Wilcoxon)
 step "prompts" "experiments.analysis_prompts" \
     --results "$RESULTS_CSV" --output-dir "${ASSETS_DIR}/tables"
