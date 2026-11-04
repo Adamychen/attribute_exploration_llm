@@ -22,7 +22,7 @@ table + figure generation).
 ## Layout
 
 ```
-code/
+.
 ├── llmfca/              # importable library (the public API)
 │   ├── attribute_explorer.py
 │   ├── entropy_analyzer.py
@@ -31,24 +31,24 @@ code/
 │   ├── llm/client.py
 │   ├── analysis/metrics.py
 │   └── prompting/
-├── experiments/         # paper-repro scripts (CLI + data + reference contexts)
+├── experiments/         # paper-repro scripts (CLI) and data
 │   ├── run_extraction.py
 │   ├── generate_paper_assets.py
+│   ├── build_derived_data.py
 │   ├── check_endpoint.py
 │   ├── models.csv
-│   ├── reference_contexts/
-│   ├── data/            # external benchmark inputs (benchmark_results.csv)
+│   ├── reference_contexts/   # reference formal contexts of the four domains
+│   ├── data/                 # results of the sweep reported in the paper (see experiments/data/DATA.md)
 │   └── run_all.sh
+├── prompts/             # system prompts, one Markdown file per domain and strategy
 ├── tests/               # pytest suite
 ├── pyproject.toml
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ## Install
 
 ```bash
-cd code/
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -91,12 +91,36 @@ explorer = AttributeExplorerGraph(
 # explorer.build() returns a compiled LangGraph StateGraph ready to .ainvoke(initial_state).
 ```
 
-## Reproducing the paper
+## Data in this repository
 
-The full pipeline is one command:
+`experiments/data/` contains the results of the sweep reported in the paper:
+24 models x 4 domains x 3 prompt strategies x 2 query modes = 576
+configurations. The sweep was executed twice with the same models, code and
+decoding settings; `results.csv` is the first execution and `traces/` the
+second. Model outputs are not deterministic, so the two differ and a new run is
+not expected to reproduce either of them exactly. `experiments/data/DATA.md`
+describes every file and column, including the support of the implications
+(`derived/conjectures.csv`, `derived/reference_bases.json`), the per-run
+summary with `S` and `S_H`, and the concept lattices.
+
+To rebuild the derived files from the raw ones (no LLM calls):
 
 ```bash
-cd code/
+python -m experiments.build_derived_data
+```
+
+To regenerate the paper's tables and figures from the committed results:
+
+```bash
+python -m experiments.generate_paper_assets \
+    --results experiments/data/results.csv --output-dir ./output
+```
+
+## Running a new sweep
+
+The full pipeline is one command (it needs an API key and takes many hours):
+
+```bash
 bash experiments/run_all.sh                       # writes to ./output/
 bash experiments/run_all.sh --output-dir ./build  # custom output dir
 bash experiments/run_all.sh --skip-extract        # reuse existing results.csv
@@ -105,18 +129,17 @@ bash experiments/run_all.sh --skip-extract        # reuse existing results.csv
 Or step by step:
 
 ```bash
-cd code/
-
 # (1) Quick sanity check: does the endpoint return logprobs?
 python -m experiments.check_endpoint --model llama3.2:3b
 
-# (2) Run the full sweep
+# (2) Run the full sweep. The paper used a limit of 4 hours per exploration
+#     (--timeout 14400); the code default is 6 hours.
 python -m experiments.run_extraction \
     --contexts integers graphs rcc top \
     --prompts basic full_context stem_basis \
     --output ./output/results.csv \
     --traces-dir ./output/traces \
-    --timeout 7200 \
+    --timeout 14400 \
     --concurrency 4
 
 # (3) Regenerate LaTeX tables (4 domain + aggregated + complexity) and PNG figures
@@ -149,9 +172,15 @@ python -m experiments.dump_prompts --format tex \
 python -m experiments.analyze_traces \
     --traces-dir ./output/traces \
     --output ./output/tables/table_traces_summary.tex
+
+# (9) Derived data: per-run summary, implications with support, lattices
+python -m experiments.build_derived_data \
+    --results ./output/results.csv --traces-dir ./output/traces \
+    --output-dir ./output/derived
 ```
 
-The 7 steps write, in this order:
+`run_all.sh` runs steps (2) to (8); step (1) is a manual check and step (9)
+is run separately. Steps (2) to (8) write, in this order:
 - `results.csv` (1 row per `(model, prompt, question_mode, context)` = 576 rows for a full sweep)
 - `traces/<model>__<ctx>__<prompt>__<qmode>.json` (per-experiment log + final context)
 - `benchmark_results.csv` (MMLU + GSM8K accuracy per model)
@@ -163,6 +192,15 @@ The 7 steps write, in this order:
 
 All paths above are defaults; every script accepts absolute paths to write
 into a different directory.
+
+## Decoding settings
+
+The client (`llmfca.make_model`) sends `temperature=0.0`, `max_tokens=2000`,
+`logprobs=true` and `top_logprobs=20`. The value 20 is the number of
+alternative tokens returned with their log-probabilities at each position (it is
+the maximum the LlamUS endpoint accepts); they feed the entropy estimate of
+`EntropyAnalyzer`. The client does not send a `top_k` sampling parameter.
+Malformed answers are retried within the bound `N_op = 10` of `EntropyAnalyzer`.
 
 ## Library API
 
@@ -189,19 +227,21 @@ into a different directory.
 
 ## Output schema
 
-After `bash experiments/run_all.sh --output-dir ./output`:
+The files committed under `experiments/data/` are documented in
+`experiments/data/DATA.md`. A new sweep with
+`bash experiments/run_all.sh --output-dir ./output` writes:
 
-- `output/results.csv` — main sweep results (576 rows when complete; one row per `(model, question_mode, context, prompt_mode)`). S and S_H are NOT stored; they are recomputed on the fly from the per-row `ctx_objects` / `ctx_attributes` / `ctx_relations` columns.
-- `output/traces/` — per-experiment JSON traces containing the full `iteration_log`, `stem_basis`, `final_context` (objects, properties, bool matrix), and the cumulative AE metrics. Useful for post-mortem analysis of any single run.
+- `output/results.csv` — one row per `(model, question_mode, context, prompt_mode)`: the learned context (`ctx_objects`, `ctx_attributes`, `ctx_relations`) and the flags `early_stop`, `finished`, `timeout`. S and S_H are not stored; they are recomputed from the context columns.
+- `output/traces/` — per-experiment JSON traces with the full `iteration_log`, `stem_basis` (the accepted implications), `final_context` and the cumulative AE metrics.
 - `output/benchmark_results.csv` — external benchmark accuracies from real MMLU + GSM8K (default: 285 MMLU questions stratified across 57 subjects + 100 GSM8K test problems, loaded from HuggingFace `cais/mmlu` and `openai/gsm8k`). Models unavailable at the endpoint get `NaN` (not 0).
 - `output/_hf_cache/` — local HuggingFace dataset cache (gitignored).
-- `output/tables/*.tex` and `output/figuras_rendimiento/*.png` — LaTeX tables and 300 dpi PNG figures ready to be `\input{}`'d into a paper.
-- `output/appendix_prompts.tex` — verbatim listing of all system prompts (integer / graphs / rcc / top × basic / full_context / stem_basis + the shared FOL evaluation rules), ready for `\input{}` from a paper appendix.
+- `output/tables/*.tex` and `output/figuras_rendimiento/*.png` — LaTeX tables and 300 dpi PNG figures.
+- `output/appendix_prompts.tex` — verbatim listing of all system prompts.
+- `output/derived/` — output of step (9), as described in `DATA.md`.
 
 ## Testing
 
 ```bash
-cd code/
 python3 -m pytest tests/ -v
 # or simply:
 python3 tests/test_metrics.py
