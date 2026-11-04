@@ -1,0 +1,70 @@
+{
+  "model": "qwen2-math:7b",
+  "context_name": "graphs",
+  "prompt_mode": "stem_basis+C0",
+  "question_mode": "existential",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 3.527,
+  "n_iterations": 1,
+  "n_retries_total": 1,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.8363372505470417,
+  "mean_entropy": 0.7652055573163926,
+  "stem_basis": [],
+  "final_context": {
+    "objects": [
+      "'"
+    ],
+    "properties": [
+      "None"
+    ],
+    "context": [
+      [
+        true
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.5364079470769368,
+      "mean_entropy": 0.5789914400154758,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.5364079470769368,
+      "mean_entropy": 0.5789914400154758
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.8363372505470417,
+      "mean_entropy": 0.7652055573163926,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']"
+    }
+  ]
+}

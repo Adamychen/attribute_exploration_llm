@@ -1,0 +1,472 @@
+{
+  "model": "qwen2.5-coder:7b",
+  "context_name": "graphs",
+  "prompt_mode": "basic+V3_wording",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 131.147,
+  "n_iterations": 8,
+  "n_retries_total": 11,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.10149932100047449,
+  "mean_entropy": 0.009767113137475922,
+  "stem_basis": [
+    {
+      "antecedent": [],
+      "consequent": [
+        "acyclic"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.247490895599506,
+      "mean_entropy": 0.421559506000316,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['acyclic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 5.214338042508604,
+      "mean_entropy": 0.49647290015578227,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['acyclic']"
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected'] => ['2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 2.890035993740167,
+      "mean_entropy": 0.450744164344098,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A directed acyclic graph (DAG) with at least three vertices",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['acyclic', '2-connected'] => ['connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 4.001351029039642,
+      "mean_entropy": 0.6321889685871928,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "tree(g)",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['acyclic', '2-connected'] => ['connected', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 4.154649572171812,
+      "mean_entropy": 0.8099612006857734,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph consisting of two or more trees connected by a single edge.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['acyclic', 'geodetic'] => ['connected', '2-connected', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 2.424034075592526,
+      "mean_entropy": 0.3598532573312277,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A single vertex graph",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['acyclic', 'geodetic'] => ['bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 4.610066155579108,
+      "mean_entropy": 0.42500842593979926,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A directed acyclic graph (DAG) with at least three vertices that is not bipartite, nonseparable, or planar.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['acyclic', 'bipartite'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 3.974176122922503,
+      "mean_entropy": 0.30690862711271194,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 3.974176122922503,
+      "mean_entropy": 0.30690862711271194
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 1.3271474738585716,
+      "mean_entropy": 0.0856911815248726,
+      "retry_attempt": 1
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 1.3271474738585716,
+      "mean_entropy": 0.0856911815248726
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.26527574983387703,
+      "mean_entropy": 0.029939974968299348,
+      "retry_attempt": 2
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.26527574983387703,
+      "mean_entropy": 0.029939974968299348
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.1156286918797908,
+      "mean_entropy": 0.014437397193974593,
+      "retry_attempt": 3
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 4,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.1156286918797908,
+      "mean_entropy": 0.014437397193974593
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.0777153583036177,
+      "mean_entropy": 0.010520826116682688,
+      "retry_attempt": 4
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 5,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.0777153583036177,
+      "mean_entropy": 0.010520826116682688
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.06720340678694436,
+      "mean_entropy": 0.008048811703710166,
+      "retry_attempt": 5
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 6,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.06720340678694436,
+      "mean_entropy": 0.008048811703710166
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.06833832876465233,
+      "mean_entropy": 0.007322641896608611,
+      "retry_attempt": 6
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 7,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.06833832876465233,
+      "mean_entropy": 0.007322641896608611
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.08318564598438093,
+      "mean_entropy": 0.008154702353229355,
+      "retry_attempt": 7
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 8,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.08318564598438093,
+      "mean_entropy": 0.008154702353229355
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.08276969670990778,
+      "mean_entropy": 0.007915838753606703,
+      "retry_attempt": 8
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 9,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.08276969670990778,
+      "mean_entropy": 0.007915838753606703
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.09199360210718052,
+      "mean_entropy": 0.009302847616027472,
+      "retry_attempt": 9
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 10,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.09199360210718052,
+      "mean_entropy": 0.009302847616027472
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.10149932100047449,
+      "mean_entropy": 0.009767113137475922,
+      "retry_attempt": 10
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 11,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.10149932100047449,
+      "mean_entropy": 0.009767113137475922
+    }
+  ]
+}

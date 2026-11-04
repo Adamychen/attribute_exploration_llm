@@ -1,0 +1,177 @@
+{
+  "model": "qwen2.5:72b",
+  "context_name": "integers",
+  "prompt_mode": "stem_basis+V2_format",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 266.34,
+  "n_iterations": 4,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.14132833557686156,
+  "mean_entropy": 0.035802059779917024,
+  "stem_basis": [
+    {
+      "antecedent": [],
+      "consequent": [
+        "even",
+        "prime"
+      ]
+    },
+    {
+      "antecedent": [
+        "even",
+        "odd",
+        "prime"
+      ],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.9505592873926805,
+      "mean_entropy": 0.2990749616130075,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "2",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['even', 'prime']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 1.1452552161197547,
+      "mean_entropy": 0.39844452008770487,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['even', 'prime']"
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['even', 'odd', 'prime'] => ['compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.03351622291183683,
+      "mean_entropy": 0.17559477576561577,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['even', 'odd', 'prime'] => ['compound', 'quadratic']"
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['even', 'prime', 'compound'] => ['odd', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.06505217363738017,
+      "mean_entropy": 0.411609196987621,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.06505217363738017,
+      "mean_entropy": 0.411609196987621
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.051086357351610254,
+      "mean_entropy": 0.03915175616812886,
+      "retry_attempt": 1
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.051086357351610254,
+      "mean_entropy": 0.03915175616812886
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.14132833557686156,
+      "mean_entropy": 0.035802059779917024,
+      "retry_attempt": 2
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.14132833557686156,
+      "mean_entropy": 0.035802059779917024
+    }
+  ]
+}

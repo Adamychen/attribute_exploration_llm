@@ -1,0 +1,83 @@
+{
+  "model": "llama3.1:8b",
+  "context_name": "integers",
+  "prompt_mode": "basic+C0",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 16.736,
+  "n_iterations": 1,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 2.329504277143867,
+  "mean_entropy": 0.11784062959984562,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 3.3957183796014467,
+      "mean_entropy": 0.9036527844106133,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 3.3957183796014467,
+      "mean_entropy": 0.9036527844106133
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 2.932193222099021,
+      "mean_entropy": 0.07516328398732447,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 2.932193222099021,
+      "mean_entropy": 0.07516328398732447
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 2.329504277143867,
+      "mean_entropy": 0.11784062959984562,
+      "retry_attempt": 2
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 2.329504277143867,
+      "mean_entropy": 0.11784062959984562
+    }
+  ]
+}

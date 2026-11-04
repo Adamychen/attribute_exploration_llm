@@ -1,0 +1,83 @@
+{
+  "model": "llama3.1:8b",
+  "context_name": "integers",
+  "prompt_mode": "stem_basis+C0",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 19.149,
+  "n_iterations": 1,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 1.117153734433346,
+  "mean_entropy": 0.08811099915909369,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.98504678474696,
+      "mean_entropy": 0.8023740646775377,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 1.98504678474696,
+      "mean_entropy": 0.8023740646775377
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.31852399746923404,
+      "mean_entropy": 0.028610064313250156,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.31852399746923404,
+      "mean_entropy": 0.028610064313250156
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.117153734433346,
+      "mean_entropy": 0.08811099915909369,
+      "retry_attempt": 2
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 1.117153734433346,
+      "mean_entropy": 0.08811099915909369
+    }
+  ]
+}
