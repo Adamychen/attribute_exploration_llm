@@ -81,6 +81,10 @@ fi
 step "assets" "experiments.generate_paper_assets" \
     --results "$RESULTS_CSV" --output-dir "$ASSETS_DIR"
 
+# Step 2b: worked Attribute Exploration trace (Table 1 of the paper)
+step "ae_trace" "experiments.render_ae_trace" \
+    --output "${ASSETS_DIR}/tables/table_ae_trace.tex"
+
 # Step 3: prompt ablation (Wilcoxon)
 step "prompts" "experiments.analysis_prompts" \
     --results "$RESULTS_CSV" --output-dir "${ASSETS_DIR}/tables"
