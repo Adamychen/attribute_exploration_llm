@@ -276,10 +276,12 @@ def fig_tradeoff_scatter(runs: pd.DataFrame) -> str:
         coords = " ".join(c(xy[(d, s)]) for s in STRATEGIES)
         lines.append(f"\\addplot[{_LINE_COLORS[d]}, dashed, thin, no marks, forget plot] coordinates {{{coords}}};")
     for d in domains:
+        # Label next to the Baseline point: below it near the right edge, to its right otherwise.
         x, y = xy[(d, "basic")]
         label = LABELS[d] + (" (control)" if d == CONTROL else "")
-        lines.append(f"\\node[anchor=north west, font=\\tiny, text={_TEXT_COLORS[d]}] "
-                     f"at (axis cs:{x + 0.01:.2f},{y - 0.01:.2f}) {{{label}}};")
+        anchor, at = ("north", (x, y - 0.03)) if x > 0.7 else ("west", (x + 0.015, y))
+        lines.append(f"\\node[anchor={anchor}, font=\\tiny, text={_TEXT_COLORS[d]}] "
+                     f"at (axis cs:{at[0]:.2f},{at[1]:.2f}) {{{label}}};")
     lines += [
         r"\fill[green!10, opacity=0.3] (axis cs:0.6,0.7) rectangle (axis cs:1.0,1.0);",
         r"\fill[red!10, opacity=0.3] (axis cs:0,0) rectangle (axis cs:0.3,0.3);",
