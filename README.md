@@ -195,12 +195,19 @@ into a different directory.
 
 ## Decoding settings
 
-The client (`llmfca.make_model`) sends `temperature=0.0`, `max_tokens=2000`,
-`logprobs=true` and `top_logprobs=20`. The value 20 is the number of
+The client (`llmfca.make_model`) sends `temperature=0.0`, `logprobs=true` and
+`top_logprobs=20`, with `max_tokens=2000` by default (`experiments.run_extraction`
+sets 3000). The value 20 is the number of
 alternative tokens returned with their log-probabilities at each position (it is
 the maximum the LlamUS endpoint accepts); they feed the entropy estimate of
 `EntropyAnalyzer`. The client does not send a `top_k` sampling parameter.
 Malformed answers are retried within the bound `N_op = 10` of `EntropyAnalyzer`.
+
+## Prompt-sensitivity analysis
+
+`experiments/SENSITIVITY.md` describes a bounded analysis of how the results depend on
+the presentation of the prompt (variants in `llmfca/prompting/variants.py`, runner
+`experiments/run_sensitivity.sh`).
 
 ## Library API
 

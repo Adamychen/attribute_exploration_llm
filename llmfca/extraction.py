@@ -25,6 +25,7 @@ from concepts import Context
 from llmfca.attribute_explorer import AttributeExplorerGraph
 from llmfca.fca_helpers import context_to_dict
 from llmfca.llm.client import make_model
+from llmfca.prompting.variants import build_variant_prompts
 from llmfca.prompting.prompts import (
     INTEGER_PROMPT, INTEGER_PROMPT_FULL_CONTEXT, INTEGER_PROMPT_STEM_BASIS,
     GRAPHS_PROMPT, GRAPHS_PROMPT_FULL_CONTEXT, GRAPHS_PROMPT_STEM_BASIS,
@@ -56,6 +57,13 @@ PROMPTS = {
     ("rcc",      "full_context"):  RCC_PROMPT_FULL_CONTEXT,
     ("rcc",      "stem_basis"):    RCC_PROMPT_STEM_BASIS,
 }
+
+# Prompt variants for the sensitivity analysis (llmfca.prompting.variants). They are
+# registered under strategy names "<strategy>+<condition>", e.g. "stem_basis+V1_order",
+# and are never part of the default sweep (PROMPT_STRATEGIES).
+VARIANT_PROMPTS = build_variant_prompts(PROMPTS)
+VARIANT_STRATEGIES = tuple(sorted({s for (_, s) in VARIANT_PROMPTS}))
+PROMPTS.update(VARIANT_PROMPTS)
 
 ATTRIBUTES = {
     "integers": INTEGER_ATTRIBUTES,

@@ -44,7 +44,7 @@ sys.path.insert(0, ROOT)
 from llmfca.extraction import (
     run_explorer, build_result_row, build_trace_payload, load_processed,
     PROMPTS, ATTRIBUTES, PARSERS, ARITY, ACCEPT_OPTION,
-    PROMPT_STRATEGIES, QUESTION_MODES, CONTEXT_NAMES,
+    PROMPT_STRATEGIES, VARIANT_STRATEGIES, QUESTION_MODES, CONTEXT_NAMES,
     DEFAULT_TIMEOUT_SECONDS,
 )
 from llmfca.fca_helpers import get_message_function
@@ -228,6 +228,8 @@ async def main_experiment(
     traces_dir: str = "traces",
     probe: bool = True,
     concurrency: int = 4,
+    models_filter: Tuple[str, ...] = (),
+    dry_run: bool = False,
 ) -> None:
     """Run the full sweep. Resumes from output_path if present.
 
@@ -242,18 +244,34 @@ async def main_experiment(
 
     load_dotenv()
     api_key = os.getenv("LLAMUS_API_KEY")
-    if not api_key:
+    if not api_key and not dry_run:
         raise RuntimeError("LLAMUS_API_KEY not set. Create a .env file at the repo root.")
 
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    os.makedirs(traces_dir, exist_ok=True)
+    if not dry_run:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        os.makedirs(traces_dir, exist_ok=True)
 
     models_csv = os.path.join(CURRENT, "models.csv")
     df_models = pd.read_csv(models_csv)
     models = df_models.sort_values(by="size", ascending=True)["model"]
+    if models_filter:
+        unknown = sorted(set(models_filter) - set(models))
+        if unknown:
+            raise ValueError(f"Unknown models (not in models.csv): {unknown}")
+        models = models[models.isin(models_filter)]
+    missing = sorted({(c, p) for c in contexts for p in prompt_modes if (c, p) not in PROMPTS})
+    if missing:
+        raise ValueError(f"No prompt defined for (context, strategy): {missing}")
     plan = list(itertools.product(models, QUESTION_MODES, contexts, prompt_modes))
 
     processed = load_processed(output_path)
+    if dry_run:
+        todo = [p for p in plan if p not in processed]
+        print(f"Dry run: {len(plan)} experiments planned, {len(todo)} not yet in {output_path}.")
+        for mode_key in sorted({(c, p) for _, _, c, p in todo}):
+            n = sum(1 for _, _, c, p in todo if (c, p) == mode_key)
+            print(f"  {mode_key[0]:9s} {mode_key[1]:22s} {n}")
+        return
     unavailable: Set[str] = set()
     probed: Set[str] = set()
     unavailable_lock = asyncio.Lock()
@@ -310,8 +328,14 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--contexts", nargs="+", default=None, choices=CONTEXT_NAMES,
                         help="Which formal contexts to explore. Defaults to all four.")
-    parser.add_argument("--prompts", nargs="+", default=None, choices=PROMPT_STRATEGIES,
-                        help="Which prompt strategies to use. Defaults to all three.")
+    parser.add_argument("--prompts", nargs="+", default=None, choices=PROMPT_STRATEGIES + VARIANT_STRATEGIES,
+                        help="Which prompt strategies to use. Defaults to the three "
+                             "strategies of the main sweep. Names like 'stem_basis+V1_order' "
+                             "are the prompt variants of the sensitivity analysis "
+                             "(integers and graphs only).")
+    parser.add_argument("--models", nargs="+", default=None,
+                        help="Restrict the sweep to these models from models.csv. "
+                             "Defaults to all of them.")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_SECONDS,
                         help="Per-experiment wallclock timeout in seconds.")
     parser.add_argument("--output", default=None,
@@ -322,6 +346,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--traces-dir", default=None,
                         help="Directory to write per-experiment JSON traces. Same "
                              "resolution rules as --output. Defaults to `traces`.")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Print the experiments that would run and exit (no API key needed).")
     parser.add_argument("--no-probe", action="store_true",
                         help="Skip the model availability probe (not recommended).")
     parser.add_argument("--concurrency", type=int, default=4,
@@ -341,4 +367,6 @@ if __name__ == "__main__":
         traces_dir=traces_dir,
         probe=not args.no_probe,
         concurrency=args.concurrency,
+        models_filter=tuple(args.models) if args.models else (),
+        dry_run=args.dry_run,
     ))
