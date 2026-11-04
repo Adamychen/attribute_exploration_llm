@@ -12,6 +12,7 @@ Outputs (written to --output-dir):
   * ``table_cfc_gains.tex``       Baseline vs CFC, existential queries
   * ``table_dg_graphs.tex``       the three strategies on graphs, existential queries
   * ``fig_tradeoff_scatter.tex``  PGFPlots figure: extraction rate vs mean S
+  * ``table_domains.tex``         size of the reference context, lattice and basis of each domain
 
 Rates are over the 24 models; means of S and S_H are over the runs that finished,
 as in ``table_aggregated.tex``. The first execution (``results.csv``) is the source
@@ -298,6 +299,42 @@ def fig_tradeoff_scatter(runs: pd.DataFrame) -> str:
     return "\n".join(lines)
 
 
+def table_domains(ref_dir: str = os.path.join(HERE, "reference_contexts"),
+                  bases_path: str = os.path.join(DATA, "derived", "reference_bases.json")) -> str:
+    """Objects, attributes, concepts and Duquenne-Guigues basis size of each reference context."""
+    import json
+    with open(bases_path, encoding="utf-8") as f:
+        bases = json.load(f)
+    refs = _reference_contexts(ref_dir)
+    lines = [
+        r"\begin{table}[ht]",
+        r"\centering",
+        r"\small",
+        r"\begin{tabular}{lrrrr}",
+        r"\toprule",
+        r"\textit{Domain} & \textit{Objects} & \textit{Attributes} & \textit{Concepts} & \textit{DG basis} \\",
+        r"\midrule",
+    ]
+    for heading, domains in _domain_blocks():
+        for d in domains:
+            b = bases[d]
+            label = LABELS[d] + (" (control)" if d == CONTROL else "")
+            lines.append(f"{label} & {b['n_objects']} & {b['n_attributes']} & "
+                         f"{len(refs[d].lattice)} & {b['n_implications']} \\\\")
+        if heading == "Case studies":
+            lines.append(r"\midrule")
+    lines += [
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\caption{Reference formal context of each domain: number of objects and attributes, number of "
+        r"concepts of its lattice, and number of implications of its Duquenne--Guigues basis.}",
+        r"\label{tab:domains}",
+        r"\end{table}",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--data-dir", default=DATA)
@@ -311,6 +348,7 @@ def main() -> None:
         "table_cfc_gains.tex": table_cfc_gains(first),
         "table_dg_graphs.tex": table_dg_graphs(first),
         "fig_tradeoff_scatter.tex": fig_tradeoff_scatter(first),
+        "table_domains.tex": table_domains(),
     }
     os.makedirs(args.output_dir, exist_ok=True)
     for name, text in outputs.items():

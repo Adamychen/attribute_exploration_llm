@@ -48,3 +48,11 @@ def test_outputs_have_labels(ex):
                         (fig_tradeoff_scatter(first), "fig:tradeoff_scatter")):
         assert f"\\label{{{label}}}" in text
     assert "(control)" in table_cfc_gains(first)
+
+
+def test_domains_table():
+    from experiments.discussion_tables import table_domains
+    tex = table_domains()
+    assert "RCC & 8 & 15 & 17 & 23" in tex
+    assert "Integers (control) & 7 & 5 & 15 & 4" in tex
+    assert r"\label{tab:domains}" in tex
