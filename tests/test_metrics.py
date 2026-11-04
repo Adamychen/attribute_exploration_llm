@@ -116,3 +116,28 @@ if __name__ == "__main__":
     test_concept_intents_unique()
     test_symmetric_difference_sanity()
     print("\nAll metrics tests passed.")
+
+
+def test_learned_context_replaces_placeholder():
+    from llmfca.analysis.metrics import (learned_context, accepted_first_implication,
+                                         ALL_ATTRIBUTES_OBJECT)
+    ref = _ctx(["1", "2", "4"], ["even", "odd", "quadratic"],
+               [[False, True, True], [True, False, False], [True, False, True]])
+    ctx = learned_context(["'"], ["None"], [[True]], ref.properties)
+    assert list(ctx.objects) == [ALL_ATTRIBUTES_OBJECT]
+    assert concept_intents(ctx) == {frozenset(ref.properties)}
+    assert accepted_first_implication(["'"], ["None"])
+    assert accepted_first_implication(list(ctx.objects), list(ctx.properties))
+    assert not accepted_first_implication(["1"], ["even", "odd", "quadratic"])
+    # M is always an intent of the reference, so S = 2 / (|C_ref| + 1); the top
+    # concept of the reference has an empty intent here, at distance |M| from M.
+    n_ref = len(concept_intents(ref))
+    S, S_H = compute_similarities(ctx, ref)
+    assert abs(S - 2 / (n_ref + 1)) < 1e-12
+    assert S_H == 0.0
+
+
+def test_learned_context_keeps_regular_contexts():
+    from llmfca.analysis.metrics import learned_context
+    ctx = learned_context(["1"], ["even", "odd"], [[False, True]])
+    assert list(ctx.objects) == ["1"]

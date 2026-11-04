@@ -16,6 +16,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.exceptions import OutputParserException
 from llmfca.entropy_analyzer import EntropyAnalyzer
+from llmfca.analysis.metrics import all_attributes_context
 
 
 class Implication:
@@ -429,9 +430,12 @@ class AttributeExplorerGraph:
                 "implication": str(state.get("current_implication")),
             }
             if state['stage'] == "initialization":
-                 # Use default bound for first implication search
+                # The oracle accepted [] -> M: every object has every attribute.
+                # The only L-closed set is M, so the exploration ends; the answers
+                # define the context with one object that has all attributes.
                 return {
-                    "context": Context(["'"], ["None"], [["True"]]),
+                    "context": all_attributes_context(self.attributes),
+                    "stem_basis": state['stem_basis'] + [state['current_implication']],
                     "stage": "exploration",
                     "retries": 0,
                     "finished": True,

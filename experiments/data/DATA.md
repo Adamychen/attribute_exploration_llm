@@ -57,8 +57,15 @@ is kept for compatibility with the committed files). `question_mode` is
 | `timeout` | true if the wall-clock limit was reached |
 
 For aborted runs the context columns hold a placeholder (`["'"]`, `["None"]`,
-`[[true]]`) and carry no information. `S` and `S_H` are not stored here; they are
-computed from the context columns (see `derived/run_summary.csv`).
+`[[true]]`) and carry no information. The same placeholder was written for finished
+runs in which the model accepted the first implication `[] -> all attributes`
+(46 runs in this file, 71 in `traces/`): such an answer says that every object has
+every attribute, so the learned lattice has the single intent M. The code that
+computes `S` and `S_H` (`llmfca.analysis.metrics.learned_context`) replaces the
+placeholder by that context, a single object with all attributes; the explorer
+writes that context directly since the fix in `AttributeExplorerGraph.update_state`.
+`S` and `S_H` are not stored here; they are computed from the context columns
+(see `derived/run_summary.csv`).
 
 ### `traces/<run_id>.json`
 
@@ -92,7 +99,7 @@ support 0 holds vacuously.
 | `n_iterations`, `n_retries_total`, `n_retry_exhausted`, `wallclock_seconds`, `joint_entropy`, `mean_entropy` | trace | as in the trace |
 | `n_conjectures`, `n_accepted`, `n_refuted`, `n_unresolved` | trace (second execution) | implications posed, and how each ended (see `conjectures.csv`) |
 | `stem_basis_size` | trace | length of the trace's `stem_basis` |
-| `accepted_at_initialization` | trace | the model accepted the first implication (`[] -> all attributes`); the explorer then stops at once with a placeholder context and an empty basis |
+| `accepted_at_initialization` | trace | the model accepted the first implication (`[] -> all attributes`); the explorer then stops at once; the sweep recorded a placeholder context and an empty basis (see `results.csv` above) |
 | `n_ctx_objects`, `n_ctx_attributes`, `n_concepts_llm` | results.csv (first execution) | size of the learned context and of its concept lattice (empty if the run was aborted according to `results.csv`) |
 | `n_concepts_ref` | reference | number of concepts of the reference lattice |
 | `S`, `S_H` | results.csv (first execution) | similarity scores of the learned lattice against the reference (empty if aborted); same computation as `experiments.generate_paper_assets` |
@@ -138,10 +145,11 @@ and `sources_agree` when they coincide.
   configurations finished in the first execution and 181 in the second; 134
   finished in both.
 - Where both finished, `S` is identical in 65 of the 134; the mean absolute
-  difference is 0.15 for `S` and 0.16 for `S_H`.
+  difference is 0.14 for `S` and 0.16 for `S_H`.
 - 71 traces show the model accepting the very first implication
   (`accepted_at_initialization = true`): the explorer then stops at once with
-  `finished = true`, a placeholder one-object context and an empty basis.
+  `finished = true` (46 runs of the first execution do the same). Without these
+  runs, 175 configurations finished in the first execution and 110 in the second.
 
 The paper's tables and figures of similarity (`S`, `S_H`) use the first
 execution (`results.csv`). The exploration statistics (iterations, retries,

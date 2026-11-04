@@ -104,6 +104,14 @@ def test_graph_accepts_implication():
         f"Graph should terminate cleanly, got: finished={result.get('finished')}, "
         f"early_stop={result.get('early_stop')}"
     )
+    # Accepting the first implication [] -> M ends the exploration; the context
+    # has one object with every attribute and the basis holds [] -> M.
+    assert result["finished"] is True
+    ctx = result["context"]
+    assert len(ctx.objects) == 1 and list(ctx.properties) == list(INTEGER_ATTRIBUTES)
+    assert all(ctx.bools[0])
+    assert len(result["stem_basis"]) == 1
+    assert list(result["stem_basis"][0].antecedent) == []
     print(f"OK test_graph_accepts_implication (calls={model.call_count})")
 
 

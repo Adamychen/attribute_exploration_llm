@@ -306,12 +306,11 @@ def lattice_payload(objects, attributes, matrix) -> dict:
 
 
 def similarity_scores(row: pd.Series, ref_json_ctx) -> Tuple[Optional[float], Optional[float]]:
-    from concepts import Context
-    from llmfca.analysis.metrics import compute_similarities
+    from llmfca.analysis.metrics import compute_similarities, learned_context
     if row.get("early_stop", False) or row.get("timeout", False) or ref_json_ctx is None:
         return None, None
-    llm = Context(json.loads(row["ctx_objects"]), json.loads(row["ctx_attributes"]),
-                  json.loads(row["ctx_relations"]))
+    llm = learned_context(json.loads(row["ctx_objects"]), json.loads(row["ctx_attributes"]),
+                          json.loads(row["ctx_relations"]), ref_json_ctx.properties)
     return compute_similarities(llm, ref_json_ctx)
 
 
@@ -328,6 +327,7 @@ def outcome_of(record) -> str:
 
 def main() -> None:
     from concepts import Context
+    from llmfca.analysis.metrics import learned_context
 
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--results", default=os.path.join(current_dir, "data", "results.csv"))
@@ -375,11 +375,14 @@ def main() -> None:
         conj_rows.extend(conj)
 
         S, S_H = similarity_scores(row, ref_concepts.get(key["context_name"]))
-        n_concepts = None
+        n_concepts = learned = None
         if not (row["early_stop"] or row["timeout"]):
-            lat = lattice_payload(json.loads(row["ctx_objects"]),
-                                  json.loads(row["ctx_attributes"]),
-                                  json.loads(row["ctx_relations"]))
+            learned = learned_context(json.loads(row["ctx_objects"]),
+                                      json.loads(row["ctx_attributes"]),
+                                      json.loads(row["ctx_relations"]),
+                                      ref_concepts[key["context_name"]].properties)
+            lat = lattice_payload(list(learned.objects), list(learned.properties),
+                                  [list(b) for b in learned.bools])
             n_concepts = lat["n_concepts"]
             with open(os.path.join(out, "lattices", f"{rid}.json"), "w", encoding="utf-8") as f:
                 json.dump({**key, "run_id": rid, **lat}, f, ensure_ascii=False)
@@ -409,8 +412,8 @@ def main() -> None:
             "wallclock_seconds": trace["wallclock_seconds"],
             "joint_entropy": trace["joint_entropy"],
             "mean_entropy": trace["mean_entropy"],
-            "n_ctx_objects": len(json.loads(row["ctx_objects"])) if n_concepts is not None else None,
-            "n_ctx_attributes": len(json.loads(row["ctx_attributes"])) if n_concepts is not None else None,
+            "n_ctx_objects": len(learned.objects) if learned is not None else None,
+            "n_ctx_attributes": len(learned.properties) if learned is not None else None,
             "n_concepts_llm": n_concepts,
             "n_concepts_ref": n_ref_concepts.get(key["context_name"]),
             "S": S,

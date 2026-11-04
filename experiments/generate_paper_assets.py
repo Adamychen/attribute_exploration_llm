@@ -27,16 +27,16 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 code_dir = os.path.dirname(current_dir)
 sys.path.insert(0, code_dir)
 
-from llmfca.analysis.metrics import compute_similarities
+from llmfca.analysis.metrics import compute_similarities, learned_context
 from experiments.tables import generate_domain_table, generate_aggregated_table, generate_complexity_table
 from experiments.figures import generate_all_performance_plots, plot_extraction_heatmap
 
 
-def build_context_from_row(row) -> Context:
+def build_context_from_row(row, ref: Context) -> Context:
     objs = json.loads(row["ctx_objects"]) if isinstance(row["ctx_objects"], str) else row["ctx_objects"]
     attrs = json.loads(row["ctx_attributes"]) if isinstance(row["ctx_attributes"], str) else row["ctx_attributes"]
     rels = json.loads(row["ctx_relations"]) if isinstance(row["ctx_relations"], str) else row["ctx_relations"]
-    return Context(objs, attrs, rels)
+    return learned_context(objs, attrs, rels, ref.properties)
 
 
 def load_reference_contexts(ref_dir: str):
@@ -93,7 +93,7 @@ def main():
             SH_list.append(None)
             continue
         try:
-            ctx_llm = build_context_from_row(row)
+            ctx_llm = build_context_from_row(row, ref)
             S, SH = compute_similarities(ctx_llm, ref)
             S_list.append(S)
             SH_list.append(SH)
@@ -125,12 +125,17 @@ def main():
         f.write(agg_tex)
     print(f"  Saved: {agg_path}")
 
-    print("Generating complexity table (R1.8)...")
-    complexity_tex = generate_complexity_table(df, df_models)
-    complexity_path = os.path.join(tables_dir, "table_complexity.tex")
-    with open(complexity_path, "w") as f:
-        f.write(complexity_tex)
-    print(f"  Saved: {complexity_path}")
+    if "wallclock_seconds" in df.columns:
+        print("Generating complexity table (R1.8)...")
+        complexity_tex = generate_complexity_table(df, df_models)
+        complexity_path = os.path.join(tables_dir, "table_complexity.tex")
+        with open(complexity_path, "w") as f:
+            f.write(complexity_tex)
+        print(f"  Saved: {complexity_path}")
+    else:
+        # results.csv of the main sweep has no timing columns; the complexity tables
+        # of the paper come from the traces (experiments.analyze_traces).
+        print("Skipping table_complexity.tex: no wallclock_seconds column in --results")
 
     print("Generating performance figures...")
     generate_all_performance_plots(df, df_models, figuras_dir)

@@ -13,6 +13,7 @@ For each (context, question_mode) group, computes:
 Output: 3 LaTeX tables (S, S_H, syntax_vs_semantics) written to --output-dir
 (default `./tables/`).
 """
+import json
 import os
 import sys
 import argparse
@@ -46,11 +47,14 @@ def _resolve(arg: str) -> str:
 
 
 def _wilcoxon_paired(a: pd.Series, b: pd.Series) -> tuple:
-    """Return (stat, p_value) for paired Wilcoxon. Returns (nan, nan) if N < 2 or all equal."""
-    mask = a.notna() & b.notna()
-    a, b = a[mask], b[mask]
-    if len(a) < 2:
+    """Paired Wilcoxon test of two strategies; (nan, nan) if fewer than 2 pairs or all equal.
+
+    ``a`` and ``b`` are indexed by model name, so that each model is paired with itself.
+    """
+    common = a.dropna().index.intersection(b.dropna().index)
+    if len(common) < 2:
         return (float("nan"), float("nan"))
+    a, b = a.loc[common], b.loc[common]
     diffs = a.values - b.values
     if np.all(diffs == 0):
         return (float("nan"), float("nan"))
@@ -86,12 +90,11 @@ def generate_prompt_ablation_table(df: pd.DataFrame, metric: str = "S") -> str:
     lines.append(r"\centering")
     lines.append(r"\footnotesize")
     lines.append(r"\resizebox{\textwidth}{!}{%")
-    lines.append(r"\begin{tabular}{ll lccc cc cc}")
+    lines.append(r"\begin{tabular}{ll lccc cc}")
     lines.append(r"\toprule")
     header = (r"\textbf{Context} & \textbf{Question} & \textbf{Prompt} & "
               r"\textbf{N} & \textbf{$\mu$} & \textbf{$\sigma$} & "
-              r"\textbf{$p$ vs basic} & \textbf{$p$ vs full\_ctx} & "
-              r"\textbf{$p$ vs stem} \\")
+              r"\textbf{$p$ vs CFC} & \textbf{$p$ vs DG} \\")
     lines.append(header)
     lines.append(r"\midrule")
 
@@ -104,36 +107,36 @@ def generate_prompt_ablation_table(df: pd.DataFrame, metric: str = "S") -> str:
             sub = sub_ctx[sub_ctx["question_mode"] == qmode]
             if sub.empty:
                 continue
-            per_prompt = {p: sub[sub["prompt_mode"] == p][metric] for p in prompts}
+            per_prompt = {p: sub[sub["prompt_mode"] == p].set_index("model")[metric]
+                          for p in prompts}
             n_per = {p: len(per_prompt[p]) for p in prompts}
             mu = {p: per_prompt[p].mean() for p in prompts}
             sd = {p: per_prompt[p].std(ddof=1) for p in prompts}
             ps = {}
             for a, b in combinations(prompts, 2):
-                ps[(a, b)] = _wilcoxon_paired(per_prompt[a], per_prompt[b])[1]
+                ps[(a, b)] = ps[(b, a)] = _wilcoxon_paired(per_prompt[a], per_prompt[b])[1]
 
             qmode_label = r"$\exists$" if qmode == "existential" else r"$\to$"
             for i, p in enumerate(prompts):
                 ctx_label = DOMAIN_LABELS.get(ctx, ctx) if first_ctx else ""
                 first_ctx = False
-                p_basic = ps.get((p, "basic"), float("nan")) if p != "basic" else float("nan")
                 p_full = ps.get((p, "full_context"), float("nan")) if p != "full_context" else float("nan")
                 p_stem = ps.get((p, "stem_basis"), float("nan")) if p != "stem_basis" else float("nan")
                 qlabel = qmode_label if i == 0 else ""
-                plabel = {"basic": "Baseline", "full_context": "CFC", "stem_basis": "Stem"}[p]
+                plabel = {"basic": "Baseline", "full_context": "CFC", "stem_basis": "DG Basis"}[p]
                 lines.append(f"{ctx_label} & {qlabel} & {plabel} & "
                              f"{n_per[p]} & {mu[p]:.2f} & {sd[p]:.2f} & "
-                             f"{_format_p(p_basic)} & {_format_p(p_full)} & {_format_p(p_stem)} \\\\")
+                             f"{_format_p(p_full)} & {_format_p(p_stem)} \\\\")
             lines.append(r"\addlinespace")
 
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}}")
     lines.append(r"\caption{Prompt-strategy ablation. Per (context, question-mode) cell, "
                  r"the table reports the mean and standard deviation of $" + metric + r"$ "
-                 r"computed over all models that completed the run, and Wilcoxon $p$-values "
-                 r"of paired tests against the three prompt strategies. "
-                 r"This separates prompt-induced variability from genuine LLM limitation.}")
-    lines.append(r"\label{tab:prompt_ablation_" + metric + "}")
+                 r"computed over all models that completed the run, and $p$-values of "
+                 r"Wilcoxon signed-rank tests between strategies, each model paired with "
+                 r"itself over the models that completed both runs.}")
+    lines.append(r"\label{tab:prompt_strategy_" + metric + "}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"
 
@@ -141,7 +144,7 @@ def generate_prompt_ablation_table(df: pd.DataFrame, metric: str = "S") -> str:
 def _compute_similarities(df: pd.DataFrame, ref_dir: str) -> pd.DataFrame:
     """Add S, S_H columns by comparing each row's context to the reference."""
     from concepts import Context
-    from llmfca.analysis.metrics import compute_similarities
+    from llmfca.analysis.metrics import compute_similarities, learned_context
     ref_contexts = {}
     for fname in os.listdir(ref_dir):
         if fname.endswith(".json"):
@@ -160,7 +163,7 @@ def _compute_similarities(df: pd.DataFrame, ref_dir: str) -> pd.DataFrame:
             objs = json.loads(row["ctx_objects"])
             attrs = json.loads(row["ctx_attributes"])
             rels = json.loads(row["ctx_relations"])
-            ctx_llm = Context(objs, attrs, rels)
+            ctx_llm = learned_context(objs, attrs, rels, ref.properties)
             s, sh = compute_similarities(ctx_llm, ref)
             S_list.append(s)
             SH_list.append(sh)
@@ -195,7 +198,7 @@ def main() -> None:
         df = _compute_similarities(df, ref_dir)
 
     for metric in ["S", "S_H"]:
-        out_path = os.path.join(output_dir, f"table_prompt_ablation_{metric}.tex")
+        out_path = os.path.join(output_dir, f"table_prompt_strategy_{metric}.tex")
         tex = generate_prompt_ablation_table(df, metric=metric)
         with open(out_path, "w") as f:
             f.write(tex)

@@ -2,10 +2,10 @@ from typing import Dict, List, Tuple, Optional
 import pandas as pd
 
 DOMAIN_LABELS = {
-    "integers": "Integer Numbers",
-    "graphs": "Graph Theory",
-    "rcc": "Region Connection Calculus",
-    "top": "KR Ontology"
+    "integers": "Integers",
+    "graphs": "Graphs",
+    "rcc": "RCC",
+    "top": "KR"
 }
 
 SHORT_LABELS = DOMAIN_LABELS
@@ -13,7 +13,7 @@ SHORT_LABELS = DOMAIN_LABELS
 PROMPT_LABELS = {
     "basic": "Baseline",
     "full_context": "CFC",
-    "stem_basis": "Stem Basis"
+    "stem_basis": "DG Basis"
 }
 
 
@@ -83,11 +83,11 @@ def generate_domain_table(df: pd.DataFrame, context_name: str) -> str:
     lines.append(r"\renewcommand{\arraystretch}{1.1}")
     lines.append(r"\resizebox{\textwidth}{!}{%")
     n_strategies = len(prompt_order)
-    total_cols = 2 + n_strategies * 4
+    total_cols = 1 + n_strategies * 4
     col_spec = "l" + " cc" * (n_strategies * 2)
     lines.append(r"\begin{tabular}{" + col_spec + r"}")
     lines.append(r"\toprule")
-    lines.append(r"\multicolumn{" + str(total_cols) + r"}{\textit{" + label + r"}} \\")
+    lines.append(r"\multicolumn{" + str(total_cols) + r"}{c}{\textit{" + label + r"}} \\")
     lines.append(r"\toprule")
     cols = []
     for p in prompt_order:
@@ -142,7 +142,7 @@ def generate_domain_table(df: pd.DataFrame, context_name: str) -> str:
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}%")
     lines.append(r"}")
-    lines.append(r"\caption{Comparative similarity scores for the \textit{" + label + r"} context.}")
+    lines.append(r"\caption{Comparative similarity scores for the \textit{" + label + r"} context. For each model, the table reports $S$ (average conceptual overlap) and $S_H$ (worst-case structural deviation) under the Baseline, CFC (Canonical Formal Context), and DG Basis (Duquenne--Guigues) strategies, for existential ($\exists$) and implicational ($\to$) queries. ``---'' indicates that the model reached the retry bound without producing a valid lattice.}")
     lines.append(r"\label{tab:" + context_name + r"_comparative}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"
@@ -262,22 +262,20 @@ def generate_aggregated_table(df: pd.DataFrame) -> str:
                 mu_S = valid_data["S"].mean() if len(valid_data) > 0 else 0.0
                 mu_SH = valid_data["S_H"].mean() if len(valid_data) > 0 else 0.0
 
-                ctx_label = f"\\multirow{{{len(prompts)*2}}}{{*}}{{{DOMAIN_LABELS.get(ctx, ctx)}}}" if first_ctx and first_prompt and qmode == "existential" else ""
-                prompt_label = f"\\multirow{{2}}{{*}}{{{PROMPT_LABELS.get(prompt, prompt)}}}" if first_prompt and qmode == "existential" else ""
+                ctx_label = f"\\multirow{{{len(prompts)*2}}}{{*}}{{{DOMAIN_LABELS.get(ctx, ctx)}}}" if first_prompt and qmode == "existential" else ""
+                prompt_label = f"\\multirow{{2}}{{*}}{{{PROMPT_LABELS.get(prompt, prompt)}}}" if qmode == "existential" else ""
                 qmode_label = "$\\exists$" if qmode == "existential" else "$\\to$"
                 row = f"{ctx_label} & {prompt_label} & {qmode_label} & {rext:.2f} & {mu_S:.2f} & {mu_SH:.2f} & {valid}/{total} \\\\"
                 lines.append(row)
                 if qmode == "implicational":
                     lines.append(r"\cline{2-7}")
-                else:
-                    first_prompt = False
             first_prompt = False
         first_ctx = False
         lines.append(r"\cline{1-6} \cline{2-6}")
 
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}}")
-    lines.append(r"\caption{Aggregated performance statistics across all experimental contexts.}")
+    lines.append(r"\caption{Aggregated performance statistics across all experimental contexts (Integers, Graphs, RCC, KR). For each context and prompt strategy, the table reports extraction rate ($R_{ext}$), average similarity ($\mu_S$), average Hausdorff similarity ($\mu_{S_H}$), and the ratio of valid completions to total attempts, for both existential ($\exists$) and implicational ($\to$) queries.}")
     lines.append(r"\label{tab:aggregated_stats}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"

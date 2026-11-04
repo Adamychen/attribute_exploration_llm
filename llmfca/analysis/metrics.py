@@ -1,5 +1,40 @@
-from typing import Set, FrozenSet
+from typing import FrozenSet, Optional, Sequence, Set
 from concepts import Context
+
+# Context recorded by runs made before the fix in ``AttributeExplorerGraph.update_state``
+# when the oracle accepted the first implication [] -> M.
+PLACEHOLDER_ATTRIBUTES = ["None"]
+ALL_ATTRIBUTES_OBJECT = "all_attributes"
+
+
+def all_attributes_context(attributes: Sequence[str]) -> Context:
+    """Context with one object that has every attribute; its lattice has the single intent M."""
+    attributes = list(attributes)
+    return Context([ALL_ATTRIBUTES_OBJECT], attributes, [[True] * len(attributes)])
+
+
+def is_placeholder(attributes: Sequence[str]) -> bool:
+    return list(attributes) == PLACEHOLDER_ATTRIBUTES
+
+
+def accepted_first_implication(objects: Sequence[str], attributes: Sequence[str]) -> bool:
+    """Whether a finished run ended by accepting [] -> M (old placeholder or fixed context)."""
+    return is_placeholder(attributes) or list(objects) == [ALL_ATTRIBUTES_OBJECT]
+
+
+def learned_context(objects, attributes, matrix,
+                    domain_attributes: Optional[Sequence[str]] = None) -> Context:
+    """Context learned by a finished run, as stored in ``results.csv`` or a trace.
+
+    Runs that ended by accepting [] -> M were stored with a placeholder context
+    (attribute ``None``). For those runs the context defined by the oracle's
+    answers is returned instead: one object with every attribute of the domain.
+    """
+    if is_placeholder(attributes):
+        if domain_attributes is None:
+            raise ValueError("placeholder context: the domain attributes are needed")
+        return all_attributes_context(domain_attributes)
+    return Context(objects, attributes, matrix)
 
 
 def concept_intents(ctx: Context) -> Set[FrozenSet[int]]:

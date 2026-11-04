@@ -1,5 +1,7 @@
 import os
+import numpy as np
 import pandas as pd
+from scipy.stats import linregress
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -20,16 +22,11 @@ def plot_performance_vs_size(
         print(f"  No data for {context_name}/{prompt_mode}")
         return
 
-    df_plot = sub.melt(
-        id_vars=["model", "S", "S_H"],
-        value_vars=[],
-    ).drop(columns=["variable", "value"])
-    df_plot = sub[["model", "S", "S_H"]].copy()
-    df_plot = df_plot.melt(id_vars=["model"], var_name="metric", value_name="score")
-    df_plot = df_plot.dropna(subset=["score"])
-    df_plot = df_plot[~df_plot["score"].astype(str).str.contains("ES|T")]
-    df_plot["score"] = pd.to_numeric(df_plot["score"], errors="coerce")
-    df_plot = df_plot.dropna(subset=["score"])
+    df_plot = sub[["model", "question_mode", "S"]].copy()
+    df_plot = df_plot.dropna(subset=["S"])
+    df_plot = df_plot[~df_plot["S"].astype(str).str.contains("ES|T")]
+    df_plot["S"] = pd.to_numeric(df_plot["S"], errors="coerce")
+    df_plot = df_plot.dropna(subset=["S"])
     df_final = pd.merge(df_plot, df_sizes, on="model", how="inner")
     if df_final.empty:
         print(f"  No valid scores for {context_name}/{prompt_mode}")
@@ -37,30 +34,41 @@ def plot_performance_vs_size(
 
     sns.set_style("white")
     plt.figure(figsize=(10, 6))
-    colors = {"S": "#D62728", "S_H": "#1F77B4"}
+    palette = {"existential": "#D62728", "implicational": "#1F77B4"}
     ax = sns.scatterplot(
-        data=df_final, x="size", y="score",
-        hue="metric", palette=colors,
+        data=df_final, x="size", y="S",
+        hue="question_mode", palette=palette,
         s=100, alpha=0.8, edgecolor="k", linewidth=0.8
     )
     texts = []
     for _, row in df_final.iterrows():
-        t = ax.text(row["size"], row["score"], row["model"],
-                    fontsize=8, color="#333333")
-        texts.append(t)
+        texts.append(ax.text(row["size"], row["S"], row["model"],
+                             fontsize=8, color="#333333"))
     if texts:
         adjust_text(texts, arrowprops=dict(arrowstyle="-", color="gray", lw=0.5, alpha=0.5),
                     expand_points=(1.2, 1.3), force_text=(0.1, 0.2))
 
-    plt.xlim(-5, df_final["size"].max() * 1.1 + 5)
+    x_vals = df_final["size"].values
+    y_vals = df_final["S"].values
+    logx = np.log(x_vals)
+    slope, intercept, r_value, _, _ = linregress(logx, y_vals)
+    r2 = r_value ** 2
+    x_range = np.logspace(np.log10(0.5), np.log10(df_final["size"].max() * 1.1), 200)
+    reg_line = ax.plot(x_range, slope * np.log(x_range) + intercept, linestyle="--", linewidth=1.5, color="gray", alpha=0.7)[0]
+
+    plt.xscale("log")
+    plt.xlim(1, df_final["size"].max() * 1.5)
     plt.ylim(-0.05, 1.05)
     plt.title(title or f"{context_name} - {prompt_mode}", fontsize=14, pad=15)
-    plt.xlabel("Model Size (Billion parameters)", fontsize=11)
-    plt.ylabel("Similarity Score", fontsize=11)
+    plt.xlabel("Model Size (Billion parameters - Log Scale)", fontsize=11)
+    plt.ylabel("Similarity Score ($S$)", fontsize=11)
     sns.despine(trim=False)
     plt.grid(axis="y", color="gray", linestyle=":", linewidth=0.5, alpha=0.5)
     plt.grid(axis="x", color="gray", linestyle=":", linewidth=0.5, alpha=0.3)
-    plt.legend(title="Metric", loc="lower right", frameon=True, framealpha=0.9)
+    handles, labels = ax.get_legend_handles_labels()
+    handles.append(reg_line)
+    labels.append(f"$R^2={r2:.3f}$")
+    plt.legend(handles=handles, labels=labels, title="Query Mode", loc="lower right", frameon=True, framealpha=0.9)
     plt.tight_layout()
     plt.savefig(output_path, format="png", dpi=300, bbox_inches="tight")
     plt.close()
@@ -76,7 +84,7 @@ def generate_all_performance_plots(df: pd.DataFrame, df_sizes: pd.DataFrame, out
         ("top", "basic", "KR Ontology (Baseline)"),
     ]
     for ctx, prompt, title in configs:
-        fname = f"{ctx}.png" if ctx != "top" else "top_performance.png"
+        fname = {"integers": "integer_numbers", "rcc": "rcc", "graphs": "graphs", "top": "top_performance"}.get(ctx, ctx) + ".png"
         plot_performance_vs_size(
             df, df_sizes, ctx, prompt,
             os.path.join(output_dir, fname),
@@ -92,8 +100,8 @@ def plot_extraction_heatmap(df: pd.DataFrame, output_path: str):
     for ctx in contexts:
         for prompt in prompts:
             data = sub[(sub["context_name"] == ctx) & (sub["prompt_mode"] == prompt)]
-            total = len(data)
-            valid = data.dropna(subset=["S"]).shape[0]
+            total = data["model"].nunique()
+            valid = data.dropna(subset=["S"])["model"].nunique()
             heat_data.loc[ctx, prompt] = valid / total if total > 0 else 0.0
     heat_data = heat_data.astype(float)
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -116,5 +124,5 @@ DOMAIN_LABELS = {
 PROMPT_LABELS = {
     "basic": "Baseline",
     "full_context": "CFC",
-    "stem_basis": "STEM"
+    "stem_basis": "DG"
 }

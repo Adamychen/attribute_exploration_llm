@@ -44,8 +44,8 @@ def _synthetic_df() -> pd.DataFrame:
 
 def test_wilcoxon_paired_basic():
     """Wilcoxon returns (stat, p) for a paired sample with non-zero diffs."""
-    a = pd.Series([1.0, 2.0, 3.0, 4.0, 5.0])
-    b = pd.Series([1.1, 2.1, 3.1, 4.1, 5.1])
+    a = pd.Series([1.0, 2.0, 3.0, 4.0, 5.0], index=list("abcde"))
+    b = pd.Series([1.1, 2.1, 3.1, 4.1, 5.1], index=list("abcde"))
     stat, p = _wilcoxon_paired(a, b)
     assert 0.0 <= p <= 1.0, f"p out of range: {p}"
     assert stat >= 0
@@ -85,7 +85,7 @@ def test_generate_table_smoke():
     tex = generate_prompt_ablation_table(df, metric="S")
     assert r"\begin{table}" in tex
     assert r"\end{table}" in tex
-    assert "Integer Numbers" in tex
+    assert "Integers" in tex
     assert r"\toprule" in tex
     print(f"OK test_generate_table_smoke ({len(tex)} chars)")
 
@@ -107,3 +107,14 @@ if __name__ == "__main__":
     test_generate_table_smoke()
     test_generate_table_empty()
     print("\nAll analysis_prompts tests passed.")
+
+
+def test_wilcoxon_pairs_by_model():
+    """Each model is paired with itself, whatever the row order and missing models."""
+    a = pd.Series([0.1, 0.2, 0.3, 0.4, 0.5, 0.9], index=["m1", "m2", "m3", "m4", "m5", "m6"])
+    b = pd.Series([0.6, 0.45, 0.33, 0.24, 0.15], index=["m5", "m4", "m3", "m2", "m1"])
+    stat, p = _wilcoxon_paired(a, b)
+    # paired differences b - a: 0.05, 0.04, 0.03, 0.05, 0.10 (m6 has no pair)
+    from scipy.stats import wilcoxon
+    expected = wilcoxon([0.15, 0.24, 0.33, 0.45, 0.6], [0.1, 0.2, 0.3, 0.4, 0.5])
+    assert abs(p - expected.pvalue) < 1e-12

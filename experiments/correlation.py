@@ -28,7 +28,7 @@ CODE_DIR = os.path.dirname(CURRENT)
 REPO_ROOT = os.path.dirname(CODE_DIR)
 sys.path.insert(0, CODE_DIR)
 
-from llmfca.analysis.metrics import compute_similarities
+from llmfca.analysis.metrics import compute_similarities, learned_context
 from experiments.tables import DOMAIN_LABELS
 
 
@@ -55,11 +55,11 @@ def _resolve(arg: str) -> str:
     return os.path.abspath(arg)
 
 
-def _build_context_from_row(row) -> Context:
+def _build_context_from_row(row, ref: Context) -> Context:
     objs = json.loads(row["ctx_objects"]) if isinstance(row["ctx_objects"], str) else row["ctx_objects"]
     attrs = json.loads(row["ctx_attributes"]) if isinstance(row["ctx_attributes"], str) else row["ctx_attributes"]
     rels = json.loads(row["ctx_relations"]) if isinstance(row["ctx_relations"], str) else row["ctx_relations"]
-    return Context(objs, attrs, rels)
+    return learned_context(objs, attrs, rels, ref.properties)
 
 
 def _load_reference_contexts(ref_dir: str):
@@ -87,7 +87,7 @@ def _compute_s_sh(df: pd.DataFrame, ref_contexts: dict) -> pd.DataFrame:
             n_skip += 1
             continue
         try:
-            ctx_llm = _build_context_from_row(row)
+            ctx_llm = _build_context_from_row(row, ref)
             S, SH = compute_similarities(ctx_llm, ref)
             S_list.append(S)
             SH_list.append(SH)
@@ -146,12 +146,12 @@ def generate_correlation_table(fca_df: pd.DataFrame, bench_df: pd.DataFrame) -> 
     lines = []
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
-    lines.append(r"\footnotesize")
+    lines.append(r"\scriptsize")
     ncols = 2 + 2 * len(fca_cols) * len(benchmark_cols)
     col_spec = "l" + "c" * (ncols - 1)
-    lines.append(r"\setlength{\tabcolsep}{4pt}")
-    lines.append(r"\renewcommand{\arraystretch}{1.1}")
-    lines.append(r"\resizebox{\textwidth}{!}{%")
+    lines.append(r"\setlength{\tabcolsep}{2pt}")
+    lines.append(r"\renewcommand{\arraystretch}{1.0}")
+    lines.append(r"\resizebox{0.85\textwidth}{!}{%")
     lines.append(r"\begin{tabular}{" + col_spec + "}")
     lines.append(r"\toprule")
     header = r"\textbf{Context} & \textbf{N}"
@@ -192,8 +192,10 @@ def generate_correlation_table(fca_df: pd.DataFrame, bench_df: pd.DataFrame) -> 
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}}")
     lines.append(r"\caption{Correlation between FCA similarity scores and external benchmark "
-                 r"accuracy per formal context. $r_p$: Pearson. $r_s$: Spearman. "
-                 r"Asterisks: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$.}")
+                 r"accuracy per formal context. N: number of models with valid runs. "
+                 r"For each metric ($\mu_S$, $\mu_{S_H}$) and benchmark (MMLU, GSM8K), "
+                 r"the table reports Pearson ($r_p$) and Spearman ($r_s$) correlation "
+                 r"coefficients. Asterisks: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$.}")
     lines.append(r"\label{tab:correlation_benchmarks}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"

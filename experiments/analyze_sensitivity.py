@@ -12,7 +12,7 @@ Outcomes, per run:
   * ``finished``    Attribute Exploration terminated normally (primary outcome);
   * ``nontrivial``  finished without accepting the first implication
                     (``[] -> all attributes``); accepting it ends the exploration at
-                    once with a one-object placeholder context;
+                    once, and the learned lattice has the single intent M;
   * ``S``, ``S_H``  similarity of the learned lattice to the reference lattice, for
                     finished runs, computed as for the paper's tables.
 
@@ -54,7 +54,6 @@ REPETITION_LABELS = {
     ("main2", "C0"): r"Second execution vs.\ $C_0$",
     ("main1", "main2"): r"First vs.\ second execution",
 }
-PLACEHOLDER_ATTRIBUTES = ["None"]
 
 
 # --------------------------------------------------------------------------
@@ -68,13 +67,13 @@ def _reference_contexts(ref_dir: str):
 
 
 def _scores(objects, attributes, matrix, ref) -> Tuple[float, float]:
-    from concepts import Context
-    from llmfca.analysis.metrics import compute_similarities
-    return compute_similarities(Context(objects, attributes, matrix), ref)
+    from llmfca.analysis.metrics import compute_similarities, learned_context
+    return compute_similarities(learned_context(objects, attributes, matrix, ref.properties), ref)
 
 
 def _record(key: dict, finished: bool, ctx: Optional[tuple], refs) -> dict:
-    trivial = bool(finished and ctx is not None and list(ctx[1]) == PLACEHOLDER_ATTRIBUTES)
+    from llmfca.analysis.metrics import accepted_first_implication
+    trivial = bool(finished and ctx is not None and accepted_first_implication(ctx[0], ctx[1]))
     S = S_H = None
     if finished and ctx is not None:
         S, S_H = _scores(*ctx, refs[key["context_name"]])
