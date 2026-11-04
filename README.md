@@ -35,10 +35,15 @@ table + figure generation).
 │   ├── run_extraction.py
 │   ├── generate_paper_assets.py
 │   ├── build_derived_data.py
+│   ├── discussion_tables.py  # replication, query-form, CFC, DG and domain tables; trade-off figure
+│   ├── analyze_sensitivity.py
+│   ├── sensitivity_power.py
+│   ├── render_ae_trace.py    # worked AE trace on integers (Table 1 of the paper)
 │   ├── check_endpoint.py
 │   ├── models.csv
 │   ├── reference_contexts/   # reference formal contexts of the four domains
 │   ├── data/                 # results of the sweep reported in the paper (see experiments/data/DATA.md)
+│   │   └── sensitivity/      # prompt-sensitivity runs (see experiments/SENSITIVITY.md)
 │   └── run_all.sh
 ├── prompts/             # system prompts, one Markdown file per domain and strategy
 ├── tests/               # pytest suite
@@ -101,7 +106,12 @@ second. Model outputs are not deterministic, so the two differ and a new run is
 not expected to reproduce either of them exactly. `experiments/data/DATA.md`
 describes every file and column, including the support of the implications
 (`derived/conjectures.csv`, `derived/reference_bases.json`), the per-run
-summary with `S` and `S_H`, and the concept lattices.
+summary with `S` and `S_H`, and the concept lattices. Runs in which the model
+accepted the first implication `[] -> all attributes` were stored with a
+placeholder context; the metric code scores them on the lattice that answer
+defines (a single object with every attribute), see `DATA.md`.
+`experiments/data/sensitivity/` holds the 398 runs of the prompt-sensitivity
+analysis (`results.csv` and `traces/`).
 
 To rebuild the derived files from the raw ones (no LLM calls):
 
@@ -188,7 +198,7 @@ is run separately. Steps (2) to (8) write, in this order:
 - `tables/table_correlation.tex`
 - `appendix_prompts.tex`
 - `tables/table_traces_summary.tex` + `table_syntax_vs_semantics.tex` + `table_complexity_outcome.tex`
-- `figuras_rendimiento/<domain>_performance.png` + `extraction_heatmap.png`
+- `figuras_rendimiento/{integer_numbers,rcc,graphs,top_performance}.png` + `extraction_heatmap.png`
 - `figuras_rendimiento/complexity_iter.png` (written by `analyze_traces`)
 
 All paths above are defaults; every script accepts absolute paths to write
@@ -209,6 +219,13 @@ Malformed answers are retried within the bound `N_op = 10` of `EntropyAnalyzer`.
 `experiments/SENSITIVITY.md` describes a bounded analysis of how the results depend on
 the presentation of the prompt (variants in `llmfca/prompting/variants.py`, runner
 `experiments/run_sensitivity.sh`).
+The runs are in `experiments/data/sensitivity/`. The analysis and its tables:
+
+```bash
+python -m experiments.analyze_sensitivity --output-dir ./output/tables   # Tables 4-5 of the paper
+python -m experiments.sensitivity_power                                  # power of the sign test
+python -m experiments.discussion_tables --output-dir ./output/tables     # replication and Discussion tables
+```
 
 ## Library API
 
