@@ -15,6 +15,15 @@ from typing import Optional
 
 from llmfca.llm.official import OfficialOpenAIClient
 
+# Names used in experiments/models.csv and in the paper -> id served by the LlamUS
+# endpoint. The endpoint serves these two models under the tag ``latest``; the
+# first sweep stored them under that tag (see MODEL_RENAMES in
+# experiments/build_derived_data.py).
+ENDPOINT_MODEL_ALIASES = {
+    "qwen3-coder:30b": "qwen3-coder:latest",
+    "phi4-mini:3.8b": "phi4-mini:latest",
+}
+
 
 def make_model(
     model_name: str,
@@ -58,7 +67,7 @@ def make_model(
         connect, ~10min read). Recommended: 180 for production sweeps.
     """
     return OfficialOpenAIClient(
-        model_name=model_name,
+        model_name=ENDPOINT_MODEL_ALIASES.get(model_name, model_name),
         base_url=base_url,
         api_key=api_key,
         temperature=temperature,
