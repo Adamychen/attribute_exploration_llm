@@ -32,6 +32,8 @@ done
 SUBSET=(qwen2.5-coder:7b llama3.1:8b qwen2.5:14b qwen3-coder:30b qwen2.5:72b llama4:16x17b gpt-oss:20b)
 TIMEOUT=14400   # 4 hours per exploration
 
+# run_extraction resolves relative paths against the parent of this repository, so use an absolute path
+case "$OUTPUT_DIR" in /*) ;; *) OUTPUT_DIR="$PWD/$OUTPUT_DIR" ;; esac
 mkdir -p "$OUTPUT_DIR"
 
 # Part A: all variants on the subset
