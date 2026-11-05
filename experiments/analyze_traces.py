@@ -6,8 +6,6 @@ per-model-size-bin breakdown of:
     - distribution of `n_iterations` (pseudo-intent steps)
     - distribution of `n_retries_total`
     - rate of `n_retry_exhausted > 0` (the entropy-derived bound was hit)
-    - mean/percentile of `joint_entropy` and `mean_entropy` at the
-      bound-setting step
 
 Outputs (the files included by the paper):
     - --output             `table_traces_summary.tex` (per context, per size bin)
@@ -158,11 +156,11 @@ def build_per_context_table(df: pd.DataFrame) -> str:
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
     lines.append(r"\footnotesize")
-    lines.append(r"\begin{tabular}{lrrrrrrr}")
+    lines.append(r"\begin{tabular}{lrrrrr}")
     lines.append(r"\toprule")
     lines.append(r"\textbf{Context} & \textbf{N} & \textbf{$\mu_{iter}$} & "
                  r"\textbf{med$_{iter}$} & \textbf{$\mu_{retries}$} & "
-                 r"\textbf{Abort rate} & \textbf{$\mu_{H^*}$} & \textbf{p95 $H^*$} \\ \midrule")
+                 r"\textbf{Abort rate} \\ \midrule")
     for ctx in CONTEXTS:
         sub = df[df["context_name"] == ctx]
         if sub.empty:
@@ -172,18 +170,16 @@ def build_per_context_table(df: pd.DataFrame) -> str:
         med_iter = sub["n_iterations"].median()
         mu_ret = sub["n_retries_total"].mean()
         es_rate = sub["early_stop"].mean()
-        mu_H = sub["joint_entropy"].mean()
-        p95_H = _pct(sub["joint_entropy"], 95)
         label = SHORT_LABELS.get(ctx, ctx)
         lines.append(f"{label} & {n} & {mu_iter:.1f} & {med_iter:.0f} & {mu_ret:.2f} & "
-                     f"{es_rate:.2f} & {mu_H:.2f} & {p95_H:.2f} \\\\")
+                     f"{es_rate:.2f} \\\\")
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}")
-    lines.append(r"\caption{Per-context statistics computed from the JSON traces. "
-                 r"$\mu_{iter}$: mean pseudo-intent steps. med$_{iter}$: median. "
-                 r"$\mu_{retries}$: mean retries across runs. Abort rate: fraction of "
-                 r"runs that aborted. $\mu_{H^*}$: mean joint entropy at the "
-                 r"bound-setting step. p95 $H^*$: 95th percentile.}")
+    lines.append(r"\caption{Per-context statistics computed from the JSON traces "
+                 r"(second execution). $\mu_{iter}$: mean number of exploration steps; "
+                 r"med$_{iter}$: median; $\mu_{retries}$: mean number of retries per "
+                 r"exploration; Abort rate: fraction of explorations that ended with an "
+                 r"Early Stop or a time-out.}")
     lines.append(r"\label{tab:traces_context}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"
@@ -215,7 +211,7 @@ def build_per_size_bin_table(df: pd.DataFrame) -> str:
     lines.append(r"\end{tabular}")
     lines.append(r"\caption{Per-model-size-bin statistics from JSON traces. "
                  r"$\mu_t$: mean wallclock time (s); $\mu_{iter}$: mean AE iterations; "
-                 r"$\mu_{retries}$: mean retries per iteration; ES-rate: fraction of runs "
+                 r"$\mu_{retries}$: mean number of retries per exploration; ES-rate: fraction of runs "
                  r"that resulted in early stop. Large models ($\geq$15B) include "
                  r"\texttt{qwen2.5:72b}, \texttt{llama3.3:70b}, \texttt{llama4:16x17b}, "
                  r"\texttt{gpt-oss:120b} and similar.}")
@@ -251,6 +247,7 @@ def build_syntax_vs_semantics_table(df: pd.DataFrame) -> str:
                  r"(JSON format: \texttt{wrong\_len, invalid\_format\_answer, no\_attributes}). "
                  r"\textbf{Sem$_{flags}$}: mean semantic errors per run "
                  r"(\texttt{no\_counterexample, useless\_counterexample}). "
+                 r"$\mu_{ret}$: mean number of retries per exploration. "
                  r"ES-rate: fraction of runs that ended in early stop. "
                  r"Repeated-object flags are excluded from both counts.}")
     lines.append(r"\label{tab:syntax_vs_semantics}")
@@ -269,9 +266,9 @@ def _complexity_block(df: pd.DataFrame, key: str, groups: List[str], labels: dic
                       caption: str, label: str) -> str:
     df = _with_outcome(df)
     lines = [r"\begin{table}[t]", r"\centering", r"\footnotesize",
-             r"\begin{tabular}{llrrrrr}", r"\toprule",
+             r"\begin{tabular}{llrrrr}", r"\toprule",
              r" & \textbf{Outcome} & \textbf{$\mu_t$ (s)} & \textbf{$\tilde{t}$ (s)} & "
-             r"\textbf{$\mu_{iter}$} & \textbf{$\mu_{retries}$} & \textbf{$\mu_{H^*}$} \\ \midrule"]
+             r"\textbf{$\mu_{iter}$} & \textbf{$\mu_{retries}$} \\ \midrule"]
     for g in groups:
         first = True
         for outcome in ("Completed", "Aborted"):
@@ -283,7 +280,7 @@ def _complexity_block(df: pd.DataFrame, key: str, groups: List[str], labels: dic
             lines.append(
                 f"{head} & {outcome} & {sub['wallclock_seconds'].mean():.2f} & "
                 f"{sub['wallclock_seconds'].median():.2f} & {sub['n_iterations'].mean():.1f} & "
-                f"{sub['n_retries_total'].mean():.2f} & {sub['joint_entropy'].mean():.3f} \\\\"
+                f"{sub['n_retries_total'].mean():.2f} \\\\"
             )
     lines += [r"\bottomrule", r"\end{tabular}", caption, rf"\label{{{label}}}", r"\end{table}"]
     return "\n".join(lines) + "\n"
@@ -295,8 +292,8 @@ def build_complexity_outcome_tables(df: pd.DataFrame) -> str:
         df, "context_name", CONTEXTS, SHORT_LABELS,
         r"\caption{Complexity and scalability metrics by formal context, split by terminal "
         r"outcome. $\mu_t$: mean wallclock time (s); $\tilde{t}$: median wallclock time; "
-        r"$\mu_{iter}$: mean AE iterations; $\mu_{retries}$: mean retries per iteration; "
-        r"$\mu_{H^*}$: mean adaptive entropy at the bound-setting step.}",
+        r"$\mu_{iter}$: mean number of exploration steps; $\mu_{retries}$: mean number of "
+        r"retries per exploration (second execution).}",
         "tab:complexity_outcome")
     if "size_bin" not in df.columns:
         return ctx
@@ -304,8 +301,7 @@ def build_complexity_outcome_tables(df: pd.DataFrame) -> str:
         df, "size_bin", SIZE_BINS, {},
         r"\caption{Complexity and scalability metrics by model size bin, split by terminal "
         r"outcome. $\mu_t$: mean wallclock time (s); $\mu_{iter}$: mean AE iterations; "
-        r"$\mu_{retries}$: mean retries per iteration; $\mu_{H^*}$: mean adaptive entropy "
-        r"at the bound-setting step.}",
+        r"$\mu_{retries}$: mean number of retries per exploration (second execution).}",
         "tab:complexity_outcome_size")
     return ctx + "\n" + size
 
