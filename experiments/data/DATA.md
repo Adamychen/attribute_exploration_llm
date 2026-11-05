@@ -15,6 +15,11 @@ limit per run):
   object already in the context (flag `repeated_object` in the traces). The check
   is not in the code of this repository; `experiments/second_execution_parser.patch`
   adds it (`git apply experiments/second_execution_parser.patch`).
+  Five configurations of the second execution, whose first traces were
+  interrupted by endpoint errors, were run again in November 2026 with the code
+  of this repository (`phi4-reasoning:14b` integers/stem_basis/implicational and
+  top/stem_basis/existential, `qwen2.5:32b` top/basic/existential,
+  `qwen3-coder:30b` top/stem_basis/existential, `qwen3:32b` graphs/basic/existential).
 
 The runs of the prompt-sensitivity analysis (`sensitivity/`) used the code of
 this repository.
