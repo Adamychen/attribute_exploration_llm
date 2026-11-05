@@ -18,6 +18,7 @@ experiments/data/
 ├── results.csv            raw: one row per run (learned context + stop flags)
 ├── traces/                raw: one JSON per run (full iteration log)
 ├── benchmark_results.csv  raw: MMLU / GSM8K accuracy per model
+├── models.csv             Ollama digest and quantisation of each model (recorded 2026-11-05)
 └── derived/               computed from the raw files, no LLM calls
     ├── run_summary.csv
     ├── conjectures.csv
@@ -157,3 +158,20 @@ early-stop analysis) use the second (`traces/`). Columns of `run_summary.csv`
 that come from the first execution are `S`, `S_H`, `n_ctx_objects`,
 `n_ctx_attributes`, `n_concepts_llm` and the lattices; all others describing the
 exploration come from the second.
+
+## Models: digests and quantisation
+
+`models.csv` lists, for each of the 24 Ollama tags, the digest, quantisation
+level, parameter count, family, format and `modified_at` reported by the
+server's `/api/tags` endpoint on 2026-11-05. The server was running Ollama
+0.40.9 on that date.
+
+This is a record taken *after* the two executions (June 2026), not during them.
+Every tag has a `modified_at` between 2026-08-15 and 2026-11-04, so all were
+downloaded again after the executions, and the digests of the weights used in
+June 2026 were not recorded. To the authors' knowledge the quantisation did not
+change. The Ollama version was not held fixed during the experiments, and the
+versions used in each execution were not recorded.
+
+Quantisation: `Q4_K_M` for 21 models, `MXFP4` for `gpt-oss:20b` and
+`gpt-oss:120b`, `Q4_0` for `qwen2-math:7b`.
