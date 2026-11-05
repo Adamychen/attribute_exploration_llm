@@ -1,0 +1,73 @@
+diff --git a/llmfca/attribute_explorer.py b/llmfca/attribute_explorer.py
+index 2620912..c2b7bb2 100644
+--- a/llmfca/attribute_explorer.py
++++ b/llmfca/attribute_explorer.py
+@@ -43,6 +43,9 @@ class ErrorMessage():
+     def wrong_len(n):
+         return f"\nERROR: Boolean list must have {n} values."
+     @staticmethod
++    def repeated_object():
++        return f"\nERROR: Object already exists."
++    @staticmethod
+     def not_enough_args(imp):
+         def and_strings(attrs):
+             return " and ".join(attrs)
+@@ -85,6 +88,7 @@ class ExplorationState(TypedDict):
+     n_iterations: int                                   # pseudo-intent steps processed
+     n_retries_total: int                                # cumulative retries across the run
+     n_retry_exhausted: int                              # times the retry bound was hit
++    n_repeated_objects: int                             # counterexamples whose name already existed
+     iteration_log: Annotated[List[Dict[str, Any]], operator.add]  # per-iteration trace; reducer appends
+ 
+ # --- Nodes ---
+@@ -122,6 +126,7 @@ class AttributeExplorerGraph:
+         self.N_OP = 10
+         self.error_funcs = {
+            "wrong_len": lambda s, imp: ErrorMessage.wrong_len(len(self.attributes)),
++           "repeated_object": lambda s, imp: ErrorMessage.repeated_object(),
+            "not_enough_attrs": lambda s, imp: ErrorMessage.not_enough_args(imp),
+            "useless_counterexample": lambda s, imp: ErrorMessage.useless_counterexample(imp),
+            "invalid_format_answer": lambda s, imp: ErrorMessage.invalid_format_answer(),
+@@ -357,14 +362,23 @@ class AttributeExplorerGraph:
+             if all(vals[i] for i in consequent_indices):
+                 flags["useless_counterexample"] = True
+ 
++            # Repeated object detection (Bloque A: activate dead flag)
++            if state['context'] is not None and "object" in parsed and parsed["object"]:
++                ex_name = str(parsed["object"])
++                ctx = state['context']
++                objs = [o[0] if isinstance(o, tuple) else o for o in ctx.objects]
++                if ex_name in objs:
++                    flags["repeated_object"] = True
++
+         # ================================================================
+         # ROBUST DYNAMIC BOUND STRATEGY (Ec. 5 y 6)
+         # ================================================================
+-
++        
+         has_error = any(flags.values())
+         new_max_retries = state['max_retries']
+         n_retries_total = state.get("n_retries_total", 0)
+         n_retry_exhausted = state.get("n_retry_exhausted", 0)
++        n_repeated_objects = state.get("n_repeated_objects", 0)
+ 
+         if has_error:
+             n_retries_total += 1
+@@ -387,6 +401,9 @@ class AttributeExplorerGraph:
+                 if early_stop:
+                     n_retry_exhausted += 1
+ 
++            if flags.get("repeated_object", False):
++                n_repeated_objects += 1
++
+             log_entry = {
+                 "step": state.get("n_iterations", 0),
+                 "event": "validate_logic",
+@@ -404,6 +421,7 @@ class AttributeExplorerGraph:
+                 "early_stop": early_stop,
+                 "n_retries_total": n_retries_total,
+                 "n_retry_exhausted": n_retry_exhausted,
++                "n_repeated_objects": n_repeated_objects,
+                 "iteration_log": [log_entry],
+             }
+ 

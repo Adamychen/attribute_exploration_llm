@@ -2,12 +2,22 @@
 
 This directory holds the output of the sweep reported in the paper:
 24 models x 4 domains x 3 prompt strategies x 2 query modes = 576 configurations.
-The sweep was executed twice with the same models, code version and decoding
-settings (temperature 0, top-k 20, 4-hour limit per run):
+The sweep was executed twice, in June 2026, with the same models, prompts and
+decoding settings (temperature 0; the log-probabilities of the 20 most probable
+tokens are requested to compute the entropy and do not restrict decoding; 4-hour
+limit per run):
 
-- the *first execution* is recorded in `results.csv`;
+- the *first execution* is recorded in `results.csv`; it used the code of this
+  repository;
 - the *second execution* was run to record the iteration log of each run (needed
-  to analyse early stops) and is recorded in `traces/`.
+  to analyse early stops) and is recorded in `traces/`. Its parser had one
+  additional check, which rejected any counterexample whose name was that of an
+  object already in the context (flag `repeated_object` in the traces). The check
+  is not in the code of this repository; `experiments/second_execution_parser.patch`
+  adds it (`git apply experiments/second_execution_parser.patch`).
+
+The runs of the prompt-sensitivity analysis (`sensitivity/`) used the code of
+this repository.
 
 Language-model outputs are not deterministic, so the two executions differ (see
 "Agreement between the two executions" below). Re-running the sweep is not
@@ -151,6 +161,12 @@ and `sources_agree` when they coincide.
   (`accepted_at_initialization = true`): the explorer then stops at once with
   `finished = true` (46 runs of the first execution do the same). Without these
   runs, 175 configurations finished in the first execution and 110 in the second.
+- The additional check of the second execution's parser (`repeated_object`) was
+  the only reason for rejecting the last response in 107 of the 388 runs of the
+  second execution that ended with an early stop. On the 70 configurations of the
+  sensitivity analysis whose prompt is that of the sweep, a new run with the code
+  of this repository (`C0`) ends in the same state as the first execution in 77 %
+  of them, and the two executions agree in 76 %.
 
 The paper's tables and figures of similarity (`S`, `S_H`) use the first
 execution (`results.csv`). The exploration statistics (iterations, retries,

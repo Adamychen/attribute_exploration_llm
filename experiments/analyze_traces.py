@@ -64,7 +64,9 @@ def _size_bin(size: float) -> str:
 # --- Flag classification ---
 SYNTACTIC_FLAGS = {"invalid_format_answer", "wrong_len", "no_attributes", "no_counterexample"}
 SEMANTIC_FLAGS = {"not_enough_attrs", "useless_counterexample"}
-IGNORED_FLAGS = {"repeated_object"}
+# Raised only by the parser of the second execution (experiments/second_execution_parser.patch):
+# a counterexample whose name is that of an object already in the context.
+NAME_FLAGS = {"repeated_object"}
 
 
 def _classify_flags(flags: list) -> Tuple[int, int]:
@@ -78,6 +80,7 @@ def _analyze_log(log: list) -> dict:
     """Walk iteration_log and return per-trace analysis of flag types."""
     syn_total = 0
     sem_total = 0
+    name_total = 0
     last_syn = 0
     last_sem = 0
     last_mixed = 0
@@ -89,6 +92,7 @@ def _analyze_log(log: list) -> dict:
         syn, sem = _classify_flags(flags)
         syn_total += syn
         sem_total += sem
+        name_total += sum(1 for f in flags if f in NAME_FLAGS)
 
     # Determine what caused the ES (last entry with flags, for ES traces)
     for entry in reversed(log):
@@ -104,6 +108,7 @@ def _analyze_log(log: list) -> dict:
     return {
         "syn_flags": syn_total,
         "sem_flags": sem_total,
+        "name_flags": name_total,
         "last_syn": last_syn,
         "last_sem": last_sem,
         "last_mixed": last_mixed,
@@ -226,10 +231,10 @@ def build_syntax_vs_semantics_table(df: pd.DataFrame) -> str:
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
     lines.append(r"\footnotesize")
-    lines.append(r"\begin{tabular}{lrrrrr}")
+    lines.append(r"\begin{tabular}{lrrrrrr}")
     lines.append(r"\toprule")
     lines.append(r"\textbf{Context} & \textbf{N} & "
-                 r"\textbf{Syn$_{flags}$} & \textbf{Sem$_{flags}$} & "
+                 r"\textbf{Syn$_{flags}$} & \textbf{Sem$_{flags}$} & \textbf{Name$_{flags}$} & "
                  r"\textbf{$\mu_{ret}$} & \textbf{ES-rate} \\ \midrule")
     for ctx in CONTEXTS:
         sub = df[df["context_name"] == ctx]
@@ -237,7 +242,7 @@ def build_syntax_vs_semantics_table(df: pd.DataFrame) -> str:
             continue
         lines.append(
             f"{SHORT_LABELS.get(ctx, ctx)} & {len(sub)} & {sub['syn_flags'].mean():.2f} & "
-            f"{sub['sem_flags'].mean():.2f} & {sub['n_retries_total'].mean():.2f} & "
+            f"{sub['sem_flags'].mean():.2f} & {sub['name_flags'].mean():.2f} & {sub['n_retries_total'].mean():.2f} & "
             f"{sub['early_stop'].mean():.2f} \\\\"
         )
     lines.append(r"\bottomrule")
@@ -247,9 +252,11 @@ def build_syntax_vs_semantics_table(df: pd.DataFrame) -> str:
                  r"(JSON format: \texttt{invalid\_format\_answer, wrong\_len, no\_attributes, no\_counterexample}). "
                  r"\textbf{Sem$_{flags}$}: mean semantic errors per run "
                  r"(the object does not refute the implication: \texttt{not\_enough\_attrs, useless\_counterexample}). "
+                 r"\textbf{Name$_{flags}$}: mean number of counterexamples rejected because their name was "
+                 r"that of an object already in the context (\texttt{repeated\_object}), a check made "
+                 r"only by the parser of the second execution. "
                  r"$\mu_{ret}$: mean number of retries per exploration. "
-                 r"ES-rate: fraction of runs that ended in early stop. "
-                 r"Repeated-object flags are excluded from both counts.}")
+                 r"ES-rate: fraction of runs that ended in early stop.}")
     lines.append(r"\label{tab:syntax_vs_semantics}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"
