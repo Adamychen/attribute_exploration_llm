@@ -108,8 +108,8 @@ def test_complexity_outcome_split():
         "joint_entropy": [0.5, 1.0, 2.0],
     })
     tex = build_complexity_outcome_tables(df)
-    assert r"\multirow{2}{*}{Integers} & Completed & 10.00 & 10.00 & 4.0 & 0.00 & 0.500" in tex
-    assert " & Aborted & 30.00 & 30.00 & 2.5 & 4.00 & 1.500" in tex
+    assert r"\multirow{2}{*}{Integers} & Completed & 10.00 & 10.00 & 4.0 & 0.00 \\" in tex
+    assert " & Aborted & 30.00 & 30.00 & 2.5 & 4.00 \\" in tex
     assert "tab:complexity_outcome_size" not in tex
 
 

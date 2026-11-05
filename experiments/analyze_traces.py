@@ -62,8 +62,8 @@ def _size_bin(size: float) -> str:
 
 
 # --- Flag classification ---
-SYNTACTIC_FLAGS = {"invalid_format_answer", "wrong_len", "no_attributes", "not_enough_attrs"}
-SEMANTIC_FLAGS = {"no_counterexample", "useless_counterexample"}
+SYNTACTIC_FLAGS = {"invalid_format_answer", "wrong_len", "no_attributes", "no_counterexample"}
+SEMANTIC_FLAGS = {"not_enough_attrs", "useless_counterexample"}
 IGNORED_FLAGS = {"repeated_object"}
 
 
@@ -244,9 +244,9 @@ def build_syntax_vs_semantics_table(df: pd.DataFrame) -> str:
     lines.append(r"\end{tabular}")
     lines.append(r"\caption{Validation-error breakdown by category. "
                  r"\textbf{Syn$_{flags}$}: mean syntactic errors per run "
-                 r"(JSON format: \texttt{wrong\_len, invalid\_format\_answer, no\_attributes}). "
+                 r"(JSON format: \texttt{invalid\_format\_answer, wrong\_len, no\_attributes, no\_counterexample}). "
                  r"\textbf{Sem$_{flags}$}: mean semantic errors per run "
-                 r"(\texttt{no\_counterexample, useless\_counterexample}). "
+                 r"(the object does not refute the implication: \texttt{not\_enough\_attrs, useless\_counterexample}). "
                  r"$\mu_{ret}$: mean number of retries per exploration. "
                  r"ES-rate: fraction of runs that ended in early stop. "
                  r"Repeated-object flags are excluded from both counts.}")
