@@ -142,7 +142,7 @@ def generate_domain_table(df: pd.DataFrame, context_name: str) -> str:
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}%")
     lines.append(r"}")
-    lines.append(r"\caption{Comparative similarity scores for the \textit{" + label + r"} context. For each model, the table reports $S$ (average conceptual overlap) and $S_H$ (worst-case structural deviation) under the Baseline, CFC (Canonical Formal Context), and DG Basis (Duquenne--Guigues) strategies, for existential ($\exists$) and implicational ($\to$) queries. ``---'' indicates that the model reached the retry bound without producing a valid lattice.}")
+    lines.append(r"\caption{Comparative similarity scores for the \textit{" + label + r"} domain. For each model, the table reports $S$ (average conceptual overlap) and $S_H$ (worst-case structural deviation) under the Baseline, CFC (Canonical Formal Context), and DG Basis (Duquenne--Guigues) strategies, for existential ($\exists$) and implicational ($\to$) queries. ``---'' indicates that the model reached the retry bound without producing a valid lattice.}")
     lines.append(r"\label{tab:" + context_name + r"_comparative}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"
@@ -275,7 +275,7 @@ def generate_aggregated_table(df: pd.DataFrame) -> str:
 
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}}")
-    lines.append(r"\caption{Aggregated performance statistics across all experimental contexts (Integers, Graphs, RCC, KR). For each context and prompt strategy, the table reports extraction rate ($R_{ext}$), average similarity ($\mu_S$), average Hausdorff similarity ($\mu_{S_H}$), and the ratio of valid completions to total attempts, for both existential ($\exists$) and implicational ($\to$) queries.}")
+    lines.append(r"\caption{Aggregated performance statistics across all experimental domains (Integers, Graphs, RCC, KR). For each domain and prompt strategy, the table reports extraction rate ($R_{ext}$), average similarity ($\mu_S$), average Hausdorff similarity ($\mu_{S_H}$), and the ratio of valid completions to total attempts, for both existential ($\exists$) and implicational ($\to$) queries.}")
     lines.append(r"\label{tab:aggregated_stats}")
     lines.append(r"\end{table}")
     return "\n".join(lines) + "\n"

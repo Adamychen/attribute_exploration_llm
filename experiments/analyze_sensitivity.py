@@ -283,15 +283,15 @@ def table_finishing(res: dict) -> str:
         r"\end{tabular}%",
         r"}",
         r"\caption{Prompt sensitivity: whether the exploration finishes. Each comparison pairs the runs "
-        r"of two conditions on the same (model, domain, strategy, query mode); $n$ is the number of pairs. "
-        r"\textit{ref/cmp}: runs that finish under the first and the second condition; "
-        r"\textit{lost/gained}: pairs that finish under the first condition only, and under the second only; "
-        r"\textit{agree}: pairs that end in the same state; $\Delta$: change in the proportion of runs that finish. "
+        r"of two conditions on the same (model, domain, strategy, query mode). $n$ is the number of pairs. "
+        r"\textit{ref/cmp}: runs that finish under the first and the second condition. "
+        r"\textit{lost/gained}: pairs that finish under the first condition only, and under the second only. "
+        r"\textit{agree}: pairs that end in the same state. $\Delta$: change in the proportion of runs that finish. "
         r"The right block counts as finished only the runs in which the model refutes the first implication "
-        r"$\emptyset \to M$; accepting it ends the exploration at once with a one-object context. "
+        r"$\emptyset \to M$. Accepting it ends the exploration at once with a one-object context. "
         r"$p_{\text{Holm}}$: exact sign test on the discordant pairs, Holm-adjusted over the four variants. "
-        r"Repetitions are computed on the cells of the variant comparisons where $C_0$ is the prompt of the main sweep; "
-        r"the last block covers the graph cells with the Duquenne--Guigues basis for the 24 models.}",
+        r"Repetitions are computed on the cells of the variant comparisons where $C_0$ is the prompt of the main sweep. "
+        r"The last block covers the graph cells with the Duquenne--Guigues basis for the 24 models.}",
         r"\label{tab:sensitivity_finish}",
         r"\end{table}",
         "",
@@ -321,7 +321,7 @@ def table_similarity(res: dict) -> str:
         r"\end{tabular}",
         r"\caption{Prompt sensitivity: similarity of the learned lattice to the reference, over the pairs of "
         r"Table~\ref{tab:sensitivity_finish} that finish under both conditions ($n$). "
-        r"\textit{equal}: pairs with the same $S$; $|\Delta|$ and $\Delta$: mean absolute and mean signed "
+        r"\textit{equal}: pairs with the same $S$. $|\Delta|$ and $\Delta$: mean absolute and mean signed "
         r"difference (second condition minus first). $p_{\text{Holm}}$: Wilcoxon signed-rank test, zero "
         r"differences dropped, Holm-adjusted over the four variants.}",
         r"\label{tab:sensitivity_similarity}",

@@ -130,11 +130,11 @@ def table_replication(ex: Dict[str, pd.DataFrame]) -> str:
     lines += [
         r"\end{tabular}%",
         r"}",
-        r"\caption{The two executions of the sweep (first / second), per domain and strategy; each cell "
+        r"\caption{The two executions of the sweep (first / second), per domain and strategy. Each cell "
         r"pools the 24 models and the two query modes (48 runs). \textit{Finished}: runs in which Attribute "
-        r"Exploration terminated; \textit{Accepted $\emptyset \to M$}: finished runs that ended by accepting "
-        r"the first implication, so that every object has every attribute; $\mu_S$, $\mu_{S_H}$: mean over "
-        r"the other finished runs; \textit{Same state}: configurations that end in the same state in both "
+        r"Exploration terminated. \textit{Accepted $\emptyset \to M$}: finished runs that ended by accepting "
+        r"the first implication, so that every object has every attribute. $\mu_S$, $\mu_{S_H}$: mean over "
+        r"the other finished runs. \textit{Same state}: configurations that end in the same state in both "
         r"executions (stopped, accepted $\emptyset \to M$, or finished otherwise).}",
         r"\label{tab:replication}",
         r"\end{table}",
@@ -171,8 +171,8 @@ def table_query_asymmetry(runs: pd.DataFrame) -> str:
         r"\bottomrule",
         r"\end{tabular}",
         r"\caption{Existential ($\exists$) and implicational ($\to$) queries under the Baseline strategy "
-        r"(first execution). \textit{Rate}: proportion of the 24 models whose exploration finished; "
-        r"\textit{Difference}: $\exists$ rate minus $\to$ rate; $\mu_S$, $\mu_{S_H}$: mean over the "
+        r"(first execution). \textit{Rate}: proportion of the 24 models whose exploration finished. "
+        r"\textit{Difference}: $\exists$ rate minus $\to$ rate. $\mu_S$, $\mu_{S_H}$: mean over the "
         r"finished runs.}",
         r"\label{tab:query_asymmetry}",
         r"\end{table}",

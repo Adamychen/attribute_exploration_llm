@@ -181,9 +181,9 @@ def build_per_context_table(df: pd.DataFrame) -> str:
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}")
     lines.append(r"\caption{Per-context statistics computed from the JSON traces "
-                 r"(second execution). $\mu_{iter}$: mean number of exploration steps; "
-                 r"med$_{iter}$: median; $\mu_{retries}$: mean number of retries per "
-                 r"exploration; Abort rate: fraction of explorations that ended with an "
+                 r"(second execution). $\mu_{iter}$: mean number of exploration steps. "
+                 r"med$_{iter}$: median. $\mu_{retries}$: mean number of retries per "
+                 r"exploration. Abort rate: fraction of explorations that ended with an "
                  r"Early Stop or a time-out.}")
     lines.append(r"\label{tab:traces_context}")
     lines.append(r"\end{table}")
@@ -215,8 +215,8 @@ def build_per_size_bin_table(df: pd.DataFrame) -> str:
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}")
     lines.append(r"\caption{Per-model-size-bin statistics from JSON traces. "
-                 r"$\mu_t$: mean wallclock time (s); $\mu_{iter}$: mean AE iterations; "
-                 r"$\mu_{retries}$: mean number of retries per exploration; ES-rate: fraction of runs "
+                 r"$\mu_t$: mean wallclock time (s). $\mu_{iter}$: mean AE iterations. "
+                 r"$\mu_{retries}$: mean number of retries per exploration. ES-rate: fraction of runs "
                  r"that resulted in early stop. Large models ($\geq$15B) include "
                  r"\texttt{qwen2.5:72b}, \texttt{llama3.3:70b}, \texttt{llama4:16x17b}, "
                  r"\texttt{gpt-oss:120b} and similar.}")
@@ -298,8 +298,8 @@ def build_complexity_outcome_tables(df: pd.DataFrame) -> str:
     ctx = _complexity_block(
         df, "context_name", CONTEXTS, SHORT_LABELS,
         r"\caption{Complexity and scalability metrics by formal context, split by terminal "
-        r"outcome. $\mu_t$: mean wallclock time (s); $\tilde{t}$: median wallclock time; "
-        r"$\mu_{iter}$: mean number of exploration steps; $\mu_{retries}$: mean number of "
+        r"outcome. $\mu_t$: mean wallclock time (s). $\tilde{t}$: median wallclock time. "
+        r"$\mu_{iter}$: mean number of exploration steps. $\mu_{retries}$: mean number of "
         r"retries per exploration (second execution).}",
         "tab:complexity_outcome")
     if "size_bin" not in df.columns:
@@ -307,7 +307,7 @@ def build_complexity_outcome_tables(df: pd.DataFrame) -> str:
     size = _complexity_block(
         df, "size_bin", SIZE_BINS, {},
         r"\caption{Complexity and scalability metrics by model size bin, split by terminal "
-        r"outcome. $\mu_t$: mean wallclock time (s); $\mu_{iter}$: mean AE iterations; "
+        r"outcome. $\mu_t$: mean wallclock time (s). $\mu_{iter}$: mean AE iterations. "
         r"$\mu_{retries}$: mean number of retries per exploration (second execution).}",
         "tab:complexity_outcome_size")
     return ctx + "\n" + size
