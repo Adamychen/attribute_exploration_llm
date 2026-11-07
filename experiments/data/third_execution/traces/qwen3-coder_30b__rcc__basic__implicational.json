@@ -1,0 +1,676 @@
+{
+  "model": "qwen3-coder:30b",
+  "context_name": "rcc",
+  "prompt_mode": "basic",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 292.883,
+  "n_iterations": 16,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.0004532432306287394,
+  "mean_entropy": 0.4043127571638484,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "PP"
+      ],
+      "consequent": [
+        "P",
+        "PP"
+      ]
+    },
+    {
+      "antecedent": [
+        "EQ"
+      ],
+      "consequent": [
+        "P",
+        "EQ",
+        "Pi"
+      ]
+    },
+    {
+      "antecedent": [
+        "PO"
+      ],
+      "consequent": [
+        "O",
+        "PO"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 2.2670263173231124e-05,
+      "mean_entropy": 0.23761973709515619,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['C'] => ['DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 9.312952944070666e-05,
+      "mean_entropy": 0.24461458503659103,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two simple connected regions (e.g., two overlapping circles) that satisfy C(x,y) but fail to satisfy DC(x,y), O(x,y), P(x,y), PP(x,y), EQ(x,y), DR(x,y), PO(x,y), TPP(x,y), EC(x,y), NTPP(x,y), Pi(x,y), PPi(x,y), NTPPi(x,y), TPPi(x,y) due to mutual exclusivity.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['DC'] => ['C', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.0055078635899088405,
+      "mean_entropy": 0.2784933579370006,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two separate squares that do not touch or overlap",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['O'] => ['C', 'DC', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 1.4370637898002177,
+      "mean_entropy": 0.40631329318756165,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y such that they overlap (O(x,y) is true), but are not disconnected (DC(x,y) is false). Since overlapping regions cannot be disconnected, this violates the implication. Another example: let x be a proper part of y (P(x,y) is true), but x and y do not overlap (O(x,y) is false). This also contradicts the implication since O(x,y) being true would require all other predicates to hold.",
+      "attribute_vector": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['P'] => ['C', 'DC', 'O', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.07241263185423566,
+      "mean_entropy": 0.4748628386893025,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y such that x is part of y (P(x,y) is true). If we take x to be a proper part of y, then C(x,y) is false because they are not connected in the sense of sharing points (they are disjoint in terms of being separate parts), and DC(x,y) would be true. Since P(x,y) is true but C(x,y) is false, the implication P(x,y) \u2192 (C(x,y) \u2227 DC(x,y) \u2227 ... ) fails.",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['P'] => ['DC', 'PP']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 0.28256886151770577,
+      "mean_entropy": 0.40858787271001484,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two squares where one is completely inside the other and they touch at their boundaries, satisfying P(x,y) but not DC(x,y).",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['PP'] => ['DC', 'P']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 0.11469639633671472,
+      "mean_entropy": 0.34524570920797715,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A proper part x of region y that shares interior points with y, such as a circle inside another circle, where x is entirely within y but they overlap (so not disconnected).",
+      "attribute_vector": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['PP'] => ['P']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.037284319857257865,
+      "mean_entropy": 0.3053196066041439,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['PP'] => ['P']"
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['EQ'] => ['C', 'DC', 'O', 'P', 'PP', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 0.7080532241645768,
+      "mean_entropy": 0.37042718602064106,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Let x and y be two identical regions such that EQ(x,y) holds. Then C(x,y) is true (since equal regions are connected), but DC(x,y) is false (since they share all points). Thus, the implication does not hold for this case.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['EQ'] => ['C', 'P', 'PP', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 0.9663573510981622,
+      "mean_entropy": 0.5400692531249629,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Let x and y be two equal regions such that x = y. Then EQ(x,y) is true, but for instance, P(x,y) is true (since x is part of y), but PP(x,y) is false because x is not a proper part of y (they are equal). Therefore, the conjunction of all those predicates cannot be true when EQ(x,y) is true.",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['EQ'] => ['P', 'Pi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 0.039718253416516996,
+      "mean_entropy": 0.20835782907943418,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['EQ'] => ['P', 'Pi']"
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['DR'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 0.11871238934259468,
+      "mean_entropy": 0.21901831249644374,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two separate squares that do not touch or overlap",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['DR'] => ['DC']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.38251568614344006,
+      "mean_entropy": 0.3704498324659142,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two squares sharing a common edge: x = [0,1] \u00d7 [0,1], y = [1,2] \u00d7 [0,1]. Here, DR(x,y) is true because they do not overlap (share no interior points), but DC(x,y) is false because they are connected at the boundary.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['PO'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.00815685708385059,
+      "mean_entropy": 0.2805275287692836,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two regions that partially overlap (e.g., two circles intersecting such that each has points inside the other but neither is fully contained in the other).",
+      "attribute_vector": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['PO'] => ['O']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 0.017014816774292285,
+      "mean_entropy": 0.18854229768244693,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['PO'] => ['O']"
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['TPP'] => ['C', 'P', 'PP', 'EQ', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.0002319486860387563,
+      "mean_entropy": 0.27920203509251273,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.0002319486860387563,
+      "mean_entropy": 0.27920203509251273
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 7.340258915330177e-05,
+      "mean_entropy": 0.3090479668904459,
+      "retry_attempt": 1
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 7.340258915330177e-05,
+      "mean_entropy": 0.3090479668904459
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.0004532432306287394,
+      "mean_entropy": 0.4043127571638484,
+      "retry_attempt": 2
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.0004532432306287394,
+      "mean_entropy": 0.4043127571638484
+    }
+  ]
+}

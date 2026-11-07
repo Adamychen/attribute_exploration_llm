@@ -1,0 +1,993 @@
+{
+  "model": "qwen3-coder:30b",
+  "context_name": "graphs",
+  "prompt_mode": "stem_basis",
+  "question_mode": "implicational",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 267.282,
+  "n_iterations": 24,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.0,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "acyclic"
+      ],
+      "consequent": [
+        "acyclic",
+        "bipartite",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "2-connected"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected"
+      ]
+    },
+    {
+      "antecedent": [
+        "geodetic"
+      ],
+      "consequent": [
+        "connected",
+        "geodetic"
+      ]
+    },
+    {
+      "antecedent": [
+        "nonseparable"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected",
+        "nonseparable"
+      ]
+    },
+    {
+      "antecedent": [
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "geodetic",
+        "bipartite",
+        "planar",
+        "tree"
+      ]
+    },
+    {
+      "antecedent": [
+        "connected",
+        "geodetic",
+        "bipartite"
+      ],
+      "consequent": [
+        "connected",
+        "geodetic",
+        "bipartite",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "bipartite",
+        "planar"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "geodetic",
+        "bipartite",
+        "planar",
+        "tree"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "planar",
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar",
+        "tree"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "null",
+      "A tree with exactly two vertices",
+      "Two isolated vertices",
+      "A cycle graph with 3 or more vertices",
+      "K5 (complete graph with 5 vertices)",
+      "A triangle graph (3-cycle)",
+      "K5 (complete graph on 5 vertices)",
+      "Cycle graph with 4 or more vertices",
+      "A cycle graph C4",
+      "C4",
+      "K_{3,3}",
+      "C4 (cycle graph with 4 vertices)",
+      "K_{2,3}",
+      "K_4",
+      "A cycle graph C_4 with 4 vertices"
+    ],
+    "properties": [
+      "acyclic",
+      "connected",
+      "2-connected",
+      "geodetic",
+      "bipartite",
+      "nonseparable",
+      "planar",
+      "tree"
+    ],
+    "context": [
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.007578799989283638,
+      "mean_entropy": 0.46671638288404993,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['acyclic'] => ['connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.0029868535619257015,
+      "mean_entropy": 0.3572558318641663,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A tree with exactly two vertices",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['acyclic'] => ['connected', 'geodetic', 'bipartite', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.05359262764934392,
+      "mean_entropy": 0.5956355951375953,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two isolated vertices",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['acyclic'] => ['bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.3835871566863737,
+      "mean_entropy": 1.1773346149287465,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic'] => ['bipartite', 'planar']"
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['connected'] => ['acyclic', 'geodetic', 'bipartite', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.046037971548765946,
+      "mean_entropy": 0.308993612423031,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph with 3 or more vertices",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['connected'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 0.01537069183992133,
+      "mean_entropy": 0.09406286732310586,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K5 (complete graph with 5 vertices)",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['acyclic', 'connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 0.27089895036982625,
+      "mean_entropy": 0.34114226941423403,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A triangle graph (3-cycle)",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected', 'geodetic', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.007123597394886194,
+      "mean_entropy": 0.4849297791872596,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K5 (complete graph on 5 vertices)",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected', 'geodetic', 'nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 0.0961245406564964,
+      "mean_entropy": 0.3970534235542231,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Cycle graph with 4 or more vertices",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected', 'nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 0.7678255359520797,
+      "mean_entropy": 0.31526920291564126,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph C4",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 2.0066690759379884,
+      "mean_entropy": 0.22860376772441113,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['2-connected'] => ['connected']"
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['geodetic'] => ['connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 1.4616572054959158,
+      "mean_entropy": 0.18150465268606708,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['geodetic'] => ['connected']"
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['bipartite'] => ['acyclic', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.605142337688002,
+      "mean_entropy": 0.13765128228440268,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "C4",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['bipartite'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.12662107842202905,
+      "mean_entropy": 0.14686842274533318,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K_{3,3}",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['nonseparable'] => ['connected', '2-connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 0.006431723988993743,
+      "mean_entropy": 0.23401340343356267,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['nonseparable'] => ['connected', '2-connected']"
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['tree'] => ['acyclic', 'connected', 'geodetic', 'bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.0007005597006273255,
+      "mean_entropy": 0.1545856903997253,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['tree'] => ['acyclic', 'connected', 'geodetic', 'bipartite', 'planar']"
+    },
+    {
+      "step": 17,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'bipartite'] => ['geodetic', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 17,
+      "event": "ask_llm",
+      "joint_entropy": 0.012971442950450546,
+      "mean_entropy": 0.30784020196288153,
+      "retry_attempt": 0
+    },
+    {
+      "step": 17,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 17,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "C4 (cycle graph with 4 vertices)",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 18,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'bipartite'] => ['nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 18,
+      "event": "ask_llm",
+      "joint_entropy": 0.4237080401830472,
+      "mean_entropy": 0.4100587603838456,
+      "retry_attempt": 0
+    },
+    {
+      "step": 18,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 18,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K_{2,3}",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 19,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'bipartite'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 1.7920307154979076,
+      "mean_entropy": 0.2618712367557141,
+      "retry_attempt": 0
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 19,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K_4",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 20,
+      "stage": "exploration",
+      "implication": "['connected', 'geodetic', 'bipartite'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 20,
+      "event": "ask_llm",
+      "joint_entropy": 1.2063348511985668,
+      "mean_entropy": 0.2720445241310469,
+      "retry_attempt": 0
+    },
+    {
+      "step": 20,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['connected', 'geodetic', 'bipartite'] => ['planar']"
+    },
+    {
+      "step": 21,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'bipartite', 'planar'] => ['geodetic', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 21,
+      "event": "ask_llm",
+      "joint_entropy": 0.09165633096151062,
+      "mean_entropy": 0.26122738049103306,
+      "retry_attempt": 0
+    },
+    {
+      "step": 21,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', 'bipartite', 'planar'] => ['geodetic', 'tree']"
+    },
+    {
+      "step": 22,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'geodetic', 'bipartite', 'planar'] => ['nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 22,
+      "event": "ask_llm",
+      "joint_entropy": 0.009041700653672604,
+      "mean_entropy": 0.3890402933475063,
+      "retry_attempt": 0
+    },
+    {
+      "step": 22,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 22,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph C_4 with 4 vertices",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 23,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'planar', 'tree'] => ['nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 23,
+      "event": "ask_llm",
+      "joint_entropy": 0.1793091326197371,
+      "mean_entropy": 0.5218190173770592,
+      "retry_attempt": 0
+    },
+    {
+      "step": 23,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'planar', 'tree'] => ['nonseparable']"
+    },
+    {
+      "step": 24,
+      "stage": "exploration",
+      "implication": null,
+      "event": "find_next_implication",
+      "finished": true
+    }
+  ]
+}

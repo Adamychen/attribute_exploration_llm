@@ -1,0 +1,292 @@
+{
+  "model": "gpt-oss:20b",
+  "context_name": "graphs",
+  "prompt_mode": "full_context",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 243.452,
+  "n_iterations": 6,
+  "n_retries_total": 5,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 4.2949715152152346e-05,
+  "mean_entropy": 0.8801191911305966,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "acyclic"
+      ],
+      "consequent": [
+        "acyclic",
+        "bipartite",
+        "planar"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.2902830022001108,
+      "mean_entropy": 0.774389666670826,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "a",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['acyclic', 'connected', 'geodetic', 'bipartite', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 4.433717212250374,
+      "mean_entropy": 0.6816513151713208,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "c",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "[] => ['connected', 'bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 6.2936975500916335,
+      "mean_entropy": 0.6271125361687142,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "d",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "[] => ['connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.17135080297798364,
+      "mean_entropy": 0.8103326221120314,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "g",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['acyclic'] => ['bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 2.7954157903124326,
+      "mean_entropy": 0.5739934597806483,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 7,
+      "is_valid_json": true,
+      "joint_entropy": 2.7954157903124326,
+      "mean_entropy": 0.5739934597806483
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.0010098982977167022,
+      "mean_entropy": 1.1582693155875399,
+      "retry_attempt": 1
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic'] => ['bipartite', 'planar']"
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected', 'nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.5561803679946096,
+      "mean_entropy": 0.8142821649285422,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 1.5561803679946096,
+      "mean_entropy": 0.8142821649285422
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 0.00033142895990271394,
+      "mean_entropy": 0.864012669642493,
+      "retry_attempt": 1
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 0.00033142895990271394,
+      "mean_entropy": 0.864012669642493
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 6.022829793340782e-05,
+      "mean_entropy": 0.8741690186627825,
+      "retry_attempt": 2
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 6.022829793340782e-05,
+      "mean_entropy": 0.8741690186627825
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 4.2949715152152346e-05,
+      "mean_entropy": 0.8801191911305966,
+      "retry_attempt": 3
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 4,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 4.2949715152152346e-05,
+      "mean_entropy": 0.8801191911305966
+    }
+  ]
+}

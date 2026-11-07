@@ -1,0 +1,615 @@
+{
+  "model": "qwen2.5:14b",
+  "context_name": "graphs",
+  "prompt_mode": "stem_basis",
+  "question_mode": "existential",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 125.988,
+  "n_iterations": 15,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.0,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "acyclic"
+      ],
+      "consequent": [
+        "acyclic",
+        "bipartite",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "2-connected"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected",
+        "geodetic",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "geodetic"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected",
+        "geodetic",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "nonseparable"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected",
+        "nonseparable"
+      ]
+    },
+    {
+      "antecedent": [
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar",
+        "tree"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "A cycle graph with 3 vertices (C3)",
+      "A graph with a single vertex is an example where it is not connected, not 2-connected, not geodetic, not nonseparable, and not planar.",
+      "K_5",
+      "A cycle graph with 4 vertices (C4) is bipartite but not acyclic.",
+      "The complete bipartite graph K(3,3) is bipartite but not planar.",
+      "A path graph with 3 vertices (P3) is connected and bipartite but not 2-connected.",
+      "A path graph with at least 3 vertices (e.g., P_3) satisfies acyclic, connected, bipartite, and planar but is not 2-connected, geodetic, nonseparable, or a tree.",
+      "A cycle graph with at least 4 vertices (C4 or larger) satisfies the conditions of being connected, 2-connected, geodetic, bipartite, nonseparable, and planar, but is not acyclic or a tree.",
+      "A graph that is acyclic, connected, 2-connected, geodetic, bipartite, nonseparable, and planar but not a tree would be a counterexample to rule 8. However, such a graph does not exist based on the rules provided, but we are asked to find a witness for the existential statement, which means we need to find a graph that satisfies all the properties except being a tree. Since rule 8 states that no such graph exists, we conclude that the statement is false."
+    ],
+    "properties": [
+      "acyclic",
+      "connected",
+      "2-connected",
+      "geodetic",
+      "bipartite",
+      "nonseparable",
+      "planar",
+      "tree"
+    ],
+    "context": [
+      [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 2.18494899768202,
+      "mean_entropy": 0.41971827755463353,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph with 3 vertices (C3)",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['connected', '2-connected', 'geodetic', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 3.031311273928955,
+      "mean_entropy": 0.46532079993331976,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph with a single vertex is an example where it is not connected, not 2-connected, not geodetic, not nonseparable, and not planar.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "[] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 2.2541369202080217,
+      "mean_entropy": 0.27416806896441304,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K_5",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['acyclic'] => ['bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 3.7145487641498507,
+      "mean_entropy": 0.2982488316343528,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic'] => ['bipartite', 'planar']"
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected', 'geodetic', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 1.3682718277785142,
+      "mean_entropy": 0.6221704638140567,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['2-connected'] => ['connected', 'geodetic', 'nonseparable', 'planar']"
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['geodetic'] => ['connected', '2-connected', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.59244706870638,
+      "mean_entropy": 0.4068055843724839,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['geodetic'] => ['connected', '2-connected', 'nonseparable', 'planar']"
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['bipartite'] => ['acyclic', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 2.3582597941879886,
+      "mean_entropy": 0.3327846871799797,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph with 4 vertices (C4) is bipartite but not acyclic.",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['bipartite'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 1.7607755746757712,
+      "mean_entropy": 0.2540396623055422,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "The complete bipartite graph K(3,3) is bipartite but not planar.",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['nonseparable'] => ['connected', '2-connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 0.48915131346337026,
+      "mean_entropy": 0.3873670563320873,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['nonseparable'] => ['connected', '2-connected']"
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['tree'] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 1.3255733544453787,
+      "mean_entropy": 0.6333809527067521,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['tree'] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar']"
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['connected', 'bipartite'] => ['2-connected', 'nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 2.9833497407637575,
+      "mean_entropy": 0.38606538885864145,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A path graph with 3 vertices (P3) is connected and bipartite but not 2-connected.",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'bipartite', 'planar'] => ['2-connected', 'geodetic', 'nonseparable', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 0.12870912336478532,
+      "mean_entropy": 0.39263647847810396,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A path graph with at least 3 vertices (e.g., P_3) satisfies acyclic, connected, bipartite, and planar but is not 2-connected, geodetic, nonseparable, or a tree.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar'] => ['acyclic', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.2986683244162315,
+      "mean_entropy": 0.49082678974263094,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle graph with at least 4 vertices (C4 or larger) satisfies the conditions of being connected, 2-connected, geodetic, bipartite, nonseparable, and planar, but is not acyclic or a tree.",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar'] => ['tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.744098647447903,
+      "mean_entropy": 0.9146312950546848,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph that is acyclic, connected, 2-connected, geodetic, bipartite, nonseparable, and planar but not a tree would be a counterexample to rule 8. However, such a graph does not exist based on the rules provided, but we are asked to find a witness for the existential statement, which means we need to find a graph that satisfies all the properties except being a tree. Since rule 8 states that no such graph exists, we conclude that the statement is false.",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": null,
+      "event": "find_next_implication",
+      "finished": true
+    }
+  ]
+}

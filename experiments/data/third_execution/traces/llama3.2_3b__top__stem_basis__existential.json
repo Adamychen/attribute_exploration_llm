@@ -1,0 +1,216 @@
+{
+  "model": "llama3.2:3b",
+  "context_name": "top",
+  "prompt_mode": "stem_basis",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 60.288,
+  "n_iterations": 3,
+  "n_retries_total": 4,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.053842957706863884,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "Independent"
+      ],
+      "consequent": [
+        "Independent",
+        "Physical",
+        "Relative",
+        "Abstract",
+        "Mediating",
+        "Continuant",
+        "Actuality",
+        "Form",
+        "Prehension",
+        "Proposition",
+        "Nexus",
+        "Intention",
+        "Occurrent",
+        "Object",
+        "Process",
+        "Schema",
+        "Script",
+        "Juncture",
+        "Participation",
+        "Description",
+        "History",
+        "Structure",
+        "Situation",
+        "Reason",
+        "Purpose"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['Independent', 'Physical', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0,
+      "mean_entropy": 0.40379019298508695,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0,
+      "mean_entropy": 0.40379019298508695
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.8501568738263238,
+      "mean_entropy": 0.451725797045146,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['Independent'] => ['Physical', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.06976094535761587,
+      "mean_entropy": 0.09729440061973284,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Independent'] => ['Physical', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']"
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['Physical'] => ['Independent', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.0493456929971318,
+      "mean_entropy": 0.10667788522174029,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.0493456929971318,
+      "mean_entropy": 0.10667788522174029
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.00028596856670844005,
+      "mean_entropy": 0.19751616308602024,
+      "retry_attempt": 1
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "no_attributes"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.00028596856670844005,
+      "mean_entropy": 0.19751616308602024
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0,
+      "mean_entropy": 0.053842957706863884,
+      "retry_attempt": 2
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0,
+      "mean_entropy": 0.053842957706863884
+    }
+  ]
+}

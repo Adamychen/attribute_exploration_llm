@@ -1,0 +1,489 @@
+{
+  "model": "qwen3-coder:30b",
+  "context_name": "integers",
+  "prompt_mode": "basic",
+  "question_mode": "existential",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 134.386,
+  "n_iterations": 13,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.0,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "even",
+        "odd"
+      ],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    },
+    {
+      "antecedent": [
+        "even",
+        "quadratic"
+      ],
+      "consequent": [
+        "even",
+        "compound",
+        "quadratic"
+      ]
+    },
+    {
+      "antecedent": [
+        "prime",
+        "compound"
+      ],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    },
+    {
+      "antecedent": [
+        "prime",
+        "quadratic"
+      ],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "1",
+      "2",
+      "3",
+      "2'",
+      "6",
+      "4",
+      "8",
+      "9"
+    ],
+    "properties": [
+      "even",
+      "odd",
+      "prime",
+      "compound",
+      "quadratic"
+    ],
+    "context": [
+      [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      [
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        false,
+        true,
+        true
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.171302536025569e-05,
+      "mean_entropy": 0.3251544240664666,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "1",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['odd', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.13644153076374935,
+      "mean_entropy": 0.19349861922625292,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "2",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['odd'] => ['quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.3422996004528441,
+      "mean_entropy": 0.13103499793457601,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "3",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['prime'] => ['odd']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 4.211746790203575e-06,
+      "mean_entropy": 0.13928908891248432,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "2",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['compound'] => ['even', 'odd', 'prime', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.01075178497011911,
+      "mean_entropy": 0.3511432185648702,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "6",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['compound'] => ['odd']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 0.18521380662599593,
+      "mean_entropy": 0.20268116472900125,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "4",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['even', 'odd'] => ['prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 3.0772472991251903e-06,
+      "mean_entropy": 0.389536835680072,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['even', 'odd'] => ['prime', 'compound', 'quadratic']"
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['even', 'compound'] => ['quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 4.912313454617695e-07,
+      "mean_entropy": 0.25791604588810974,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "8",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['even', 'quadratic'] => ['compound']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 7.306656073872807e-05,
+      "mean_entropy": 0.4414535333173594,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['even', 'quadratic'] => ['compound']"
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['prime', 'compound'] => ['even', 'odd', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 3.509209959871272e-05,
+      "mean_entropy": 0.27498008704127835,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['prime', 'compound'] => ['even', 'odd', 'quadratic']"
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['prime', 'quadratic'] => ['even', 'odd', 'compound']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 3.2646546934858506e-05,
+      "mean_entropy": 0.4113338568813652,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['prime', 'quadratic'] => ['even', 'odd', 'compound']"
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['compound', 'quadratic'] => ['even']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 1.7047162994267482e-06,
+      "mean_entropy": 0.2713520628450575,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "9",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": null,
+      "event": "find_next_implication",
+      "finished": true
+    }
+  ]
+}

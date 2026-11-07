@@ -1,0 +1,144 @@
+{
+  "model": "qwen3:4b",
+  "context_name": "top",
+  "prompt_mode": "basic",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 468.613,
+  "n_iterations": 2,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 15.5316396604518,
+  "mean_entropy": 0.6808703596769987,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['Independent', 'Physical', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 8.225932267449123,
+      "mean_entropy": 0.6686300081945138,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "a chair",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['Physical', 'Relative', 'Continuant', 'Actuality', 'Object']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 12.198829386496426,
+      "mean_entropy": 0.7214720539316295,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 12.198829386496426,
+      "mean_entropy": 0.7214720539316295
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 14.996590633273541,
+      "mean_entropy": 0.58637972274004,
+      "retry_attempt": 1
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 14.996590633273541,
+      "mean_entropy": 0.58637972274004
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 15.5316396604518,
+      "mean_entropy": 0.6808703596769987,
+      "retry_attempt": 2
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 15.5316396604518,
+      "mean_entropy": 0.6808703596769987
+    }
+  ]
+}

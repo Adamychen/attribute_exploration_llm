@@ -1,0 +1,166 @@
+{
+  "model": "llama3.2:3b",
+  "context_name": "integers",
+  "prompt_mode": "basic",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 8.519,
+  "n_iterations": 3,
+  "n_retries_total": 4,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.5029257144779246,
+  "mean_entropy": 0.49344285603217747,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.8661836316532743,
+      "mean_entropy": 0.7811126341321823,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['even'] => ['odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 2.4509661534080687,
+      "mean_entropy": 0.9349166909980109,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "2",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['even'] => ['compound']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 1.4589488449501065,
+      "mean_entropy": 0.8477496588512435,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 1.4589488449501065,
+      "mean_entropy": 0.8477496588512435
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 3.4597162083925657,
+      "mean_entropy": 0.8497323760029876,
+      "retry_attempt": 1
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 3.4597162083925657,
+      "mean_entropy": 0.8497323760029876
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 2.065275102860325,
+      "mean_entropy": 0.4416111717928396,
+      "retry_attempt": 2
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample"
+      ],
+      "retries_used": 3,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 2.065275102860325,
+      "mean_entropy": 0.4416111717928396
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.5029257144779246,
+      "mean_entropy": 0.49344285603217747,
+      "retry_attempt": 3
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample"
+      ],
+      "retries_used": 4,
+      "max_retries": 3,
+      "is_valid_json": true,
+      "joint_entropy": 0.5029257144779246,
+      "mean_entropy": 0.49344285603217747
+    }
+  ]
+}

@@ -1,0 +1,917 @@
+{
+  "model": "llama3.3:70b",
+  "context_name": "top",
+  "prompt_mode": "full_context",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 3757.094,
+  "n_iterations": 19,
+  "n_retries_total": 5,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 1.5190214644004346e-05,
+  "mean_entropy": 0.00976824644869805,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "Independent"
+      ],
+      "consequent": [
+        "Independent",
+        "Physical",
+        "Continuant",
+        "Actuality",
+        "Object"
+      ]
+    },
+    {
+      "antecedent": [
+        "Actuality"
+      ],
+      "consequent": [
+        "Physical",
+        "Actuality"
+      ]
+    },
+    {
+      "antecedent": [
+        "Form"
+      ],
+      "consequent": [
+        "Abstract",
+        "Form"
+      ]
+    },
+    {
+      "antecedent": [
+        "Prehension"
+      ],
+      "consequent": [
+        "Physical",
+        "Relative",
+        "Prehension"
+      ]
+    },
+    {
+      "antecedent": [
+        "Proposition"
+      ],
+      "consequent": [
+        "Relative",
+        "Abstract",
+        "Continuant",
+        "Proposition",
+        "Description"
+      ]
+    },
+    {
+      "antecedent": [
+        "Nexus"
+      ],
+      "consequent": [
+        "Physical",
+        "Mediating",
+        "Nexus"
+      ]
+    },
+    {
+      "antecedent": [
+        "Intention"
+      ],
+      "consequent": [
+        "Abstract",
+        "Mediating",
+        "Continuant",
+        "Intention",
+        "Reason"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['Independent', 'Physical', 'Relative', 'Abstract', 'Mediating', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.018371945140462,
+      "mean_entropy": 0.17598045099484014,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "object",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['Independent', 'Physical', 'Continuant', 'Actuality', 'Object']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 9.575953236478552e-05,
+      "mean_entropy": 0.15260491777654997,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 9.575953236478552e-05,
+      "mean_entropy": 0.15260491777654997
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.7445275009866571,
+      "mean_entropy": 0.0991025272454525,
+      "retry_attempt": 1
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['Independent'] => ['Physical', 'Continuant', 'Actuality', 'Object']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.008420807557811225,
+      "mean_entropy": 0.1716442836833579,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Independent'] => ['Physical', 'Continuant', 'Actuality', 'Object']"
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['Physical'] => ['Independent', 'Continuant', 'Actuality', 'Object']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 3.989222632459437e-05,
+      "mean_entropy": 0.18473221238664136,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "juncture",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['Physical'] => ['Continuant']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.0037955035978596676,
+      "mean_entropy": 0.13580724306414194,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "process",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['Relative'] => ['Physical', 'Continuant', 'Prehension', 'Juncture']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 3.603345572124427e-05,
+      "mean_entropy": 0.19262461362174293,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "participation",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['Relative'] => ['Physical', 'Prehension']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 0.0053961201981723925,
+      "mean_entropy": 0.09106307588578794,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "description",
+      "attribute_vector": [
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['Abstract'] => ['Relative', 'Continuant', 'Proposition', 'Description']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.78765170699515,
+      "mean_entropy": 0.2034277384883093,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "schema",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['Abstract'] => ['Continuant']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 0.5680817014944312,
+      "mean_entropy": 0.10185030918558739,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "script",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['Mediating'] => ['Independent', 'Physical', 'Relative', 'Abstract', 'Continuant', 'Actuality', 'Form', 'Prehension', 'Proposition', 'Nexus', 'Intention', 'Occurrent', 'Object', 'Process', 'Schema', 'Script', 'Juncture', 'Participation', 'Description', 'History', 'Structure', 'Situation', 'Reason', 'Purpose']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 0.00014209009917038056,
+      "mean_entropy": 0.1549589611869423,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "structure",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['Mediating'] => ['Physical', 'Continuant', 'Nexus', 'Structure']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 2.3620833925754376e-05,
+      "mean_entropy": 0.29162268418754855,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "situation",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['Mediating'] => ['Physical', 'Nexus']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 8.48753994914199e-05,
+      "mean_entropy": 0.18533285580782655,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "reason",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['Actuality'] => ['Physical']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.9279467829758566,
+      "mean_entropy": 0.30652139704785103,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Actuality'] => ['Physical']"
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['Form'] => ['Abstract']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.09281167834596206,
+      "mean_entropy": 0.1988725635134159,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Form'] => ['Abstract']"
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['Prehension'] => ['Physical', 'Relative']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 1.084056222131974,
+      "mean_entropy": 0.17044003907388827,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Prehension'] => ['Physical', 'Relative']"
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['Proposition'] => ['Relative', 'Abstract', 'Continuant', 'Description']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.01809304458865181,
+      "mean_entropy": 0.07555567897602958,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "active_flags": [
+        "useless_counterexample"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.01809304458865181,
+      "mean_entropy": 0.07555567897602958
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.8963277458331712,
+      "mean_entropy": 0.10416704874073551,
+      "retry_attempt": 1
+    },
+    {
+      "step": 16,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Proposition'] => ['Relative', 'Abstract', 'Continuant', 'Description']"
+    },
+    {
+      "step": 17,
+      "stage": "exploration",
+      "implication": "['Nexus'] => ['Physical', 'Mediating']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 17,
+      "event": "ask_llm",
+      "joint_entropy": 0.00011275089760041114,
+      "mean_entropy": 0.08598029884686817,
+      "retry_attempt": 0
+    },
+    {
+      "step": 17,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Nexus'] => ['Physical', 'Mediating']"
+    },
+    {
+      "step": 18,
+      "stage": "exploration",
+      "implication": "['Intention'] => ['Abstract', 'Mediating', 'Continuant', 'Reason']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 18,
+      "event": "ask_llm",
+      "joint_entropy": 0.9285389590735488,
+      "mean_entropy": 0.09367934089280247,
+      "retry_attempt": 0
+    },
+    {
+      "step": 18,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['Intention'] => ['Abstract', 'Mediating', 'Continuant', 'Reason']"
+    },
+    {
+      "step": 19,
+      "stage": "exploration",
+      "implication": "['Object'] => ['Independent', 'Physical', 'Continuant', 'Actuality']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 6.945178745218978e-06,
+      "mean_entropy": 0.06026283097925878,
+      "retry_attempt": 0
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 6.945178745218978e-06,
+      "mean_entropy": 0.06026283097925878
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.0060475158674199,
+      "mean_entropy": 0.009154856931786868,
+      "retry_attempt": 1
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.0060475158674199,
+      "mean_entropy": 0.009154856931786868
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 1.5190214644004346e-05,
+      "mean_entropy": 0.00976824644869805,
+      "retry_attempt": 2
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 1.5190214644004346e-05,
+      "mean_entropy": 0.00976824644869805
+    }
+  ]
+}

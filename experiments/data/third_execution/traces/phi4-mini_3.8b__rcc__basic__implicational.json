@@ -1,0 +1,89 @@
+{
+  "model": "phi4-mini:3.8b",
+  "context_name": "rcc",
+  "prompt_mode": "basic",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 65.06,
+  "n_iterations": 1,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.001095137728996268,
+  "mean_entropy": 0.012542897290062676,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.004573248367340608,
+      "mean_entropy": 0.022106791918958667,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.004573248367340608,
+      "mean_entropy": 0.022106791918958667
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.021966582604742227,
+      "mean_entropy": 0.2066099120312271,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_attributes"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.021966582604742227,
+      "mean_entropy": 0.2066099120312271
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.001095137728996268,
+      "mean_entropy": 0.012542897290062676,
+      "retry_attempt": 2
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_attributes"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.001095137728996268,
+      "mean_entropy": 0.012542897290062676
+    }
+  ]
+}

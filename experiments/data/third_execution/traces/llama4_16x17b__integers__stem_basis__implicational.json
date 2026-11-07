@@ -1,0 +1,70 @@
+{
+  "model": "llama4:16x17b",
+  "context_name": "integers",
+  "prompt_mode": "stem_basis",
+  "question_mode": "implicational",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 107.717,
+  "n_iterations": 1,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 4.0132698549518925e-06,
+  "mean_entropy": 0.05241244222002626,
+  "stem_basis": [
+    {
+      "antecedent": [],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "all_attributes"
+    ],
+    "properties": [
+      "even",
+      "odd",
+      "prime",
+      "compound",
+      "quadratic"
+    ],
+    "context": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 4.0132698549518925e-06,
+      "mean_entropy": 0.05241244222002626,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']"
+    }
+  ]
+}

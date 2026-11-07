@@ -1,0 +1,83 @@
+{
+  "model": "llama3.2:3b",
+  "context_name": "rcc",
+  "prompt_mode": "basic",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 5.47,
+  "n_iterations": 1,
+  "n_retries_total": 3,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.30299386154160707,
+  "mean_entropy": 0.04471257680335467,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.8712390601648141,
+      "mean_entropy": 0.11976921003466894,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "invalid_format_answer"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 1.8712390601648141,
+      "mean_entropy": 0.11976921003466894
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.24145370386901266,
+      "mean_entropy": 0.09509696847580357,
+      "retry_attempt": 1
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "invalid_format_answer"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.24145370386901266,
+      "mean_entropy": 0.09509696847580357
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.30299386154160707,
+      "mean_entropy": 0.04471257680335467,
+      "retry_attempt": 2
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "active_flags": [
+        "invalid_format_answer"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0.30299386154160707,
+      "mean_entropy": 0.04471257680335467
+    }
+  ]
+}

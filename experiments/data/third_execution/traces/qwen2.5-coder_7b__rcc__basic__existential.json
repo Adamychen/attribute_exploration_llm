@@ -1,0 +1,992 @@
+{
+  "model": "qwen2.5-coder:7b",
+  "context_name": "rcc",
+  "prompt_mode": "basic",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 464.009,
+  "n_iterations": 19,
+  "n_retries_total": 11,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.1886570805817238,
+  "mean_entropy": 0.00862896710525471,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "EQ"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "TPP"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "EC"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.4475579901757074,
+      "mean_entropy": 0.5749453152833665,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['C'] => ['DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 2.9516137974331604,
+      "mean_entropy": 0.28591780668397465,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two overlapping circles",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['C'] => ['O', 'PO']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 3.682460658137153,
+      "mean_entropy": 0.3849630079578445,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['DC'] => ['C', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 1.395881298097342,
+      "mean_entropy": 0.288464550007553,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['O'] => ['C', 'PO']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 6.560770901939912,
+      "mean_entropy": 0.3518047153384708,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['P'] => ['C', 'DC', 'O', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.5558675678649878,
+      "mean_entropy": 0.3041747603162689,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['PP'] => ['C', 'DC', 'O', 'P', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 7.316160907676386,
+      "mean_entropy": 0.4008678316107187,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "x = a square, y = a larger square that contains x but does not touch its boundary",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['PP'] => ['DC', 'NTPP']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 6.375730162717466,
+      "mean_entropy": 0.4767512641981442,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['EQ'] => ['C', 'DC', 'O', 'P', 'PP', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 2.621059048773574,
+      "mean_entropy": 0.2702342856532342,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['EQ'] => ['C', 'DC', 'O', 'P', 'PP', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['DR'] => ['O', 'NTPP']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 1.7749590456266882,
+      "mean_entropy": 0.46254218755851184,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['PO'] => ['C', 'O']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 4.978170762179187,
+      "mean_entropy": 0.34317273441195756,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['TPP'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 3.063716128965619,
+      "mean_entropy": 0.3082560159814612,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['TPP'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['EC'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 1.5824963973539319,
+      "mean_entropy": 0.6129436934224431,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['EC'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['Pi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 7.072710252053936,
+      "mean_entropy": 0.28490515029944813,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['Pi'] => ['DC', 'O', 'DR', 'PO', 'EC', 'NTPP']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 2.238410107077092,
+      "mean_entropy": 0.46756129380806,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['PPi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 6.795611747214305,
+      "mean_entropy": 0.3644198391104448,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 16,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 17,
+      "stage": "exploration",
+      "implication": "['PPi'] => ['DC', 'O', 'DR', 'PO', 'EC', 'NTPP', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 17,
+      "event": "ask_llm",
+      "joint_entropy": 5.982079551277919,
+      "mean_entropy": 0.4569790243829278,
+      "retry_attempt": 0
+    },
+    {
+      "step": 17,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 17,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 18,
+      "stage": "exploration",
+      "implication": "['NTPPi'] => ['DC', 'O', 'DR', 'PO', 'EC', 'NTPP', 'PPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 18,
+      "event": "ask_llm",
+      "joint_entropy": 2.8850269292144604,
+      "mean_entropy": 0.46695115769607787,
+      "retry_attempt": 0
+    },
+    {
+      "step": 18,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 18,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 19,
+      "stage": "exploration",
+      "implication": "['TPPi'] => ['DC', 'O', 'DR', 'PO', 'EC', 'NTPP', 'PPi', 'NTPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 3.2683159962175052,
+      "mean_entropy": 0.42008203938364935,
+      "retry_attempt": 0
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 3.2683159962175052,
+      "mean_entropy": 0.42008203938364935
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 1.7927584546121844,
+      "mean_entropy": 0.0537293704712054,
+      "retry_attempt": 1
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 1.7927584546121844,
+      "mean_entropy": 0.0537293704712054
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.23504895855870228,
+      "mean_entropy": 0.009859548868869106,
+      "retry_attempt": 2
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.23504895855870228,
+      "mean_entropy": 0.009859548868869106
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.08150644670031582,
+      "mean_entropy": 0.004482065229160871,
+      "retry_attempt": 3
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 4,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.08150644670031582,
+      "mean_entropy": 0.004482065229160871
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.06625103059190256,
+      "mean_entropy": 0.0038865814004119875,
+      "retry_attempt": 4
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 5,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.06625103059190256,
+      "mean_entropy": 0.0038865814004119875
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.08288146351348788,
+      "mean_entropy": 0.00485370297124942,
+      "retry_attempt": 5
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 6,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.08288146351348788,
+      "mean_entropy": 0.00485370297124942
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.10612713297924188,
+      "mean_entropy": 0.005491358754597579,
+      "retry_attempt": 6
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 7,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.10612713297924188,
+      "mean_entropy": 0.005491358754597579
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.1490815431216831,
+      "mean_entropy": 0.006866219815884733,
+      "retry_attempt": 7
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 8,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.1490815431216831,
+      "mean_entropy": 0.006866219815884733
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.17204081157653517,
+      "mean_entropy": 0.007805855992215803,
+      "retry_attempt": 8
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 9,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.17204081157653517,
+      "mean_entropy": 0.007805855992215803
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.17972523200241897,
+      "mean_entropy": 0.008438732594917365,
+      "retry_attempt": 9
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 10,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.17972523200241897,
+      "mean_entropy": 0.008438732594917365
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.1886570805817238,
+      "mean_entropy": 0.00862896710525471,
+      "retry_attempt": 10
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 11,
+      "max_retries": 10,
+      "is_valid_json": true,
+      "joint_entropy": 0.1886570805817238,
+      "mean_entropy": 0.00862896710525471
+    }
+  ]
+}

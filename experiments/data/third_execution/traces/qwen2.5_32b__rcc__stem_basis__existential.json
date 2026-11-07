@@ -1,0 +1,1464 @@
+{
+  "model": "qwen2.5:32b",
+  "context_name": "rcc",
+  "prompt_mode": "stem_basis",
+  "question_mode": "existential",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 1098.278,
+  "n_iterations": 32,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.0,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "DC"
+      ],
+      "consequent": [
+        "DC",
+        "DR"
+      ]
+    },
+    {
+      "antecedent": [
+        "O"
+      ],
+      "consequent": [
+        "C",
+        "O"
+      ]
+    },
+    {
+      "antecedent": [
+        "P"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "P"
+      ]
+    },
+    {
+      "antecedent": [
+        "PP"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "P",
+        "PP"
+      ]
+    },
+    {
+      "antecedent": [
+        "EQ"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "PO"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "PO"
+      ]
+    },
+    {
+      "antecedent": [
+        "TPP"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "EC"
+      ],
+      "consequent": [
+        "C",
+        "DR",
+        "EC"
+      ]
+    },
+    {
+      "antecedent": [
+        "NTPP"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "P",
+        "PP",
+        "NTPP"
+      ]
+    },
+    {
+      "antecedent": [
+        "PPi"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "PP",
+        "Pi",
+        "PPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "NTPPi"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "Pi",
+        "PPi",
+        "NTPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "TPPi"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "C",
+        "DR"
+      ],
+      "consequent": [
+        "C",
+        "DR",
+        "EC"
+      ]
+    },
+    {
+      "antecedent": [
+        "DR",
+        "Pi"
+      ],
+      "consequent": [
+        "C",
+        "DR",
+        "EC",
+        "Pi"
+      ]
+    },
+    {
+      "antecedent": [
+        "C",
+        "DC",
+        "DR",
+        "EC"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "C",
+        "O",
+        "P",
+        "Pi"
+      ],
+      "consequent": [
+        "C",
+        "O",
+        "P",
+        "EQ",
+        "Pi"
+      ]
+    },
+    {
+      "antecedent": [
+        "C",
+        "O",
+        "DR",
+        "EC"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    },
+    {
+      "antecedent": [
+        "C",
+        "O",
+        "P",
+        "PP",
+        "PO"
+      ],
+      "consequent": [
+        "C",
+        "DC",
+        "O",
+        "P",
+        "PP",
+        "EQ",
+        "DR",
+        "PO",
+        "TPP",
+        "EC",
+        "NTPP",
+        "Pi",
+        "PPi",
+        "NTPPi",
+        "TPPi"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "Two regions x and y where DC(x,y) is true, thus C(x,y) is false.",
+      "Consider two regions x and y where x and y overlap (O(x,y)). This satisfies both C(x,y) and O(x,y), which means they are not disconnected (DC) and not discrete from each other (DR).",
+      "Consider two regions x and y where x is a small circle and y is a larger circle that touches x at exactly one point. In this case, C(x,y) is true because they share at least one point, O(x,y) is false because they do not share interior points, and PO(x,y) is false because they are not partially overlapped.",
+      "Consider two regions x and y where x and y overlap but x is a part of y (P(x,y) is true). In this case, O(x,y) is true and PO(x,y) is false because P(x,y) is true.",
+      "Consider two regions x and y where x is a proper part of y, but they do not satisfy any of the other predicates.",
+      "x is a non-tangential proper part of y, but not equal to y, not externally connected, not partially overlapped, not tangential proper part, and not any inverse relations.",
+      "Consider two regions x and y where x is a part of y, but they do not overlap (Pi(x,y) is true, but O(x,y) is false).",
+      "Consider two regions x and y where x is a part of y (Pi(x,y) is true). If x and y do not share any boundary points (C(x,y) is false), then the statement is satisfied. Alternatively, if x and y are not discrete from each other (DR(x,y) is false) or not externally connected (EC(x,y) is false), the statement is also satisfied.",
+      "x is a proper part of y, but not equal, not externally connected, not partially overlapped, not tangential proper part, not non-tangential proper part, and not any of the inverse relations.",
+      "Consider two regions x and y where x is a non-tangential proper part inverse of y. In this case, NTPPi(x,y) is true, but C(x,y), O(x,y), Pi(x,y), and PPi(x,y) are true. However, DC(x,y), DR(x,y), PO(x,y), TPP(x,y), EC(x,y), NTPP(x,y), and TPPi(x,y) are false, satisfying the condition.",
+      "Consider two regions x and y where x is part of y but y is not a proper part of x. For example, x is a circle and y is the same circle. This satisfies C(x,y), O(x,y), Pi(x,y), and negation of PPi(x,y).",
+      "Consider two regions x and y where x is a part of y and partially overlaps with y, but x is not a proper part of y.",
+      "x and y are partially overlapped and y is a part of x, but x is not a part of y."
+    ],
+    "properties": [
+      "C",
+      "DC",
+      "O",
+      "P",
+      "PP",
+      "EQ",
+      "DR",
+      "PO",
+      "TPP",
+      "EC",
+      "NTPP",
+      "Pi",
+      "PPi",
+      "NTPPi",
+      "TPPi"
+    ],
+    "context": [
+      [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.6476400418853386,
+      "mean_entropy": 0.8098200706805108,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Two regions x and y where DC(x,y) is true, thus C(x,y) is false.",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['DC', 'DR']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.6526222746128645,
+      "mean_entropy": 0.8577168531923914,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x and y overlap (O(x,y)). This satisfies both C(x,y) and O(x,y), which means they are not disconnected (DC) and not discrete from each other (DR).",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "['C'] => ['O', 'PO']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 0.9566715760321337,
+      "mean_entropy": 0.6757251924395616,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a small circle and y is a larger circle that touches x at exactly one point. In this case, C(x,y) is true because they share at least one point, O(x,y) is false because they do not share interior points, and PO(x,y) is false because they are not partially overlapped.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['DC'] => ['DR']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.3569061254266465,
+      "mean_entropy": 0.3996312462331294,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['DC'] => ['DR']"
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['O'] => ['C', 'PO']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.2342848750372199,
+      "mean_entropy": 0.5206348705292905,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x and y overlap but x is a part of y (P(x,y) is true). In this case, O(x,y) is true and PO(x,y) is false because P(x,y) is true.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['O'] => ['C']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.1882235593827322,
+      "mean_entropy": 0.3948375076512494,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['O'] => ['C']"
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['P'] => ['C', 'O']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 1.3609215368768355,
+      "mean_entropy": 0.45161739524453826,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['P'] => ['C', 'O']"
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['PP'] => ['C', 'DC', 'O', 'P', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.33120143745331865,
+      "mean_entropy": 0.7357543769302998,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a proper part of y, but they do not satisfy any of the other predicates.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['PP'] => ['C', 'O', 'P']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 1.2705836470183178,
+      "mean_entropy": 0.5105168290173002,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['PP'] => ['C', 'O', 'P']"
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['EQ'] => ['C', 'DC', 'O', 'P', 'PP', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 4.132094652408263,
+      "mean_entropy": 0.6783548494608015,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['EQ'] => ['C', 'DC', 'O', 'P', 'PP', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['PO'] => ['C', 'O']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 1.5649323425463393,
+      "mean_entropy": 0.4334297140772422,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['PO'] => ['C', 'O']"
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['TPP'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 2.4876226650987268,
+      "mean_entropy": 0.6544477972181583,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['TPP'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['EC'] => ['C', 'DR']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.9229516169958971,
+      "mean_entropy": 0.3689088490382988,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['EC'] => ['C', 'DR']"
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['NTPP'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.357511758601498,
+      "mean_entropy": 0.6524859396129954,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "x is a non-tangential proper part of y, but not equal to y, not externally connected, not partially overlapped, not tangential proper part, and not any inverse relations.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['NTPP'] => ['C', 'O', 'P', 'PP']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 1.7789424008774168,
+      "mean_entropy": 0.3873473693645889,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['NTPP'] => ['C', 'O', 'P', 'PP']"
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['Pi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 2.9979650505254907,
+      "mean_entropy": 0.7057424508606085,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 16,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a part of y, but they do not overlap (Pi(x,y) is true, but O(x,y) is false).",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 17,
+      "stage": "exploration",
+      "implication": "['Pi'] => ['C', 'DR', 'EC']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 17,
+      "event": "ask_llm",
+      "joint_entropy": 2.331562405615985,
+      "mean_entropy": 0.5979002025838477,
+      "retry_attempt": 0
+    },
+    {
+      "step": 17,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 17,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a part of y (Pi(x,y) is true). If x and y do not share any boundary points (C(x,y) is false), then the statement is satisfied. Alternatively, if x and y are not discrete from each other (DR(x,y) is false) or not externally connected (EC(x,y) is false), the statement is also satisfied.",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 18,
+      "stage": "exploration",
+      "implication": "['PPi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 18,
+      "event": "ask_llm",
+      "joint_entropy": 2.3948571088120167,
+      "mean_entropy": 0.7850664131284446,
+      "retry_attempt": 0
+    },
+    {
+      "step": 18,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 18,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "x is a proper part of y, but not equal, not externally connected, not partially overlapped, not tangential proper part, not non-tangential proper part, and not any of the inverse relations.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 19,
+      "stage": "exploration",
+      "implication": "['PPi'] => ['C', 'O', 'PP', 'Pi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.9110410135025996,
+      "mean_entropy": 0.6454644762323549,
+      "retry_attempt": 0
+    },
+    {
+      "step": 19,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['PPi'] => ['C', 'O', 'PP', 'Pi']"
+    },
+    {
+      "step": 20,
+      "stage": "exploration",
+      "implication": "['NTPPi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 20,
+      "event": "ask_llm",
+      "joint_entropy": 1.6485386967275784,
+      "mean_entropy": 0.5840034903468084,
+      "retry_attempt": 0
+    },
+    {
+      "step": 20,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 20,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a non-tangential proper part inverse of y. In this case, NTPPi(x,y) is true, but C(x,y), O(x,y), Pi(x,y), and PPi(x,y) are true. However, DC(x,y), DR(x,y), PO(x,y), TPP(x,y), EC(x,y), NTPP(x,y), and TPPi(x,y) are false, satisfying the condition.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 21,
+      "stage": "exploration",
+      "implication": "['NTPPi'] => ['C', 'O', 'Pi', 'PPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 21,
+      "event": "ask_llm",
+      "joint_entropy": 2.1746947946117516,
+      "mean_entropy": 0.459899418571521,
+      "retry_attempt": 0
+    },
+    {
+      "step": 21,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['NTPPi'] => ['C', 'O', 'Pi', 'PPi']"
+    },
+    {
+      "step": 22,
+      "stage": "exploration",
+      "implication": "['TPPi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 22,
+      "event": "ask_llm",
+      "joint_entropy": 2.3891486794254053,
+      "mean_entropy": 0.6149932644421597,
+      "retry_attempt": 0
+    },
+    {
+      "step": 22,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['TPPi'] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi']"
+    },
+    {
+      "step": 23,
+      "stage": "exploration",
+      "implication": "['C', 'DR'] => ['EC']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 23,
+      "event": "ask_llm",
+      "joint_entropy": 0.654866041663976,
+      "mean_entropy": 0.4535302289062447,
+      "retry_attempt": 0
+    },
+    {
+      "step": 23,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['C', 'DR'] => ['EC']"
+    },
+    {
+      "step": 24,
+      "stage": "exploration",
+      "implication": "['DR', 'Pi'] => ['C', 'EC']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 24,
+      "event": "ask_llm",
+      "joint_entropy": 1.5484672675748665,
+      "mean_entropy": 0.48333392547343623,
+      "retry_attempt": 0
+    },
+    {
+      "step": 24,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['DR', 'Pi'] => ['C', 'EC']"
+    },
+    {
+      "step": 25,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'Pi'] => ['PPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 25,
+      "event": "ask_llm",
+      "joint_entropy": 1.266982280148726,
+      "mean_entropy": 0.6818396381244183,
+      "retry_attempt": 0
+    },
+    {
+      "step": 25,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 25,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is part of y but y is not a proper part of x. For example, x is a circle and y is the same circle. This satisfies C(x,y), O(x,y), Pi(x,y), and negation of PPi(x,y).",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 26,
+      "stage": "exploration",
+      "implication": "['C', 'DC', 'DR', 'EC'] => ['O', 'P', 'PP', 'EQ', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 26,
+      "event": "ask_llm",
+      "joint_entropy": 0.5093621183149598,
+      "mean_entropy": 0.5219667049533031,
+      "retry_attempt": 0
+    },
+    {
+      "step": 26,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['C', 'DC', 'DR', 'EC'] => ['O', 'P', 'PP', 'EQ', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 27,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'P', 'PO'] => ['DC', 'PP', 'EQ', 'DR', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 27,
+      "event": "ask_llm",
+      "joint_entropy": 0.9008888170998299,
+      "mean_entropy": 0.8529887482709722,
+      "retry_attempt": 0
+    },
+    {
+      "step": 27,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 27,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Consider two regions x and y where x is a part of y and partially overlaps with y, but x is not a proper part of y.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 28,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'P', 'Pi'] => ['EQ']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 28,
+      "event": "ask_llm",
+      "joint_entropy": 1.1334111904664275,
+      "mean_entropy": 0.3998757099392716,
+      "retry_attempt": 0
+    },
+    {
+      "step": 28,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['C', 'O', 'P', 'Pi'] => ['EQ']"
+    },
+    {
+      "step": 29,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'DR', 'EC'] => ['DC', 'P', 'PP', 'EQ', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 29,
+      "event": "ask_llm",
+      "joint_entropy": 0.6970371113938905,
+      "mean_entropy": 0.3960614577881752,
+      "retry_attempt": 0
+    },
+    {
+      "step": 29,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['C', 'O', 'DR', 'EC'] => ['DC', 'P', 'PP', 'EQ', 'PO', 'TPP', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 30,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'PO', 'Pi'] => ['DC', 'P', 'PP', 'EQ', 'DR', 'TPP', 'EC', 'NTPP', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 30,
+      "event": "ask_llm",
+      "joint_entropy": 1.0201182601802143,
+      "mean_entropy": 0.7049824718856669,
+      "retry_attempt": 0
+    },
+    {
+      "step": 30,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 30,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "x and y are partially overlapped and y is a part of x, but x is not a part of y.",
+      "attribute_vector": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 31,
+      "stage": "exploration",
+      "implication": "['C', 'O', 'P', 'PP', 'PO'] => ['DC', 'EQ', 'DR', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 31,
+      "event": "ask_llm",
+      "joint_entropy": 0.5890342756780357,
+      "mean_entropy": 0.6634957523419565,
+      "retry_attempt": 0
+    },
+    {
+      "step": 31,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['C', 'O', 'P', 'PP', 'PO'] => ['DC', 'EQ', 'DR', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']"
+    },
+    {
+      "step": 32,
+      "stage": "exploration",
+      "implication": null,
+      "event": "find_next_implication",
+      "finished": true
+    }
+  ]
+}

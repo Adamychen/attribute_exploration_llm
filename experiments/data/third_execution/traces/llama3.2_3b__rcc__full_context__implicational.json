@@ -1,0 +1,163 @@
+{
+  "model": "llama3.2:3b",
+  "context_name": "rcc",
+  "prompt_mode": "full_context",
+  "question_mode": "implicational",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 16.418,
+  "n_iterations": 2,
+  "n_retries_total": 5,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 4.103546205195062,
+  "mean_entropy": 0.18497263964878327,
+  "stem_basis": [],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['C', 'DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.019746468986188,
+      "mean_entropy": 0.6282191605692801,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "['C'] => ['DC', 'O', 'P', 'PP', 'EQ', 'DR', 'PO', 'TPP', 'EC', 'NTPP', 'Pi', 'PPi', 'NTPPi', 'TPPi']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 1.9662884961460434,
+      "mean_entropy": 0.6753797946307181,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 4,
+      "is_valid_json": true,
+      "joint_entropy": 1.9662884961460434,
+      "mean_entropy": 0.6753797946307181
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 3.2654086856916815,
+      "mean_entropy": 0.283948532881232,
+      "retry_attempt": 1
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 4,
+      "is_valid_json": true,
+      "joint_entropy": 3.2654086856916815,
+      "mean_entropy": 0.283948532881232
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 8.429118058481729,
+      "mean_entropy": 0.19863968462880532,
+      "retry_attempt": 2
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 4,
+      "is_valid_json": true,
+      "joint_entropy": 8.429118058481729,
+      "mean_entropy": 0.19863968462880532
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 6.612228335135232,
+      "mean_entropy": 0.19408434152104886,
+      "retry_attempt": 3
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 4,
+      "max_retries": 4,
+      "is_valid_json": true,
+      "joint_entropy": 6.612228335135232,
+      "mean_entropy": 0.19408434152104886
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 4.103546205195062,
+      "mean_entropy": 0.18497263964878327,
+      "retry_attempt": 4
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 5,
+      "max_retries": 4,
+      "is_valid_json": true,
+      "joint_entropy": 4.103546205195062,
+      "mean_entropy": 0.18497263964878327
+    }
+  ]
+}

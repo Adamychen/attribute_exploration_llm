@@ -1,0 +1,1326 @@
+{
+  "model": "gemma3:27b",
+  "context_name": "graphs",
+  "prompt_mode": "basic",
+  "question_mode": "existential",
+  "finished": false,
+  "early_stop": true,
+  "timeout": false,
+  "wallclock_seconds": 1815.51,
+  "n_iterations": 36,
+  "n_retries_total": 4,
+  "n_retry_exhausted": 1,
+  "joint_entropy": 0.0007527552829901263,
+  "mean_entropy": 0.629723060184562,
+  "stem_basis": [
+    {
+      "antecedent": [
+        "2-connected"
+      ],
+      "consequent": [
+        "connected",
+        "2-connected"
+      ]
+    },
+    {
+      "antecedent": [
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "tree"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "nonseparable",
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "nonseparable",
+        "planar",
+        "tree"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar",
+        "tree"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "bipartite",
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "bipartite",
+        "planar",
+        "tree"
+      ]
+    }
+  ],
+  "final_context": null,
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 1.325433415975683,
+      "mean_entropy": 0.23776909787902065,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A triangle graph (cycle of length 3)",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['connected', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 0.976359222075906,
+      "mean_entropy": 0.4082548909192287,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph with two disconnected components.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "[] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 1.222496141243945,
+      "mean_entropy": 0.13390515045885631,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K5",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['acyclic', 'connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 0.05690176411569221,
+      "mean_entropy": 0.173859232591858,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "triangle",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['2-connected'] => ['connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 0.0014754008884342294,
+      "mean_entropy": 0.20536320263702101,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['2-connected'] => ['connected']"
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['geodetic'] => ['connected', '2-connected', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.0166527156487708,
+      "mean_entropy": 0.37919854529294816,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph with two disconnected components, each a complete graph with two vertices (an edge).",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['bipartite'] => ['acyclic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 0.03127897424456279,
+      "mean_entropy": 0.16861039545926865,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "C4 (a square)",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": "['nonseparable'] => ['connected', '2-connected', 'geodetic', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 8,
+      "event": "ask_llm",
+      "joint_entropy": 0.5834121245449351,
+      "mean_entropy": 0.34254576857617114,
+      "retry_attempt": 0
+    },
+    {
+      "step": 8,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 8,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A single vertex with a self-loop.",
+      "attribute_vector": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 9,
+      "stage": "exploration",
+      "implication": "['tree'] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 9,
+      "event": "ask_llm",
+      "joint_entropy": 0.15659261956373907,
+      "mean_entropy": 0.2737708419188675,
+      "retry_attempt": 0
+    },
+    {
+      "step": 9,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 9,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A tree with two nodes.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 10,
+      "stage": "exploration",
+      "implication": "['tree'] => ['acyclic', 'connected', 'bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 10,
+      "event": "ask_llm",
+      "joint_entropy": 0.44699282140896074,
+      "mean_entropy": 0.5710193743601958,
+      "retry_attempt": 0
+    },
+    {
+      "step": 10,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 10,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K5 with one edge removed",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "step": 11,
+      "stage": "exploration",
+      "implication": "['tree'] => ['acyclic', 'connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 11,
+      "event": "ask_llm",
+      "joint_entropy": 1.4054229841308863,
+      "mean_entropy": 0.24287228613063813,
+      "retry_attempt": 0
+    },
+    {
+      "step": 11,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['tree'] => ['acyclic', 'connected']"
+    },
+    {
+      "step": 12,
+      "stage": "exploration",
+      "implication": "['acyclic', 'nonseparable'] => ['connected', '2-connected', 'geodetic', 'bipartite', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 12,
+      "event": "ask_llm",
+      "joint_entropy": 0.05548766865139205,
+      "mean_entropy": 0.23921624090258384,
+      "retry_attempt": 0
+    },
+    {
+      "step": 12,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 12,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A single vertex graph.",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 13,
+      "stage": "exploration",
+      "implication": "['acyclic', 'nonseparable'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 13,
+      "event": "ask_llm",
+      "joint_entropy": 0.9752123925324452,
+      "mean_entropy": 0.3294117954274207,
+      "retry_attempt": 0
+    },
+    {
+      "step": 13,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 13,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K3,3",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "step": 14,
+      "stage": "exploration",
+      "implication": "['connected', 'nonseparable'] => ['2-connected', 'geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 14,
+      "event": "ask_llm",
+      "joint_entropy": 0.029969542565679755,
+      "mean_entropy": 0.27111358626898696,
+      "retry_attempt": 0
+    },
+    {
+      "step": 14,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 14,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle of length 4 (C4)",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 15,
+      "stage": "exploration",
+      "implication": "['geodetic', 'nonseparable'] => ['connected', '2-connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 15,
+      "event": "ask_llm",
+      "joint_entropy": 1.03142358985956,
+      "mean_entropy": 0.5021034603990244,
+      "retry_attempt": 0
+    },
+    {
+      "step": 15,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 15,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph consisting of two disjoint complete graphs (e.g., two K2 graphs).",
+      "attribute_vector": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 16,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'nonseparable'] => ['2-connected', 'geodetic', 'bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 16,
+      "event": "ask_llm",
+      "joint_entropy": 0.13171765246860917,
+      "mean_entropy": 0.3485594948739575,
+      "retry_attempt": 0
+    },
+    {
+      "step": 16,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 16,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A tree with more than two vertices.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 17,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'nonseparable'] => ['bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 17,
+      "event": "ask_llm",
+      "joint_entropy": 0.005709487652824963,
+      "mean_entropy": 0.182253732019157,
+      "retry_attempt": 0
+    },
+    {
+      "step": 17,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 17,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K3",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 18,
+      "stage": "exploration",
+      "implication": "['acyclic', 'geodetic', 'planar'] => ['nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 18,
+      "event": "ask_llm",
+      "joint_entropy": 0.00963178079600222,
+      "mean_entropy": 0.2837733082848433,
+      "retry_attempt": 0
+    },
+    {
+      "step": 18,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 18,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A tree with a single leaf node.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 19,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'bipartite'] => ['geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 19,
+      "event": "ask_llm",
+      "joint_entropy": 0.5270999251450744,
+      "mean_entropy": 0.20398671619248138,
+      "retry_attempt": 0
+    },
+    {
+      "step": 19,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 19,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K_{3,3}",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 20,
+      "stage": "exploration",
+      "implication": "['connected', 'geodetic', 'nonseparable'] => ['2-connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 20,
+      "event": "ask_llm",
+      "joint_entropy": 0.06894174175021862,
+      "mean_entropy": 0.20643520102205784,
+      "retry_attempt": 0
+    },
+    {
+      "step": 20,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 20,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Star graph with 4 vertices",
+      "attribute_vector": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 21,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic'] => ['nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 21,
+      "event": "ask_llm",
+      "joint_entropy": 0.0007922031398319171,
+      "mean_entropy": 0.23273160944490046,
+      "retry_attempt": 0
+    },
+    {
+      "step": 21,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 21,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph with 4 vertices (A, B, C, D) and edges (A,B), (B,C), (C,D), (D,A), (A,C).",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 22,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'bipartite'] => ['geodetic', 'nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 22,
+      "event": "ask_llm",
+      "joint_entropy": 0.0005424754618006477,
+      "mean_entropy": 0.20485369308500082,
+      "retry_attempt": 0
+    },
+    {
+      "step": 22,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 22,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Cycle graph with 4 vertices",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 23,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'nonseparable'] => ['geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 23,
+      "event": "ask_llm",
+      "joint_entropy": 0.0004555566805921943,
+      "mean_entropy": 0.33605320523773247,
+      "retry_attempt": 0
+    },
+    {
+      "step": 23,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 23,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle of length 4 with a diagonal.",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 24,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'tree'] => ['geodetic', 'bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 24,
+      "event": "ask_llm",
+      "joint_entropy": 1.9544785117074226,
+      "mean_entropy": 0.3976845031720092,
+      "retry_attempt": 0
+    },
+    {
+      "step": 24,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 24,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Star graph with 5 leaves",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "step": 25,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'geodetic', 'nonseparable'] => ['2-connected']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 25,
+      "event": "ask_llm",
+      "joint_entropy": 0.0020295589878593485,
+      "mean_entropy": 0.19127740407953292,
+      "retry_attempt": 0
+    },
+    {
+      "step": 25,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 25,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A tree with two vertices.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 26,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'bipartite', 'tree'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 26,
+      "event": "ask_llm",
+      "joint_entropy": 0.20103388966777946,
+      "mean_entropy": 0.5457715420285288,
+      "retry_attempt": 0
+    },
+    {
+      "step": 26,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 26,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A star graph with 5 vertices.",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "step": 27,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'nonseparable', 'tree'] => ['bipartite', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 27,
+      "event": "ask_llm",
+      "joint_entropy": 0.43446401915642263,
+      "mean_entropy": 0.2770649297408456,
+      "retry_attempt": 0
+    },
+    {
+      "step": 27,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 27,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "Star graph with 3 or more leaves",
+      "attribute_vector": [
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 28,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', 'nonseparable', 'tree'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 28,
+      "event": "ask_llm",
+      "joint_entropy": 0.03381847307481375,
+      "mean_entropy": 0.31368866231083237,
+      "retry_attempt": 0
+    },
+    {
+      "step": 28,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', 'nonseparable', 'tree'] => ['planar']"
+    },
+    {
+      "step": 29,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite'] => ['nonseparable']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 29,
+      "event": "ask_llm",
+      "joint_entropy": 0.006956490307639425,
+      "mean_entropy": 0.26885875086292843,
+      "retry_attempt": 0
+    },
+    {
+      "step": 29,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 29,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A cycle with a bridge (e.g., a cycle of length 4 with an edge connecting two non-adjacent vertices on the cycle).",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 30,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'tree'] => ['bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 30,
+      "event": "ask_llm",
+      "joint_entropy": 0,
+      "mean_entropy": 0.22877328979552644,
+      "retry_attempt": 0
+    },
+    {
+      "step": 30,
+      "event": "validate_logic",
+      "active_flags": [
+        "wrong_len",
+        "invalid_format_answer",
+        "no_counterexample",
+        "no_attributes"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": false,
+      "joint_entropy": 0,
+      "mean_entropy": 0.22877328979552644
+    },
+    {
+      "step": 30,
+      "event": "ask_llm",
+      "joint_entropy": 0.9435969762164883,
+      "mean_entropy": 0.26946571797166896,
+      "retry_attempt": 1
+    },
+    {
+      "step": 30,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', '2-connected', 'geodetic', 'tree'] => ['bipartite', 'nonseparable', 'planar']"
+    },
+    {
+      "step": 31,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'bipartite', 'nonseparable'] => ['geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 31,
+      "event": "ask_llm",
+      "joint_entropy": 0.0002910259542337906,
+      "mean_entropy": 0.32997029006449574,
+      "retry_attempt": 0
+    },
+    {
+      "step": 31,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 31,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A graph formed by connecting two triangles with a shared edge.",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 32,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'bipartite', 'tree'] => ['geodetic', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 32,
+      "event": "ask_llm",
+      "joint_entropy": 0.17238651168649827,
+      "mean_entropy": 0.5210967606522026,
+      "retry_attempt": 0
+    },
+    {
+      "step": 32,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 32,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A path graph with 3 nodes.",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 33,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'bipartite', 'tree'] => ['planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 33,
+      "event": "ask_llm",
+      "joint_entropy": 0.024699632116208153,
+      "mean_entropy": 0.8327002879491986,
+      "retry_attempt": 0
+    },
+    {
+      "step": 33,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', '2-connected', 'bipartite', 'tree'] => ['planar']"
+    },
+    {
+      "step": 34,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'planar', 'tree'] => ['bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 34,
+      "event": "ask_llm",
+      "joint_entropy": 0.9492497535124337,
+      "mean_entropy": 0.3202915580367797,
+      "retry_attempt": 0
+    },
+    {
+      "step": 34,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 34,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A path graph with 3 or more vertices.",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "step": 35,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable'] => ['acyclic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 35,
+      "event": "ask_llm",
+      "joint_entropy": 0.004455937542484103,
+      "mean_entropy": 0.1341503719610359,
+      "retry_attempt": 0
+    },
+    {
+      "step": 35,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 35,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "K4",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 36,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'nonseparable', 'planar', 'tree'] => ['geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 36,
+      "event": "ask_llm",
+      "joint_entropy": 0.007892003065715367,
+      "mean_entropy": 0.36855329911365464,
+      "retry_attempt": 0
+    },
+    {
+      "step": 36,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 1,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.007892003065715367,
+      "mean_entropy": 0.36855329911365464
+    },
+    {
+      "step": 36,
+      "event": "ask_llm",
+      "joint_entropy": 0.01083109478052977,
+      "mean_entropy": 0.5180825700624504,
+      "retry_attempt": 1
+    },
+    {
+      "step": 36,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 2,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.01083109478052977,
+      "mean_entropy": 0.5180825700624504
+    },
+    {
+      "step": 36,
+      "event": "ask_llm",
+      "joint_entropy": 0.0007527552829901263,
+      "mean_entropy": 0.629723060184562,
+      "retry_attempt": 2
+    },
+    {
+      "step": 36,
+      "event": "validate_logic",
+      "active_flags": [
+        "not_enough_attrs"
+      ],
+      "retries_used": 3,
+      "max_retries": 2,
+      "is_valid_json": true,
+      "joint_entropy": 0.0007527552829901263,
+      "mean_entropy": 0.629723060184562
+    }
+  ]
+}

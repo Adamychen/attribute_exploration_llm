@@ -151,15 +151,16 @@ For each run whose context is non-empty according to `results.csv`: `concepts`
 (`id`, `extent`, `intent`) and `covers`, the covering relation as
 `[lower_id, upper_id]` pairs.
 
-## Agreement between the two executions
+## Agreement between the executions
 
 `run_summary.csv` reports the terminal state of each configuration in both
 executions (`outcome_results_csv` for the first, `outcome_trace` for the second)
 and `sources_agree` when they coincide.
 
-- Terminal state: they agree in 435 of 576 configurations (76 %). 221
-  configurations finished in the first execution and 181 in the second; 134
-  finished in both.
+- Terminal state: the first and second executions agree in 422 of 576
+  configurations (73 %); the first and the third (`third_execution/`) agree in
+  423 (73 %). 221 configurations finished in the first execution, 181 in the
+  second and 226 in the third; 134 finished in both the first and the second.
 - Where both finished, `S` is identical in 65 of the 134; the mean absolute
   difference is 0.14 for `S` and 0.16 for `S_H`.
 - 71 traces show the model accepting the very first implication
@@ -171,7 +172,7 @@ and `sources_agree` when they coincide.
   second execution that ended with an early stop. On the 70 configurations of the
   sensitivity analysis whose prompt is that of the sweep, a new run with the code
   of this repository (`C0`) ends in the same state as the first execution in 77 %
-  of them, and the two executions agree in 76 %.
+  of them, and the first and second executions agree in 73 %.
 
 The paper's tables and figures of similarity (`S`, `S_H`) use the first
 execution (`results.csv`). The exploration statistics (iterations, retries,
@@ -179,6 +180,17 @@ early-stop analysis) use the second (`traces/`). Columns of `run_summary.csv`
 that come from the first execution are `S`, `S_H`, `n_ctx_objects`,
 `n_ctx_attributes`, `n_concepts_llm` and the lattices; all others describing the
 exploration come from the second.
+
+## Third execution (`third_execution/`)
+
+A third execution of the sweep, run after the second with the same models,
+prompts and decoding settings, repeats the first execution with the parser of
+the first (no `repeated_object` check). Its files have the same layout as the
+first execution and the traces of the second: `results.csv` (576 rows),
+`traces/` (576 JSON files) and `CODE_VERSION.txt` (commit of the code that
+produced it). It is not used for the similarity results, which come from the
+first execution; it is used to separate the effect of the parser check from the
+variation between runs (Table `replication` of the paper).
 
 ## Models: digests and quantisation
 

@@ -1,0 +1,316 @@
+{
+  "model": "qwen2.5-coder:7b",
+  "context_name": "graphs",
+  "prompt_mode": "stem_basis",
+  "question_mode": "implicational",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 43.225,
+  "n_iterations": 8,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.0,
+  "mean_entropy": 0.0,
+  "stem_basis": [
+    {
+      "antecedent": [],
+      "consequent": [
+        "connected",
+        "2-connected",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "nonseparable",
+        "planar"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "connected",
+        "2-connected",
+        "geodetic",
+        "nonseparable",
+        "planar"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "connected",
+        "2-connected",
+        "bipartite",
+        "nonseparable",
+        "planar"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar"
+      ]
+    },
+    {
+      "antecedent": [
+        "connected",
+        "2-connected",
+        "nonseparable",
+        "planar",
+        "tree"
+      ],
+      "consequent": [
+        "acyclic",
+        "connected",
+        "2-connected",
+        "geodetic",
+        "bipartite",
+        "nonseparable",
+        "planar",
+        "tree"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "null",
+      "A counterexample is a cycle graph with an odd number of vertices. It is connected, 2-connected, and planar, but it is not acyclic, geodetic, or bipartite."
+    ],
+    "properties": [
+      "acyclic",
+      "connected",
+      "2-connected",
+      "geodetic",
+      "bipartite",
+      "nonseparable",
+      "planar",
+      "tree"
+    ],
+    "context": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar', 'tree']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 2.854989728742173,
+      "mean_entropy": 0.5388119091933623,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "null",
+      "attribute_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "exploration",
+      "implication": "[] => ['acyclic', 'connected', '2-connected', 'geodetic', 'bipartite', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 2,
+      "event": "ask_llm",
+      "joint_entropy": 2.8198128879607394,
+      "mean_entropy": 0.5346202935803874,
+      "retry_attempt": 0
+    },
+    {
+      "step": 2,
+      "event": "validate_logic",
+      "decision": "accept"
+    },
+    {
+      "step": 2,
+      "event": "update_state",
+      "decision": "add_counterexample",
+      "object": "A counterexample is a cycle graph with an odd number of vertices. It is connected, 2-connected, and planar, but it is not acyclic, geodetic, or bipartite.",
+      "attribute_vector": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "exploration",
+      "implication": "[] => ['connected', '2-connected', 'nonseparable', 'planar']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 3,
+      "event": "ask_llm",
+      "joint_entropy": 4.094175895164118,
+      "mean_entropy": 0.4360965005729226,
+      "retry_attempt": 0
+    },
+    {
+      "step": 3,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['connected', '2-connected', 'nonseparable', 'planar']"
+    },
+    {
+      "step": 4,
+      "stage": "exploration",
+      "implication": "['acyclic', 'connected', '2-connected', 'nonseparable', 'planar'] => ['geodetic', 'bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 4,
+      "event": "ask_llm",
+      "joint_entropy": 1.4375040001316801,
+      "mean_entropy": 0.3165934851462939,
+      "retry_attempt": 0
+    },
+    {
+      "step": 4,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['acyclic', 'connected', '2-connected', 'nonseparable', 'planar'] => ['geodetic', 'bipartite']"
+    },
+    {
+      "step": 5,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'geodetic', 'nonseparable', 'planar'] => ['acyclic', 'bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 5,
+      "event": "ask_llm",
+      "joint_entropy": 1.4928445199950726,
+      "mean_entropy": 0.32398723108379573,
+      "retry_attempt": 0
+    },
+    {
+      "step": 5,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['connected', '2-connected', 'geodetic', 'nonseparable', 'planar'] => ['acyclic', 'bipartite']"
+    },
+    {
+      "step": 6,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'bipartite', 'nonseparable', 'planar'] => ['acyclic', 'geodetic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 6,
+      "event": "ask_llm",
+      "joint_entropy": 1.3663476880468488,
+      "mean_entropy": 0.32330572938562363,
+      "retry_attempt": 0
+    },
+    {
+      "step": 6,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['connected', '2-connected', 'bipartite', 'nonseparable', 'planar'] => ['acyclic', 'geodetic']"
+    },
+    {
+      "step": 7,
+      "stage": "exploration",
+      "implication": "['connected', '2-connected', 'nonseparable', 'planar', 'tree'] => ['acyclic', 'geodetic', 'bipartite']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 7,
+      "event": "ask_llm",
+      "joint_entropy": 0.30465015626478203,
+      "mean_entropy": 0.28626775656554726,
+      "retry_attempt": 0
+    },
+    {
+      "step": 7,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "['connected', '2-connected', 'nonseparable', 'planar', 'tree'] => ['acyclic', 'geodetic', 'bipartite']"
+    },
+    {
+      "step": 8,
+      "stage": "exploration",
+      "implication": null,
+      "event": "find_next_implication",
+      "finished": true
+    }
+  ]
+}

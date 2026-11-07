@@ -1,0 +1,70 @@
+{
+  "model": "gemma3:4b",
+  "context_name": "integers",
+  "prompt_mode": "stem_basis",
+  "question_mode": "existential",
+  "finished": true,
+  "early_stop": false,
+  "timeout": false,
+  "wallclock_seconds": 5.662,
+  "n_iterations": 1,
+  "n_retries_total": 0,
+  "n_retry_exhausted": 0,
+  "joint_entropy": 0.11310966598826112,
+  "mean_entropy": 0.27380737647401243,
+  "stem_basis": [
+    {
+      "antecedent": [],
+      "consequent": [
+        "even",
+        "odd",
+        "prime",
+        "compound",
+        "quadratic"
+      ]
+    }
+  ],
+  "final_context": {
+    "objects": [
+      "all_attributes"
+    ],
+    "properties": [
+      "even",
+      "odd",
+      "prime",
+      "compound",
+      "quadratic"
+    ],
+    "context": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "iteration_log": [
+    {
+      "step": 1,
+      "stage": "initialization",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']",
+      "event": "find_next_implication",
+      "finished": false
+    },
+    {
+      "step": 1,
+      "event": "ask_llm",
+      "joint_entropy": 0.11310966598826112,
+      "mean_entropy": 0.27380737647401243,
+      "retry_attempt": 0
+    },
+    {
+      "step": 1,
+      "event": "update_state",
+      "decision": "accept",
+      "implication": "[] => ['even', 'odd', 'prime', 'compound', 'quadratic']"
+    }
+  ]
+}
