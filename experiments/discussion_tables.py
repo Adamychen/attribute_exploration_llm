@@ -40,12 +40,16 @@ STRATEGY_LABELS = {"basic": "Baseline", "full_context": "CFC", "stem_basis": "DG
 
 
 def load_executions(data_dir: str = DATA,
-                    ref_dir: str = os.path.join(HERE, "reference_contexts")) -> Dict[str, pd.DataFrame]:
+                    ref_dir: str = os.path.join(HERE, "reference_contexts"),
+                    rerun_dir: str | None = None) -> Dict[str, pd.DataFrame]:
     refs = _reference_contexts(ref_dir)
-    return {
+    ex = {
         "first": load_results_csv(os.path.join(data_dir, "results.csv"), refs, "main1"),
         "second": load_traces(os.path.join(data_dir, "traces"), refs, "main2"),
     }
+    if rerun_dir is not None:
+        ex["rerun"] = load_traces(os.path.join(rerun_dir, "traces"), refs, "rerun2")
+    return ex
 
 
 def summary(runs: pd.DataFrame) -> dict:
@@ -98,9 +102,16 @@ def _state(r: pd.Series) -> str:
 # --------------------------------------------------------------------------
 
 def table_replication(ex: Dict[str, pd.DataFrame]) -> str:
+    """Per domain and strategy: first / second execution and, if present, the repetition."""
     a = ex["first"].set_index(CELL)
     b = ex["second"].set_index(CELL)
-    same = (a.apply(_state, axis=1) == b.loc[a.index].apply(_state, axis=1))
+    s1 = a.apply(_state, axis=1)
+    same12 = (s1 == b.loc[a.index].apply(_state, axis=1))
+    runs = [ex["first"], ex["second"]]
+    rep = ex.get("rerun")
+    if rep is not None:
+        runs.append(rep)
+        same13 = (s1 == rep.set_index(CELL).loc[a.index].apply(_state, axis=1))
     lines = [
         r"\begin{table}[ht]",
         r"\centering\small",
@@ -115,37 +126,35 @@ def table_replication(ex: Dict[str, pd.DataFrame]) -> str:
         lines.append(r"\multicolumn{7}{l}{\textit{" + heading + r"}} \\")
         for d in domains:
             for i, s in enumerate(STRATEGIES):
-                r1 = summary(_select(ex["first"], d, s))
-                r2 = summary(_select(ex["second"], d, s))
+                sums = [summary(_select(df, d, s)) for df in runs]
                 idx = [k for k in a.index if k[1] == d and k[2] == s]
-                agree = same.loc[idx].mean()
+                same = f"${100 * same12.loc[idx].mean():.0f}\\%$"
+                if rep is not None:
+                    same += f" / ${100 * same13.loc[idx].mean():.0f}\\%$"
                 lines.append(
                     f"{LABELS[d] if i == 0 else ''} & {STRATEGY_LABELS[s]} & "
-                    f"${r1['k']}$ / ${r2['k']}$ & "
-                    f"${r1['accepted_first']}$ / ${r2['accepted_first']}$ & "
-                    f"{_f(r1['S_nt'])} / {_f(r2['S_nt'])} & "
-                    f"{_f(r1['S_H_nt'])} / {_f(r2['S_H_nt'])} & "
-                    f"${100 * agree:.0f}\\%$ \\\\")
+                    + " / ".join(f"${x['k']}$" for x in sums) + " & "
+                    + " / ".join(f"${x['accepted_first']}$" for x in sums) + " & "
+                    + " / ".join(_f(x['S_nt']) for x in sums) + " & "
+                    + " / ".join(_f(x['S_H_nt']) for x in sums) + " & "
+                    + same + r" \\")
         lines.append(r"\hline")
     lines += [
         r"\end{tabular}%",
         r"}",
-        r"\caption{The two executions of the sweep (first / second), per domain and strategy. Each cell "
-        r"pools the 24 models and the two query modes (48 runs). \textit{Finished}: runs in which Attribute "
-        r"Exploration terminated. \textit{Accepted $\emptyset \to M$}: finished runs that ended by accepting "
-        r"the first implication, so that every object has every attribute. $\mu_S$, $\mu_{S_H}$: mean over "
-        r"the other finished runs. \textit{Same state}: configurations that end in the same state in both "
-        r"executions (stopped, accepted $\emptyset \to M$, or finished otherwise).}",
+        r"\caption{The executions of the sweep, per domain and strategy: first / second"
+        + (r" / repetition" if rep is not None else "") + r". Each cell pools the 24 models and the two query "
+        r"modes (48 runs). \textit{Finished}: runs in which Attribute Exploration terminated. "
+        r"\textit{Accepted $\emptyset \to M$}: finished runs that ended by accepting the first implication, "
+        r"so that every object has every attribute. $\mu_S$, $\mu_{S_H}$: mean over the other finished runs. "
+        r"\textit{Same state}: configurations that end in the same state in the first and the second execution"
+        + (r", and, after the slash, in the first execution and the repetition" if rep is not None else "")
+        + r" (stopped, accepted $\emptyset \to M$, or finished otherwise).}",
         r"\label{tab:replication}",
         r"\end{table}",
-        "",
     ]
     return "\n".join(lines)
 
-
-# --------------------------------------------------------------------------
-# Slices of the first execution
-# --------------------------------------------------------------------------
 
 def table_query_asymmetry(runs: pd.DataFrame) -> str:
     lines = [
@@ -339,8 +348,9 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--data-dir", default=DATA)
     ap.add_argument("--output-dir", default="output/tables")
+    ap.add_argument("--rerun-dir", default=None, help="output directory of the repetition (has traces/)")
     args = ap.parse_args()
-    ex = load_executions(args.data_dir)
+    ex = load_executions(args.data_dir, rerun_dir=args.rerun_dir)
     first = ex["first"]
     outputs = {
         "table_replication.tex": table_replication(ex),
